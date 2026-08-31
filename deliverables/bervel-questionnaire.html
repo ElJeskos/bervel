@@ -976,11 +976,11 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
 <h2>5.2. Пилот, качество и приёмка</h2>
-<h3>C40. Scope двух пилотов</h3>
+<h3>C40. Scope пилота по каждому выбранному контуру</h3>
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор и владельцы процессов<br />
-<strong>Тип ответа:</strong> две отдельные scope-таблицы<br />
+<strong>Тип ответа:</strong> отдельная scope-таблица для каждого выбранного контура<br />
 <strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> утверждённый pilot charter</p>
-<p><strong>Ответьте:</strong> отдельно для тендеров и заявок задайте проверяемую гипотезу, период, источники/каналы, форматы, товарные семейства, пользователей, объём, режим <code>offline / shadow / draft</code>, разрешённые действия и явные исключения. Укажите baseline и целевое изменение. В пилоте по умолчанию запрещены подача на ЭТП, финальный bid/no-bid, окончательная цена и отправка КП без человека.</p>
+<p><strong>Ответьте:</strong> для каждого выбранного контура задайте проверяемую гипотезу, период, источники/каналы, форматы, товарные семейства, пользователей, объём, режим <code>offline / shadow / draft</code>, разрешённые действия и явные исключения. Укажите baseline и целевое изменение. В пилоте по умолчанию запрещены подача на ЭТП, финальный bid/no-bid, окончательная цена и отправка КП без человека.</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -1479,7 +1479,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <td>Требования ИБ/юристов к классификации, размещению, внешним сервисам, ключам, ролям, хранению, журналированию и удалению</td>
 <td>ИБ/юристы</td>
 <td>Всегда</td>
-<td>C36–C38, L17, L22</td>
+<td>C36–C39, L17, L22</td>
 <td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
 </tr>
 <tr>
@@ -1662,7 +1662,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p>Пакет может служить основой для полного ТЗ, если:</p>
 <ul>
 <li>[ ] у всех применимых <code>C01–C46</code> есть согласованный ответ либо управляемое неизвестное с владельцем, сроком и влиянием;</li>
-<li>[ ] критичные материалы <code>M01–M10</code> получены или имеют согласованный план и безопасный канал передачи;</li>
+<li>[ ] все применимые критичные материалы <code>M01–M10</code> получены или имеют согласованный план и безопасный канал передачи;</li>
 <li>[ ] общие ответы не противоречат двум предметным веткам;</li>
 <li>[ ] назначены владельцы источников истины, решений, экспертной проверки и приёмки;</li>
 <li>[ ] определены допустимый контур данных, границы автономности и ручные stop-маршруты;</li>
@@ -1685,7 +1685,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 
   <aside class="right-rail">
     <section class="panel progress-card">
-      <p class="rail-heading">Готовность пакета</p>
+      <p class="rail-heading">Критичные вопросы до ТЗ</p>
       <div class="progress-head"><span class="progress-number" id="progress-number">0%</span><span class="progress-label" id="progress-label">0 из 0</span></div>
       <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
       <div class="stat-list">
@@ -1752,6 +1752,24 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     }
     currentSection.appendChild(node);
   });
+
+  // Keep each acceptance matrix conditional on its selected process contour.
+  const wrapAcceptanceMatrix = (pattern, branch) => {
+    const heading = [...questionnaire.querySelectorAll('h3')].find(h => pattern.test(h.textContent));
+    if (!heading) return;
+    const block = document.createElement('section');
+    block.className = 'acceptance-branch';
+    block.dataset.acceptanceBranch = branch;
+    heading.parentNode.insertBefore(block, heading);
+    let node = heading;
+    while (node && (node === heading || !/^H[123]$/.test(node.tagName))) {
+      const next = node.nextElementSibling;
+      block.appendChild(node);
+      node = next;
+    }
+  };
+  wrapAcceptanceMatrix(/матрица A — тендеры/, 'tenders');
+  wrapAcceptanceMatrix(/матрица B — входящие заявки/, 'rfq');
 
   // Wrap C/L question blocks as interactive cards.
   const questionHeadings = [...questionnaire.querySelectorAll('h3')].filter(h => /^([CL]\d{2})\./.test(h.textContent.trim()));
@@ -1837,6 +1855,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       updateProgress();
       applyFilters();
     }));
+    answerGrid.querySelectorAll('input, textarea').forEach(field => field.addEventListener('input', updateProgress));
   });
 
   // Improve long tables and make blank cells fillable.
@@ -1922,6 +1941,9 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     document.querySelectorAll('.major-section[data-branch]').forEach(section => {
       section.classList.toggle('branch-hidden', !branchVisible(section.dataset.branch));
     });
+    document.querySelectorAll('[data-acceptance-branch]').forEach(section => {
+      section.classList.toggle('branch-hidden', !branchVisible(section.dataset.acceptanceBranch));
+    });
     toc.querySelectorAll('[data-branch]').forEach(link => link.classList.toggle('branch-disabled', !branchVisible(link.dataset.branch)));
     applyFilters();
     updateProgress();
@@ -1955,10 +1977,20 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
   }
 
   function updateProgress() {
-    const cards = visibleCards();
+    const cards = visibleCards().filter(card => card.dataset.kind === 'C');
     const counts = {answered:0, unknown:0, awaiting:0, na:0, empty:0};
     cards.forEach(card => counts[card.dataset.status || 'empty']++);
-    const done = counts.answered + counts.na;
+    const isComplete = card => {
+      const id = card.dataset.id;
+      if (card.dataset.status === 'answered') return Boolean(card.querySelector(`[name="answer-${id}"]`)?.value.trim());
+      if (card.dataset.status === 'unknown') {
+        return ['owner', 'date', 'action', 'impact', 'restriction']
+          .every(field => Boolean(card.querySelector(`[name="unknown-${field}-${id}"]`)?.value.trim()));
+      }
+      if (card.dataset.status === 'na') return Boolean(card.querySelector(`[name="comment-${id}"]`)?.value.trim());
+      return false;
+    };
+    const done = cards.filter(isComplete).length;
     const pct = cards.length ? Math.round(done / cards.length * 100) : 0;
     document.getElementById('progress-number').textContent = `${pct}%`;
     document.getElementById('progress-label').textContent = `${done} из ${cards.length}`;
