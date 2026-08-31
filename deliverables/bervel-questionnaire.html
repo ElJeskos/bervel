@@ -1,0 +1,2056 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Опросник БЕРВЕЛ для подготовки ТЗ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314253f'/%3E%3Cpath d='M18 17h18c8 0 12 4 12 10 0 4-2 7-6 9 5 1 8 5 8 10 0 8-5 12-14 12H18V17zm10 9v7h7c3 0 4-1 4-4 0-2-1-3-4-3h-7zm0 15v8h8c3 0 5-1 5-4s-2-4-5-4h-8z' fill='%23d96f32'/%3E%3C/svg%3E">
+<style>
+:root {
+  --ink: #172033;
+  --muted: #667085;
+  --subtle: #8d97a8;
+  --line: #dce2ea;
+  --line-strong: #c5ced9;
+  --surface: #ffffff;
+  --surface-2: #f5f7fa;
+  --surface-3: #eef2f6;
+  --navy: #14253f;
+  --navy-2: #1d3557;
+  --accent: #d96f32;
+  --accent-soft: #fff0e7;
+  --green: #2f7d5d;
+  --green-soft: #e8f5ef;
+  --amber: #9b6818;
+  --amber-soft: #fff5db;
+  --red: #b44343;
+  --red-soft: #fff0f0;
+  --blue: #315eaa;
+  --blue-soft: #edf3ff;
+  --shadow: 0 10px 30px rgba(20, 37, 63, .08);
+  --radius: 16px;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #edf1f5;
+  font-size: 15px;
+  line-height: 1.55;
+}
+button, input, textarea { font: inherit; }
+button { color: inherit; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 76px;
+  display: grid;
+  grid-template-columns: 310px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 0 28px;
+  color: #fff;
+  background: var(--navy);
+  border-bottom: 3px solid var(--accent);
+  box-shadow: 0 4px 18px rgba(14, 26, 44, .2);
+}
+.brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
+.brand-mark {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: grid; place-items: center;
+  color: var(--navy); background: var(--accent);
+  font-weight: 900; letter-spacing: -.5px;
+}
+.brand-copy { min-width: 0; }
+.brand-title { font-weight: 750; letter-spacing: -.02em; white-space: nowrap; }
+.brand-subtitle { color: #aebdd0; font-size: 12px; white-space: nowrap; }
+.topbar-center { display: flex; align-items: center; gap: 10px; }
+.scope-label { color: #aebdd0; font-size: 12px; text-transform: uppercase; letter-spacing: .09em; margin-right: 2px; }
+.scope-toggle {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid #496079; background: #203750; color: #d8e2ec;
+  padding: 9px 12px; border-radius: 999px; cursor: pointer; user-select: none;
+  transition: .15s ease;
+}
+.scope-toggle input { accent-color: var(--accent); }
+.scope-toggle:has(input:checked) { border-color: #f2a06d; background: #314662; color: #fff; }
+.top-actions { display: flex; align-items: center; gap: 8px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  border: 1px solid transparent; border-radius: 10px; padding: 9px 12px;
+  cursor: pointer; font-size: 13px; font-weight: 650; transition: .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-ghost { border-color: #496079; background: transparent; color: #e6edf4; }
+.btn-ghost:hover { background: #203750; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-light { border-color: var(--line); background: #fff; }
+.btn-light:hover { border-color: var(--line-strong); background: var(--surface-2); }
+.shell {
+  display: grid;
+  grid-template-columns: 300px minmax(720px, 1fr) 280px;
+  gap: 22px;
+  width: min(1880px, calc(100vw - 32px));
+  margin: 18px auto 40px;
+  align-items: start;
+}
+.left-rail, .right-rail { position: sticky; top: 94px; max-height: calc(100vh - 112px); overflow: auto; }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 10px rgba(20,37,63,.04);
+}
+.rail-panel { padding: 16px; }
+.rail-heading {
+  margin: 0 0 10px; color: var(--subtle); font-size: 11px;
+  font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+}
+.search-wrap { position: relative; margin-bottom: 14px; }
+.search-wrap input {
+  width: 100%; padding: 10px 11px 10px 34px; border: 1px solid var(--line);
+  background: var(--surface-2); border-radius: 10px; outline: none;
+}
+.search-wrap input:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px var(--blue-soft); }
+.search-icon { position: absolute; left: 11px; top: 10px; color: var(--subtle); }
+.toc { display: grid; gap: 2px; }
+.toc a {
+  display: block; color: #4b586a; text-decoration: none;
+  border-left: 2px solid transparent; border-radius: 0 8px 8px 0;
+  padding: 7px 9px; font-size: 13px; line-height: 1.35;
+}
+.toc a.level-2 { padding-left: 19px; font-size: 12px; }
+.toc a:hover { color: var(--navy); background: var(--surface-2); }
+.toc a.active { color: var(--accent); background: var(--accent-soft); border-left-color: var(--accent); font-weight: 700; }
+.toc a.branch-disabled { opacity: .4; pointer-events: none; }
+.content-column { min-width: 0; }
+.cover-card {
+  position: relative; overflow: hidden; padding: 30px 32px;
+  color: #fff; background: linear-gradient(125deg, var(--navy) 0%, var(--navy-2) 72%, #294766 100%);
+  border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.cover-card::after {
+  content: ""; position: absolute; width: 270px; height: 270px; right: -85px; top: -110px;
+  border: 54px solid rgba(217,111,50,.24); border-radius: 50%;
+}
+.cover-kicker { color: #f1a072; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+.cover-card h1 { margin: 8px 0 9px; max-width: 750px; font-size: 34px; line-height: 1.14; letter-spacing: -.035em; }
+.cover-card > p { max-width: 820px; margin: 0; color: #c8d4e1; }
+.cover-grid { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+.cover-field { display: grid; gap: 5px; }
+.cover-field.wide { grid-column: span 2; }
+.cover-field label { color: #aebdd0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.cover-field input {
+  width: 100%; border: 1px solid #536983; color: #fff; background: rgba(255,255,255,.08);
+  border-radius: 9px; padding: 10px 11px; outline: none;
+}
+.cover-field input:focus { border-color: #f1a072; background: rgba(255,255,255,.13); }
+.cover-note { position: relative; z-index: 2; display: flex; gap: 8px; align-items: center; margin-top: 18px; color: #aebdd0; font-size: 12px; }
+.questionnaire-content { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 28px 34px 54px; }
+.major-section > h1 {
+  margin: 44px -34px 24px; padding: 22px 34px 18px;
+  font-size: 27px; line-height: 1.2; letter-spacing: -.025em;
+  color: var(--navy); background: linear-gradient(90deg, #f1f4f8, #fff);
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.major-section:first-child > h1 { margin-top: 0; }
+.questionnaire-content h2 { margin: 32px 0 14px; color: var(--navy); font-size: 20px; letter-spacing: -.015em; }
+.questionnaire-content h3 { color: var(--navy); }
+.questionnaire-content p { color: #425066; }
+.questionnaire-content blockquote {
+  margin: 14px 0; padding: 13px 16px; border-left: 4px solid var(--accent);
+  color: #5c493c; background: var(--accent-soft); border-radius: 0 10px 10px 0;
+}
+.questionnaire-content blockquote p { margin: 0; color: inherit; }
+.questionnaire-content hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+.questionnaire-content ul, .questionnaire-content ol { padding-left: 22px; }
+.questionnaire-content code { color: #8d451f; background: var(--accent-soft); padding: 2px 5px; border-radius: 5px; }
+.question-card {
+  scroll-margin-top: 96px;
+  margin: 14px 0;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--line-strong);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color .16s ease, box-shadow .16s ease, opacity .16s ease;
+}
+.question-card:hover { border-color: #c8d2df; box-shadow: 0 8px 24px rgba(20,37,63,.06); }
+.question-card[data-kind="C"] { border-left-color: var(--accent); }
+.question-card[data-kind="L"] { border-left-color: var(--blue); }
+.question-card[data-status="answered"] { border-left-color: var(--green); }
+.question-card[data-status="unknown"] { border-left-color: var(--red); }
+.question-card[data-status="awaiting"] { border-left-color: var(--amber); }
+.question-card[data-status="na"] { border-left-color: var(--subtle); opacity: .82; }
+.card-head {
+  display: grid; grid-template-columns: 58px 1fr auto; gap: 13px; align-items: center;
+  padding: 16px 17px; background: #fafbfd; border-bottom: 1px solid var(--line); cursor: pointer;
+}
+.id-badge {
+  display: grid; place-items: center; min-height: 38px; border-radius: 9px;
+  color: #fff; background: var(--navy); font-size: 13px; font-weight: 850; letter-spacing: .02em;
+}
+.question-card[data-kind="L"] .id-badge { background: var(--blue); }
+.card-title { margin: 0 !important; font-size: 17px; line-height: 1.25; letter-spacing: -.01em; }
+.card-state { display: flex; align-items: center; gap: 8px; }
+.due-badge, .state-badge {
+  display: inline-flex; align-items: center; border-radius: 999px;
+  padding: 5px 9px; font-size: 11px; font-weight: 750; white-space: nowrap;
+}
+.due-badge { color: #694025; background: var(--accent-soft); }
+.question-card[data-kind="L"] .due-badge { color: #315eaa; background: var(--blue-soft); }
+.state-badge { color: #667085; background: var(--surface-3); }
+.collapse-btn { border: 0; background: transparent; color: var(--subtle); font-size: 18px; cursor: pointer; transition: transform .15s ease; }
+.question-card.collapsed .collapse-btn { transform: rotate(-90deg); }
+.card-body { padding: 17px 18px 19px; }
+.question-card.collapsed .card-body { display: none; }
+.card-meta {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px;
+  margin-bottom: 13px; padding: 12px 13px; background: var(--surface-2); border-radius: 10px;
+  font-size: 12px; color: #536174;
+}
+.card-meta p { margin: 0; color: inherit; }
+.card-meta strong { color: #29364a; }
+.card-prompt { margin: 12px 1px 15px; }
+.card-prompt strong { color: var(--navy); }
+.answer-grid { display: grid; gap: 12px; }
+.field { display: grid; gap: 6px; }
+.field label { color: #46546a; font-size: 12px; font-weight: 750; }
+.field textarea, .field input, .status-select {
+  width: 100%; border: 1px solid var(--line-strong); background: #fff;
+  border-radius: 9px; padding: 10px 11px; outline: none; color: var(--ink);
+}
+.field textarea { min-height: 92px; resize: vertical; }
+.field textarea:focus, .field input:focus, .status-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
+.status-select { min-width: 142px; padding: 7px 9px; font-size: 12px; }
+.ready-check { display: flex; align-items: flex-start; gap: 9px; list-style: none; margin-left: -22px; }
+.ready-check input { margin-top: 5px; accent-color: var(--green); }
+.signature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin-top: 14px; }
+.signature-row { display: grid; grid-template-columns: 180px 1fr 140px; gap: 9px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); }
+.signature-row strong { font-size: 12px; }
+.signature-row input { min-width: 0; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; padding: 8px 9px; outline: none; }
+.signature-row input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
+.signature-row.full { grid-column: 1 / -1; }
+.status-row { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.status-row > span { margin-right: 4px; color: #46546a; font-size: 12px; font-weight: 750; }
+.status-option { position: relative; }
+.status-option input { position: absolute; opacity: 0; pointer-events: none; }
+.status-option label {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px;
+  border: 1px solid var(--line); border-radius: 9px; background: #fff;
+  color: #5a6779; font-size: 12px; font-weight: 650; cursor: pointer; user-select: none;
+}
+.status-option label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #c9d0da; }
+.status-option input:checked + label { color: var(--navy); border-color: #9eabbc; background: var(--surface-2); }
+.status-option input[value="answered"]:checked + label::before { background: var(--green); }
+.status-option input[value="unknown"]:checked + label::before { background: var(--red); }
+.status-option input[value="na"]:checked + label::before { background: var(--subtle); }
+.status-option input[value="awaiting"]:checked + label::before { background: var(--amber); }
+.context-panel { display: none; grid-template-columns: 1fr 160px; gap: 10px; padding: 12px; border-radius: 10px; background: var(--red-soft); border: 1px solid #f3d0d0; }
+.context-panel.visible { display: grid; }
+.context-panel.material { background: var(--amber-soft); border-color: #f0ddb2; }
+.context-panel .wide { grid-column: 1 / -1; }
+.table-wrap { overflow-x: auto; margin: 14px 0 22px; border: 1px solid var(--line); border-radius: 12px; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; line-height: 1.4; }
+th { position: sticky; top: 0; z-index: 1; color: #fff; background: var(--navy-2); text-align: left; font-weight: 700; }
+th, td { padding: 10px 11px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); vertical-align: top; min-width: 90px; }
+th:last-child, td:last-child { border-right: 0; }
+tr:last-child td { border-bottom: 0; }
+tbody tr:nth-child(even) td { background: #fafbfd; }
+td[contenteditable="true"] { min-width: 120px; background: #fffdf8 !important; outline: none; }
+td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
+.section-note { margin: 12px 0; padding: 13px 14px; background: var(--blue-soft); border: 1px solid #d5e1fa; border-radius: 10px; color: #3c5580; }
+.progress-card { padding: 17px; }
+.progress-head { display: flex; justify-content: space-between; align-items: baseline; }
+.progress-number { font-size: 25px; font-weight: 800; color: var(--navy); }
+.progress-label { color: var(--muted); font-size: 12px; }
+.progress-track { height: 9px; overflow: hidden; background: var(--surface-3); border-radius: 999px; margin: 10px 0 15px; }
+.progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), #ee9b67); border-radius: inherit; transition: width .2s ease; }
+.stat-list { display: grid; gap: 8px; }
+.stat-row { display: flex; justify-content: space-between; gap: 12px; color: #536174; font-size: 12px; }
+.stat-row strong { color: var(--ink); }
+.filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 14px; }
+.filter-btn {
+  border: 1px solid var(--line); background: #fff; border-radius: 9px; padding: 8px;
+  color: #586679; font-size: 11px; font-weight: 700; cursor: pointer;
+}
+.filter-btn.active { color: var(--accent); border-color: #efb28e; background: var(--accent-soft); }
+.privacy-card { margin-top: 12px; padding: 14px; color: #4a5b70; background: #f7fafc; border: 1px solid var(--line); border-radius: 14px; font-size: 12px; }
+.privacy-card strong { display: block; color: var(--navy); margin-bottom: 4px; }
+.empty-state { display: none; padding: 36px; text-align: center; color: var(--muted); }
+.branch-hidden, .filtered-out { display: none !important; }
+.toast {
+  position: fixed; right: 28px; bottom: 28px; z-index: 80;
+  padding: 11px 15px; border-radius: 10px; color: #fff; background: var(--navy);
+  box-shadow: var(--shadow); opacity: 0; transform: translateY(12px); pointer-events: none; transition: .2s ease;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+@media (max-width: 1450px) {
+  .shell { grid-template-columns: 250px minmax(700px, 1fr); }
+  .right-rail { position: fixed; right: 20px; bottom: 20px; top: auto; width: 250px; z-index: 40; max-height: none; }
+  .topbar { grid-template-columns: 255px 1fr auto; }
+}
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff; font-size: 10pt; }
+  .topbar, .left-rail, .right-rail, .btn, .collapse-btn, .privacy-card, .toast { display: none !important; }
+  .shell { display: block; width: auto; margin: 0; }
+  .cover-card { color: #111; background: #fff; border: 1px solid #bbb; box-shadow: none; }
+  .cover-card input { color: #111; background: #fff; border-color: #aaa; }
+  .questionnaire-content { padding: 0; border: 0; box-shadow: none; }
+  .question-card { break-inside: avoid; box-shadow: none; }
+  .question-card.collapsed .card-body { display: block; }
+  .major-section > h1 { margin-left: 0; margin-right: 0; }
+  .status-option input:checked + label { border-color: #333; }
+  .status-option input:not(:checked) + label { display: none; }
+  .context-panel.visible { display: grid; }
+  table { font-size: 7.5pt; }
+  th { color: #111; background: #eee; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">БВ</div>
+    <div class="brand-copy">
+      <div class="brand-title">Опросник БЕРВЕЛ</div>
+      <div class="brand-subtitle">Основание для технического задания</div>
+    </div>
+  </div>
+  <div class="topbar-center">
+    <span class="scope-label">Контуры</span>
+    <label class="scope-toggle"><input id="scope-tenders" type="checkbox" checked> Тендеры</label>
+    <label class="scope-toggle"><input id="scope-rfq" type="checkbox" checked> Входящие заявки</label>
+  </div>
+  <div class="top-actions">
+    <button class="btn btn-ghost" id="import-btn" type="button">Загрузить ответы</button>
+    <button class="btn btn-ghost" id="export-btn" type="button">Скачать JSON</button>
+    <button class="btn btn-primary" id="print-btn" type="button">Печать / PDF</button>
+    <input id="import-file" type="file" accept="application/json" hidden>
+  </div>
+</header>
+<div class="shell">
+  <aside class="left-rail panel rail-panel">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input id="search" type="search" placeholder="Найти вопрос или ID…" autocomplete="off">
+    </div>
+    <p class="rail-heading">Содержание</p>
+    <nav class="toc" id="toc"></nav>
+  </aside>
+
+  <main class="content-column">
+    <section class="cover-card" id="cover">
+      <div class="cover-kicker">Единый пакет ответов</div>
+      <h1>Опросник для подготовки технического задания</h1>
+      <p>Общая основа и две условные ветки. Ответы, приложения и управляемые неизвестные остаются в одном согласованном документе.</p>
+      <div class="cover-grid">
+        <div class="cover-field"><label for="meta-version">Версия пакета</label><input id="meta-version" name="meta-version" placeholder="Например, 0.1"></div>
+        <div class="cover-field"><label for="meta-opened">Дата открытия</label><input id="meta-opened" name="meta-opened" type="date"></div>
+        <div class="cover-field"><label for="meta-deadline">Срок заполнения</label><input id="meta-deadline" name="meta-deadline" type="date"></div>
+        <div class="cover-field"><label for="meta-coordinator">Координатор</label><input id="meta-coordinator" name="meta-coordinator" placeholder="ФИО, должность, контакты"></div>
+        <div class="cover-field"><label for="meta-sponsor">Бизнес-спонсор</label><input id="meta-sponsor" name="meta-sponsor" placeholder="ФИО, должность"></div>
+        <div class="cover-field"><label for="meta-departments">Подразделения</label><input id="meta-departments" name="meta-departments" placeholder="Через запятую"></div>
+      </div>
+      <div class="cover-note">◉ Файл работает локально: введённые данные не отправляются в сеть. Для сохранения используйте «Скачать JSON».</div>
+    </section>
+    <div class="questionnaire-content" id="questionnaire"><h1>Опросник БЕРВЕЛ для подготовки технического задания</h1>
+<p><strong>Статус документа:</strong> черновик для согласования<br />
+<strong>Версия пакета ответов:</strong> ____________________<br />
+<strong>Дата открытия:</strong> ____________________<br />
+<strong>Срок заполнения:</strong> ____________________<br />
+<strong>Координатор заполнения (ФИО, должность, контакты):</strong> ____________________<br />
+<strong>Бизнес-спонсор (ФИО, должность):</strong> ____________________<br />
+<strong>Выбранные контуры:</strong> ☐ Анализ тендеров ☐ Обработка входящих заявок<br />
+<strong>Подразделения, участвующие в заполнении:</strong> ____________________</p>
+<h2>0. Как заполнять опросник</h2>
+<h3>Назначение</h3>
+<p>Ответы, приложения и явно зафиксированные неизвестные образуют один канонический <strong>пакет ответов</strong>. Он должен позволить определить границы решения, требования к данным и интеграциям, полномочия сотрудников, критерии пилота и условия приёмки без скрытых допущений.</p>
+<p>Опросник не просит БЕРВЕЛ заранее выбрать архитектуру, OCR/LLM, базу данных или поставщика. В ответах нужны бизнес-правила, ограничения, источники истины и проверяемые критерии результата.</p>
+<h3>Порядок работы</h3>
+<ol>
+<li>Координатор назначает одного основного владельца каждой карточки и при необходимости согласующих.</li>
+<li>Общая основа заполняется один раз. Ветки «Тендеры» и «Входящие заявки» открываются только для выбранных контуров.</li>
+<li>Большие перечни, числовые справочники и реальные цепочки документов не копируются в форму. Их передают через единый реестр приложений в разделе 7.</li>
+<li>Сырые заявки, тендерные пакеты, чертежи, персональные данные, реквизиты, цены, маржа, ключи, токены и пароли не передаются по электронной почте или через открытые ссылки. Для материалов используется согласованный защищённый канал. Секреты и закрытые ключи не прикладываются ни при каких условиях.</li>
+<li>Если точного ответа нет, выберите «Неизвестно» и обязательно укажите владельца уточнения, срок и влияние на ТЗ. Неизвестное без владельца не считается управляемым.</li>
+<li>Если ответ «Не применимо», укажите основание. Если требуется файл, но он ещё не передан, выберите «Ожидается материал» и свяжите карточку с записью <code>Mxx</code> в реестре приложений.</li>
+<li>При противоречии между владельцами не выбирайте удобный вариант: занесите противоречие в реестр неизвестного и назначьте лицо, принимающее решение.</li>
+</ol>
+<h3>Статусы карточки</h3>
+<ul>
+<li><strong>Ответ дан</strong> — ответ полон, владелец и согласующие его подтвердили.</li>
+<li><strong>Неизвестно</strong> — назначены владелец уточнения, срок и описано влияние.</li>
+<li><strong>Не применимо</strong> — приведено проверяемое основание.</li>
+<li><strong>Ожидается материал</strong> — ответ зависит от зарегистрированного приложения.</li>
+</ul>
+<h3>Сроки ответа</h3>
+<ul>
+<li><strong>Критично до ТЗ</strong> — без ответа нельзя надёжно зафиксировать границу, правило, ответственность, источник истины, допустимый контур данных или критерий результата.</li>
+<li><strong>До пилота</strong> — ответ не блокирует рамочное ТЗ, но блокирует соответствующий тест, интеграцию или работу с данными БЕРВЕЛ.</li>
+<li><strong>До промышленного запуска</strong> — ответ обязателен для production-readiness и эксплуатации.</li>
+</ul>
+<h3>Формат ответа на неизвестное</h3>
+<blockquote>
+<p><strong>Владелец уточнения:</strong> ФИО, должность<br />
+<strong>Срок:</strong> дата<br />
+<strong>Что нужно сделать:</strong> действие или решение<br />
+<strong>Влияние:</strong> какой раздел ТЗ, пилота, срок или обещание остаётся неподтверждённым<br />
+<strong>Временное ограничение:</strong> что разрешено делать до уточнения</p>
+</blockquote>
+<h3>Рекомендуемые роли</h3>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>ФИО/должность</th>
+<th>Зона ответа</th>
+<th>Замещающий</th>
+<th>SLA ответа</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Бизнес-спонсор</td>
+<td></td>
+<td>цель, scope, итоговый go/no-go</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Владелец тендерного процесса</td>
+<td></td>
+<td>ветка тендеров, bid/no-bid</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Владелец входящих заявок</td>
+<td></td>
+<td>RFQ, КП/отказ, связь с клиентом</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Продажи/тендерный отдел</td>
+<td></td>
+<td>текущий процесс, исключения, выходы</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Технолог/номенклатура</td>
+<td></td>
+<td>технические атрибуты, аналоги, производимость</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Производство</td>
+<td></td>
+<td>мощности, сроки, ограничения</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Качество/лаборатория</td>
+<td></td>
+<td>испытания, сертификаты, партии</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Финансы/ценообразование</td>
+<td></td>
+<td>цена, себестоимость, маржа, риски</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Юристы</td>
+<td></td>
+<td>договоры, право, ограничения</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ИТ/данные</td>
+<td></td>
+<td>системы истины, интеграции, эксплуатация</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Информационная безопасность</td>
+<td></td>
+<td>классификация, доступы, размещение</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Владелец пилота/качества</td>
+<td></td>
+<td>gold set, метрики, приёмка</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>1. Рамка задачи</h1>
+<h2>1.1. Цели и границы</h2>
+<h3>C01. Проблема, цель и владельцы решения</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор; согласуют владельцы двух процессов<br />
+<strong>Тип ответа:</strong> повторяемая таблица «контур → проблема → baseline → целевой эффект → владелец»<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> утверждённая карточка инициативы или KPI, если есть</p>
+<p><strong>Ответьте:</strong> отдельно для каждого выбранного контура опишите наблюдаемую проблему, кого она затрагивает, как часто возникает и чем измеряется ущерб. Укажите текущий показатель, желаемое изменение и срок. Назовите бизнес-владельца, владельца процесса и лицо, принимающее итоговый <code>go / conditional go / iterate / no-go</code>.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C02. Границы первого этапа</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор<br />
+<strong>Тип ответа:</strong> таблица <code>входит / не входит / требует решения</code><br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> утверждённый scope или протокол решения</p>
+<p><strong>Ответьте:</strong> перечислите входящие в первый этап подразделения, пользователей, источники и типы тендеров, каналы заявок, товарные семейства, языки, регионы и объёмы. Отдельно перечислите явные исключения. Для каждого спорного пункта укажите принимающего решение и дату.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C03. Граница автоматизации и обязательные результаты</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владельцы процессов; согласуют ИТ, юристы и ИБ<br />
+<strong>Тип ответа:</strong> матрица <code>сценарий → последний автоматизированный шаг → выход → запрещённое действие</code><br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> примеры текущих выходных документов по <code>M08</code></p>
+<p><strong>Ответьте:</strong> для каждого контура выберите последний допустимый шаг: обнаружение, анализ, рекомендация, черновик документа, запись черновика в систему или внешнее действие. Отметьте обязательные выходы: заключение bid/no-bid, матрица требований, экономика, список уточнений, черновик КП, отказ или рекомендация по освоению. Укажите действия, которые система не вправе выполнять без человека.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L01. Горизонт развития за пределами первого этапа</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong>, только для roadmap · <strong>Владелец:</strong> бизнес-спонсор<br />
+<strong>Тип ответа:</strong> ранжированный перечень с условиями возврата в scope<br />
+<strong>Показывать:</strong> если БЕРВЕЛ хочет зафиксировать roadmap · <strong>Подтверждение:</strong> протокол портфельного решения</p>
+<p><strong>Ответьте:</strong> какие направления за пределами двух выбранных контуров могут быть рассмотрены позже? Для каждого назовите бизнес-сигнал, данные и решение, после которых его можно вернуть в scope. Подтвердите, что эти направления не расширяют первый этап автоматически.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h2>1.2. Текущий процесс и baseline</h2>
+<h3>C04. Текущий процесс от входа до результата</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец соответствующего процесса<br />
+<strong>Тип ответа:</strong> карта процесса + таблица шагов, ролей, систем и исключений<br />
+<strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> <code>M01</code></p>
+<p><strong>Ответьте:</strong> опишите один обычный, один сложный и один неуспешный случай от поступления до финального результата. Для каждого шага укажите вход, действие, роль, систему, ручную проверку, выход, ожидание, возврат на доработку и причину исключения. Отдельно отметьте решения, принимаемые вне систем — в почте, файлах или устно.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C05. Объём, сезонность, нагрузка и сроки</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец процесса; данные подтверждает ИТ/аналитика<br />
+<strong>Тип ответа:</strong> числа с единицей, периодом и источником<br />
+<strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> выгрузка baseline по <code>M10</code></p>
+<p><strong>Ответьте:</strong> укажите за репрезентативный период число входов, файлов, страниц, строк и версий; медиану и P90/P95; сезонность и пики; дедлайны клиента/процедуры; рабочие часы; очередь; время ожидания и touch time по этапам. Для оценок без выгрузки пометьте источник как экспертную оценку.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C06. Исходное качество процесса</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец качества процесса<br />
+<strong>Тип ответа:</strong> таблица метрик <code>определение → числитель → знаменатель → период → источник</code><br />
+<strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> <code>M10</code></p>
+<p><strong>Ответьте:</strong> зафиксируйте долю пропусков, дублей, просрочек, возвратов, исправлений, формальных и технических отклонений, неверных сопоставлений и переделок после выпуска. Определите, что именно считается ошибкой и на какой единице она измеряется. Отделите подтверждённые данные от экспертной оценки.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L02. Изменения процесса, ролей и обучения</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> бизнес-владелец внедрения<br />
+<strong>Тип ответа:</strong> план изменений с владельцами и сроками<br />
+<strong>Показывать:</strong> если пилот предполагает изменение процесса · <strong>Подтверждение:</strong> план внедрения</p>
+<p><strong>Ответьте:</strong> какие регламенты, роли, полномочия, обучение и KPI должны измениться после пилота? Кто отвечает за внедрение процесса, коммуникацию, обучение и проверку освоения, а не только за техническую систему?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h2>1.3. Роли, полномочия и человеческий контроль</h2>
+<h3>C07. Владельцы этапов и SLA ответа</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор и владельцы процессов<br />
+<strong>Тип ответа:</strong> RACI/SLA-матрица<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M01</code></p>
+<p><strong>Ответьте:</strong> назначьте основного владельца и замещающего для первичного отбора, продаж, технологии, производства, качества/лаборатории, экономики, юристов, ИБ, ИТ, финального решения и связи с клиентом. Укажите полномочия, рабочие часы и максимальное время ответа каждого.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C08. Разрешённые и запрещённые действия системы</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владельцы процессов; согласуют юристы, ИБ и ИТ<br />
+<strong>Тип ответа:</strong> CRUD/полномочия по каждому действию<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> утверждённая матрица полномочий</p>
+<p><strong>Ответьте:</strong> для классификации, извлечения, нормализации, сопоставления, расчёта, подготовки запроса, формирования документа, записи в CRM/ERP/1С и отправки наружу выберите режим: <code>запрещено / только подсказка / черновик / действие после подтверждения / автономно в заданных пределах</code>. Укажите пределы суммы, риска, категории и среды.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C09. Stop-события, review, override и подпись</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владельцы процессов и риска<br />
+<strong>Тип ответа:</strong> каталог событий и матрица <code>событие → REVIEW/BLOCK → роль → SLA → доказательство</code><br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> действующие чек-листы и регламенты <code>M01</code></p>
+<p><strong>Ответьте:</strong> перечислите события, которые всегда останавливают автоматическую обработку или требуют человека: неполный вход, конфликт документов, новый тип, низкая уверенность, аналог, крупная сумма, критичное поле, устаревший справочник. Укажите, кто может approve/edit/reject/override, обязан ли записать основание, кто контролирует override и кто финально подписывает результат.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L03. Очереди и рабочее место проверяющего</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> владельцы процессов<br />
+<strong>Тип ответа:</strong> сценарии очереди и приоритетов<br />
+<strong>Показывать:</strong> если предусмотрен human review · <strong>Подтверждение:</strong> текущие очереди/экраны, если есть</p>
+<p><strong>Ответьте:</strong> как распределяются приоритет, дедлайн, владелец, замещение и эскалация? Что проверяющий должен видеть рядом: оригинал и координату, raw/canonical значение, версию, уверенность, различия кандидатов и downstream-последствие? Каков допустимый backlog и как измеряется качество проверяющего?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<hr />
+<h1>2. Общая основа</h1>
+<h2>2.1. Номенклатура, техническая модель и производимость</h2>
+<h3>C10. Мастер-каталог и идентификаторы</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец номенклатуры/1С<br />
+<strong>Тип ответа:</strong> карточка источника истины + словарь идентификаторов<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M05</code></p>
+<p><strong>Ответьте:</strong> где находится полный мастер-каталог; какая система и таблица являются источником истины; кто утверждает изменения? Перечислите стабильные SKU/GUID, клиентские и производительские коды, синонимы, архивные и заказные позиции, дубли, даты действия и правила слияния/разделения карточек.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C11. Обязательные технические атрибуты по товарным веткам</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> главный технолог/номенклатура; согласует качество<br />
+<strong>Тип ответа:</strong> таблица <code>товарная ветка → обязательный атрибут → единица/справочник → владелец</code><br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M05</code>, примеры КМ/КМД/чертежей по <code>M04</code></p>
+<p><strong>Ответьте:</strong> для крепежа/болтокомплектов, холоднотянутого проката, покрытий, термообработки, лабораторных услуг и монтажного сопровождения перечислите обязательные атрибуты. Включите применимые стандарт/СТО/чертёж и ревизию, размеры и допуски, комплектность, резьбу, класс/материал/марку стали, покрытие и среду, k-фактор/натяжение, испытания, партию, упаковку и документы качества. Разведите сертификат соответствия и документ качества конкретной партии.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C12. Жёсткие ограничения, эквиваленты и единицы</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> главный технолог<br />
+<strong>Тип ответа:</strong> матрица ограничений и полномочий<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M05</code></p>
+<p><strong>Ответьте:</strong> какие атрибуты никогда нельзя изменять автоматически? Где допустим точный эквивалент, улучшение или аналог? Кто утверждает соответствие ГОСТ/DIN/ISO/EN/СТО, замену комплектности и покрытия? Перечислите допустимые единицы, упаковочные коэффициенты, округления и случаи, когда конверсия запрещена или требует согласования клиента.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C13. Производимость, мощности и доказательства</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> производство; согласуют технолог и качество<br />
+<strong>Тип ответа:</strong> карточки источников + правила feasibility<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M05</code></p>
+<p><strong>Ответьте:</strong> где и в каком виде хранятся техкарты/BOM/маршруты и ревизии, оборудование и оснастка, доступная мощность по периодам, переналадка, MOQ, lead time сырья и покрытий, лабораторные возможности, сертификаты и ограничения качества? Кто и за какое время подтверждает стандартную и нестандартную производимость? Какая версия данных должна воспроизводиться на дату решения?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L04. Кооперация, партнёры и новое изделие</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> производство/закупки/технолог<br />
+<strong>Тип ответа:</strong> матрица допустимых маршрутов и доказательств<br />
+<strong>Показывать:</strong> если разрешены субподряд, закупка у партнёра или освоение · <strong>Подтверждение:</strong> утверждённый реестр партнёров/процедура квалификации</p>
+<p><strong>Ответьте:</strong> когда допустимы кооперация, субподряд, закупка у партнёра или разработка нового продукта? Кто квалифицирует поставщика и принимает остаточный риск? Какие доказательства качества, срока, происхождения и цены обязательны до предложения клиенту?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L05. Глубина расчёта мощностей</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> производство<br />
+<strong>Тип ответа:</strong> один вариант + условия применения<br />
+<strong>Показывать:</strong> если система должна подтверждать срок/производимость · <strong>Подтверждение:</strong> пример фактического расчёта</p>
+<p><strong>Ответьте:</strong> достаточно ли грубой проверки доступности семейства/операции, нужен расчёт по линиям и периодам или календарное планирование по операциям? Какие данные и допустимая устарелость нужны для каждого уровня? Что система показывает, если мощность не подтверждена?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h2>2.2. Системы истины, данные и интеграции</h2>
+<h3>C14. Источники истины по сущностям и полям</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИТ/архитектор данных; утверждают бизнес-владельцы данных<br />
+<strong>Тип ответа:</strong> SoR-матрица <code>сущность/поле → система → владелец → правило конфликта</code><br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M07</code></p>
+<p><strong>Ответьте:</strong> назовите источник истины для клиента, контакта, заявки/тендера, SKU, техкарты, производимости, остатков/ATP, загрузки, цены, себестоимости, скидки, валюты/курса, заказа, решения, сертификата и фактического результата. Если поля одной сущности принадлежат разным системам, перечислите их отдельно. Укажите правило конфликта и владельца утверждения.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C15. Инвентарь и готовность наборов данных</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владельцы данных; координирует ИТ<br />
+<strong>Тип ответа:</strong> повторяемая карточка dataset<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M02–M07</code>, <code>M10</code></p>
+<p><strong>Ответьте:</strong> для каждого набора укажите owner/steward, назначение, источник и способ сбора, период и объём, формат/язык, поля и ID, место хранения, частоту и задержку, версии, права, retention и известные проблемы полноты, точности, уникальности и актуальности. Укажите, какой обезличенный репрезентативный пример можно передать и кто утверждает обезличивание.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C16. Чтение, запись и связи между системами</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИТ и владельцы приложений<br />
+<strong>Тип ответа:</strong> CRUD/интеграционная матрица<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M07</code></p>
+<p><strong>Ответьте:</strong> какие записи и поля система должна читать, создавать или изменять в каждой базе 1С, ERP, CRM, СЭД, почте и иных системах? Какими внутренними и внешними ID связаны объекты? Какие поля автоматике запрещено перезаписывать? Кто побеждает при параллельном изменении человеком и системой?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L06. Версионированные интеграционные контракты</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> ИТ/владельцы систем<br />
+<strong>Тип ответа:</strong> карточка каждого потока<br />
+<strong>Показывать:</strong> если пилот читает или пишет внешнюю систему · <strong>Подтверждение:</strong> <code>M13</code></p>
+<p><strong>Ответьте:</strong> для каждого потока укажите source→target, событие, sync/async, интерфейс, версию схемы, обязательные поля, единицы/время/кодировку, auth без секретов, лимиты, idempotency key, retry/DLQ/replay, частичный успех, correlation ID, конфликт, SLA и владельца. Перечислите DEV/TEST/UAT/PROD и правила запрета production-данных в non-prod.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L07. История, миграция и drift данных</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> ИТ/владелец данных<br />
+<strong>Тип ответа:</strong> план backfill и контроля изменений<br />
+<strong>Показывать:</strong> если нужна история или регулярная синхронизация · <strong>Подтверждение:</strong> план миграции/сверки</p>
+<p><strong>Ответьте:</strong> какой исторический период переносится, как разрешаются дубли и изменившиеся справочники, кто подтверждает результат? Как обнаруживаются schema drift, data drift и расхождение систем истины; с какой частотой выполняется сверка и что происходит при нарушении порога?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<hr />
+<h1>3. Ветка «Тендеры»</h1>
+<blockquote>
+<p>Заполняется, только если в разделе 0 выбран контур <strong>«Анализ тендеров»</strong>.</p>
+</blockquote>
+<h2>3.1. Источники, покрытие и версии пакета</h2>
+<h3>C17. Обязательные источники и правила релевантности</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец тендерного процесса<br />
+<strong>Тип ответа:</strong> реестр источников и фильтров<br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> параметры текущей выгрузки <code>M02</code></p>
+<p><strong>Ответьте:</strong> какие режимы и источники входят: 44-ФЗ, 223-ФЗ, ПП № 615, конкретные ЭТП, коммерческие/зарубежные площадки, агрегаторы, кабинеты, почта и ручные каналы? Для каждого укажите регионы, заказчиков, коды, ключевые признаки, исключения, backfill и критерий слишком позднего обнаружения. Отметьте, что источник принципиально не покрывает.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C18. Разрешённый доступ к тендерным источникам</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИТ и администратор ЕИС/ЭТП; согласуют юристы и ИБ<br />
+<strong>Тип ответа:</strong> карточка доступа без секретов<br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> обезличенное подтверждение ролей/доступа</p>
+<p><strong>Ответьте:</strong> для каждого источника укажите разрешённый способ доступа, владельца учётной записи/договора, готовность ЕСИА/КЭП/<code>getDocsLE</code>, место интеграции, срок сертификата, ротацию/отзыв, допустимый fallback и ограничения хранения. Секреты, PIN, токены и закрытые ключи не указывайте. Кто проверяет договор и полноту агрегатора?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C19. Единица учёта и версия тендерного пакета</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец тендерного процесса; согласует ИТ<br />
+<strong>Тип ответа:</strong> state model и правила идентичности<br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> последовательные выгрузки и полные пакеты <code>M02</code></p>
+<p><strong>Ответьте:</strong> определите каноническую цепочку <code>закупка → лот → позиция → редакция извещения → вложение → разъяснение/изменение → протокол/контракт</code>. Какие ID, URL, время получения и хеши сохраняются? Как отличить дубль, новую редакцию, повторную публикацию и многолотовость? Какие события требуют пересчёта и повторного согласования решения?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C20. Комплект документов и обработка исключений</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> тендерный отдел; согласуют юрист и технолог<br />
+<strong>Тип ответа:</strong> матрица <code>режим → обязательный документ → приоритет источника → действие при отсутствии</code><br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> <code>M02</code>, <code>M04</code>, <code>M08</code></p>
+<p><strong>Ответьте:</strong> перечислите обязательные карточки, ТЗ, спецификации, проект договора, формы заявки, обоснование НМЦК, чертежи, разъяснения и протоколы. Как обрабатывать ZIP, DOCX/XLSX, текстовый/сканированный PDF, CAD, подписи и защищённые файлы? Что делать при отсутствии отдельного ТЗ/чертежа, конфликте источников или законно непубликуемых данных? Какие случаи являются hard stop?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L08. Исторический архив и повторное получение</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> ИТ и владелец тендерных данных<br />
+<strong>Тип ответа:</strong> политика версий/retention<br />
+<strong>Показывать:</strong> если хранится история пакетов · <strong>Подтверждение:</strong> политика хранения</p>
+<p><strong>Ответьте:</strong> какой период и какие редакции хранятся; нужен ли diff; какие контрольные суммы и метаданные обязательны; каков срок удаления; как повторно скачать исчезнувшее/временное вложение; как обрабатывается legal hold?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L09. Live spike ЕИС/агрегатора</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> ИТ и владелец тендерного процесса<br />
+<strong>Тип ответа:</strong> план и протокол измерения<br />
+<strong>Показывать:</strong> если источники входят в пилот · <strong>Подтверждение:</strong> <code>M12</code></p>
+<p><strong>Ответьте:</strong> какие 10–20 эталонов и выборка 100+ карточек каждого обязательного режима проверят покрытие, версии, архивы и вложения? Как измеряются p50/p95/p99 задержки, реальные лимиты, TTL ссылок, повторное скачивание, ошибки и восстановление пропусков? Какие обещания остаются запрещёнными до завершения spike?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h2>3.2. Hard gates, экономика и решение</h2>
+<h3>C21. Безусловные stop-факторы до scoring</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец тендерного процесса; согласуют профильные владельцы риска<br />
+<strong>Тип ответа:</strong> каталог gates <code>условие → PASS/REVIEW/BLOCK → доказательство → владелец</code><br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> чек-листы <code>M06</code>, <code>M08</code></p>
+<p><strong>Ответьте:</strong> перечислите hard gates по дедлайну, типу процедуры/участника, аккредитации, реестрам и ограничениям, обеспечению, составу/анонимности заявки, обязательным сертификатам, частичной поставке, географии, мощности, логистике и договорным red flags. Для каждого задайте проверяемое условие, авторитетный источник и право исключения.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C22. Атомарная матрица требований и доказательств</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> технолог и тендерный отдел<br />
+<strong>Тип ответа:</strong> утверждение схемы и статусов матрицы<br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> шаблоны/примеры <code>M08</code></p>
+<p><strong>Ответьте:</strong> какие типы требований должны извлекаться: формальные, технические, качественные, коммерческие, логистические, договорные и доказательные? Утвердите минимальные поля строки: <code>требование → значение БЕРВЕЛ → статус → доказательство → источник/страница/таблица/версия → владелец</code>. Как фиксировать общее условие на группу позиций, отсутствующий чертёж, опечатку, противоречие и неоднозначный эквивалент, не исправляя их молча?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C23. Полная экономика и сценарии</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> финансы/ценообразование; согласуют производство и юристы<br />
+<strong>Тип ответа:</strong> словарь статей и формул + base/downside сценарии<br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> <code>M06</code></p>
+<p><strong>Ответьте:</strong> перечислите обязательные статьи: сырьё, переделы, переналадка, покрытия, испытания, оснастка, кооперация, тара, логистика, страхование, налоги, валюта/курс, финансирование, аванс/отсрочка, обеспечение, гарантия, штрафы и резерв риска. Для каждой укажите источник истины, формулу/версию и владельца. Определите обязательные base/downside/stress допущения и чувствительность.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C24. Финансовые и ресурсные пороги no-bid</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> финансовый директор/уполномоченное лицо<br />
+<strong>Тип ответа:</strong> пороги с валютой, периодом и матрицей согласования<br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> <code>M06</code></p>
+<p><strong>Ответьте:</strong> укажите минимальную маржу, максимальный cash gap, лимит обеспечения/downside, допустимую загрузку, срок окупаемости специальных затрат и договорные условия no-bid. Кто может согласовать исключение, в каких пределах, на какой срок и с каким обязательным обоснованием?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C25. Инвестиционная ветка и новое оборудование</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор/производство/финансы<br />
+<strong>Тип ответа:</strong> один вариант + границы расчёта<br />
+<strong>Показывать:</strong> если освоение нового продукта или оборудования рассматривается в первом этапе · <strong>Подтверждение:</strong> <code>M15</code></p>
+<p><strong>Ответьте:</strong> выберите глубину: <code>не входит / только флаг и грубая оценка / shortlist вариантов / полноценный CapEx/ROI/Payback</code>. Укажите, какие технологии и поставщики допустимы, кто подтверждает входные данные и какое решение может быть принято на основе результата. Если ветка не входит, подтвердите это явно.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C26. Содержание и подпись решения bid/no-bid</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец тендерного процесса<br />
+<strong>Тип ответа:</strong> чек-лист выходной карточки и маршрута согласования<br />
+<strong>Показывать:</strong> если выбран контур тендеров · <strong>Подтверждение:</strong> <code>M08</code></p>
+<p><strong>Ответьте:</strong> подтвердите обязательные части результата: актуальная версия пакета, hard gates, техническая выполнимость, пробелы/уточнения, отдельные экономика, риск, стратегическая ценность и вероятность победы, чувствительность, доказательства, рекомендация и ближайшее действие. Кто принимает ответственное человеческое решение и какие части нельзя скрывать одним итоговым AI-баллом?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L10. Ranking после hard gates</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> владелец тендерного процесса<br />
+<strong>Тип ответа:</strong> факторы, шкалы, веса и правила missing data<br />
+<strong>Показывать:</strong> если нужен ранжированный список прошедших opportunities · <strong>Подтверждение:</strong> исторические решения <code>M14</code></p>
+<p><strong>Ответьте:</strong> какие факторы ранжируют только прошедшие hard gates? Задайте шкалы, веса, пороги, правила отсутствующих данных и сегменты калибровки. Как проверяется, что score не маскирует veto, а изменение одного допущения не переворачивает решение незаметно?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L11. Подготовка и подача частей заявки</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> тендерный отдел и юристы<br />
+<strong>Тип ответа:</strong> scope и отдельная матрица полномочий<br />
+<strong>Показывать:</strong> только если после доказанного анализа планируется подготовка/загрузка заявки · <strong>Подтверждение:</strong> утверждённые шаблоны и регламент</p>
+<p><strong>Ответьте:</strong> какие части заявки разрешено готовить автоматически, какие данные запрещены в анонимной части, кто проверяет ЭП, обеспечение, формат и состав файлов? Может ли система только сформировать черновик или также загрузить его на ЭТП? Финальную подачу и юридические проверки согласуйте как отдельный gate.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<hr />
+<h1>4. Ветка «Входящие заявки»</h1>
+<blockquote>
+<p>Заполняется, только если в разделе 0 выбран контур <strong>«Обработка входящих заявок»</strong>.</p>
+</blockquote>
+<h2>4.1. Приём, происхождение и извлечение</h2>
+<h3>C27. Каналы, цепочка и версия заявки</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец процесса входящих заявок<br />
+<strong>Тип ответа:</strong> реестр каналов + state model<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> полные цепочки <code>M03</code></p>
+<p><strong>Ответьте:</strong> какие каналы и форматы входят: общая/личная почта, сайт, CRM, ЭДО, мессенджер, API, PDF/XLSX/DOCX/изображение/архив? Что считается первичным запросом, уточнением, новой редакцией, отменой, производным отчётом, КП и дублем? Каким ID связываются сообщение, вложения, версии, решение, КП и заказ?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C28. Обязательные поля и область действия условий</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> продажи и технолог<br />
+<strong>Тип ответа:</strong> словарь полей по стадиям и товарным семействам<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> <code>M03</code>, <code>M05</code></p>
+<p><strong>Ответьте:</strong> какие поля обязательны для регистрации, технического подбора, предварительной цены и финального КП на уровнях request/document/section/row? Что обязательно или неприменимо по товарным семействам? Как обозначается условие, действующее на весь документ, секцию или группу строк? Разведите <code>не указано</code>, <code>не применимо</code>, <code>нужно уточнение</code> и разрешённое значение по умолчанию.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C29. Provenance и нормализация каждой строки</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИТ/данные; утверждают продажи и технолог<br />
+<strong>Тип ответа:</strong> утверждение минимальной схемы записи<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> размеченные примеры <code>M03</code>, <code>M11</code></p>
+<p><strong>Ответьте:</strong> подтвердите, нужно ли для каждой строки/ячейки хранить исходный фрагмент, страницу и координаты, raw-значение, каноническое значение, единицу и коэффициент, confidence, область действия, правило/версию нормализации и статус проверки. Какие преобразования разрешены, какие запрещены и как обрабатываются диапазон, допуск, «не менее» и конфликт?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C30. Критичные ошибки и маршрутизация по уверенности</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> продажи/технолог/качество<br />
+<strong>Тип ответа:</strong> матрица <code>поле/ошибка → AUTO/REVIEW/BLOCK → порог → владелец</code><br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> журнал исправлений <code>M10</code>/<code>M14</code></p>
+<p><strong>Ответьте:</strong> перечислите критичные ошибки: потеря/дубль, неверная версия/клиент, смещение строки/колонки, позиция, стандарт, размер, класс, покрытие, количество, единица, цена/валюта/НДС, срок и согласование. Какие пороги действуют на уровне документа, строки, поля и матча? Какие случаи всегда требуют review/hard stop? Нужна ли случайная проверка части высокоуверенных результатов?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L12. Длинный хвост форматов</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> владелец заявок и ИТ<br />
+<strong>Тип ответа:</strong> матрица форматов/лимитов/действий<br />
+<strong>Показывать:</strong> если такие случаи входят в пилот или обязательный fallback · <strong>Подтверждение:</strong> challenge-примеры <code>M11</code></p>
+<p><strong>Ответьте:</strong> входят ли иностранные языки, рукопись, повреждённые/защищённые файлы, вложенные архивы, сложные многостраничные таблицы, скрытые листы/формулы и предельные размеры? Для каждого задайте лимит и маршрут: обработать, REVIEW, BLOCK или защищённый ручной процесс.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L13. Выбор OCR/IDP/LLM и порогов</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> ИТ и владелец качества пилота<br />
+<strong>Тип ответа:</strong> план сравнительного теста<br />
+<strong>Показывать:</strong> если автоматическое извлечение входит в пилот · <strong>Подтверждение:</strong> <code>M11</code></p>
+<p><strong>Ответьте:</strong> на каком репрезентативном корпусе сравниваются кандидаты, какими per-label и end-to-end метриками, по каким версиям и ограничениям размещения? Как исключается настройка на frozen acceptance set? Кто утверждает пороги AUTO/REVIEW/BLOCK после анализа ошибок?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h2>4.2. Матчинг, расчёт и выход</h2>
+<h3>C31. Статусы товарного матча</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец номенклатуры/технолог<br />
+<strong>Тип ответа:</strong> утверждённый справочник статусов и переходов<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> <code>M05</code></p>
+<p><strong>Ответьте:</strong> какие статусы строки нужны: точное совпадение, совпадение с уточнением, возможный аналог, спецзаказ/освоение, партнёрская позиция, вне каталога, недостаточно данных, конфликт? Для каждого укажите обязательные совместимые атрибуты, допустимое действие, владельца и необходимость согласования клиента.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C32. Аналоги, частичное предложение и исходная потребность</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> продажи и технолог<br />
+<strong>Тип ответа:</strong> матрица разрешённых вариантов и согласований<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> регламент аналогов/замен <code>M05</code>, шаблоны <code>M08</code></p>
+<p><strong>Ответьте:</strong> разрешены ли аналог, несколько вариантов, частичное КП, backorder, внешняя комплектация и позиция «цена/срок по запросу»? Кто утверждает замену и когда требуется письменное согласование клиента? Как сохраняется исходная потребность без подмены предложенным товаром? Когда проблемная строка блокирует весь запрос?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C33. Детерминированные правила цены и срока</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> финансы/ценообразование; согласуют продажи и производство<br />
+<strong>Тип ответа:</strong> таблица правил, источников и версий<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> <code>M06</code></p>
+<p><strong>Ответьте:</strong> после утверждённого матча укажите источники и правила базовой/клиентской цены, себестоимости, скидки и маржинального пола, НДС, валюты/курса, остатка/ATP, производства, MOQ, кратности, упаковки, логистики, округления, срока действия и матрицы согласования. Какие поля/формулы запрещено генерировать моделью и нужно вычислять воспроизводимо?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C34. Выходные документы и связь с клиентом</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец входящих заявок; согласуют юристы и маркетинг/бренд<br />
+<strong>Тип ответа:</strong> чек-лист выходов и шаблонов<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> <code>M08</code></p>
+<p><strong>Ответьте:</strong> какие выходы нужны: список вопросов менеджеру/клиенту, черновик КП, отказ с причиной/альтернативой, рекомендация по освоению? Для каждого укажите шаблон, обязательные юридические поля, номер/версию, язык, формат, подпись и канал. Подтвердите, что финальная отправка по умолчанию остаётся за менеджером, либо задайте отдельные разрешённые исключения.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C35. Запись результата и исправлений в CRM/ERP/1С</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИТ и владелец процесса заявок<br />
+<strong>Тип ответа:</strong> state/CRUD-матрица<br />
+<strong>Показывать:</strong> если выбран контур заявок · <strong>Подтверждение:</strong> <code>M07</code>, <code>M13</code></p>
+<p><strong>Ответьте:</strong> какие записи и статусы должны вернуться после регистрации, извлечения, проверки, матча, выпуска КП, заказа или отказа? Какие external ID и версии используются? Как фиксируются исправления, override, причина, пользователь и время? Как система обнаруживает дубль, частичный успех, stale price/catalog и расхождение reconciliation?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L14. Формы и представления КП</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> продажи/маркетинг/юристы<br />
+<strong>Тип ответа:</strong> каталог шаблонов и правил выбора<br />
+<strong>Показывать:</strong> если требуется несколько представлений одного канонического КП · <strong>Подтверждение:</strong> утверждённые шаблоны</p>
+<p><strong>Ответьте:</strong> какие брендовые, клиентские, языковые и presentation-варианты нужны? Какие поля во всех формах должны брать одно каноническое значение? Кто утверждает шаблон и как предотвращается расхождение PDF, Excel, CRM и отправленного сообщения?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L15. Автоматический диалог с клиентом</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> продажи и юристы<br />
+<strong>Тип ответа:</strong> отдельная матрица сценариев и полномочий<br />
+<strong>Показывать:</strong> только если планируется автоматическая коммуникация · <strong>Подтверждение:</strong> утверждённые сценарии и шаблоны</p>
+<p><strong>Ответьте:</strong> какие вопросы или уведомления система вправе отправлять сама, через какой канал и от чьего имени? Какие темы, клиенты, суммы и юридические формулировки всегда требуют менеджера? Как фиксируются согласие, история, opt-out, эскалация и ошибочная отправка? До отдельного согласования система готовит только черновик.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<hr />
+<h1>5. Общие ограничения и проверка результата</h1>
+<h2>5.1. Безопасность, право, размещение и NFR</h2>
+<h3>C36. Классификация данных и правовые основания</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> юристы и владелец данных; согласует ИБ<br />
+<strong>Тип ответа:</strong> матрица классов данных и потоков<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M09</code></p>
+<p><strong>Ответьте:</strong> какие поля и документы содержат персональные данные, коммерческую тайну, цены/маржу, закрытые чертежи, заявки, ИС третьих лиц или иные ограничения? Для каждого класса укажите цель, правовое/договорное основание, получателей, допустимые операции, регион/трансграничность, срок хранения, удаление и лицо, принимающее остаточный риск. Это решение подтверждают ответственные БЕРВЕЛ; опросник не является правовым заключением.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C37. Разрешённое размещение и внешние провайдеры</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИБ/ИТ; согласуют юристы<br />
+<strong>Тип ответа:</strong> deployment/data-to-provider matrix<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M09</code></p>
+<p><strong>Ответьте:</strong> где разрешены originals, extracted data, индексы/embeddings, логи и backup: сервер БЕРВЕЛ, private/public cloud, регион, tenant и сегмент? Что не может покидать контур? Можно ли передавать данные внешним OCR/LLM/embedding-сервисам, что маскируется, запрещено ли обучение провайдера и какие DPA/retention/subprocessors/incident/exit условия обязательны?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C38. Доступы, секреты, файлы и аудит безопасности</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИБ и ИТ<br />
+<strong>Тип ответа:</strong> control/access matrix<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M09</code></p>
+<p><strong>Ответьте:</strong> задайте SSO/MFA, роли и разделение обязанностей, least privilege, service accounts, vault/HSM/KMS и ротацию; шифрование и маскирование логов; trust boundaries и сетевые allowlists. Для входящих файлов задайте allowlist типа/размера, MIME+signature validation, quarantine, случайное имя, AV/sandbox/CDR, защиту от path traversal/zip bomb/macro и ресурсные лимиты. Какие события аудируются и кто расследует инцидент?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C39. Измеримые нефункциональные требования</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-владельцы и ИТ<br />
+<strong>Тип ответа:</strong> таблица <code>метрика → условие → порог → окно → источник доказательства → владелец</code><br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> baseline <code>M10</code> и политики <code>M09</code></p>
+<p><strong>Ответьте:</strong> задайте типичную/пиковую нагрузку, максимальное время до черновика и решения (p50/p95/p99 при необходимости), допустимую устарелость, availability, RTO/RPO, стоимость операции/месяца, поддерживаемые форматы/системы, часы поддержки и требуемую доказательность объяснения. Не используйте «быстро», «высокая точность» или «всегда доступно» без измеримой границы и контекста.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L16. Удобство, обучение и поддержка</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> владельцы процессов и служба поддержки<br />
+<strong>Тип ответа:</strong> пользовательские сценарии и измеримые критерии<br />
+<strong>Показывать:</strong> если сотрудники взаимодействуют с результатом · <strong>Подтверждение:</strong> план обучения/поддержки</p>
+<p><strong>Ответьте:</strong> какие роли и рабочие задачи проверяются на usability; какое время и число действий допустимы; какие accessibility/языковые требования есть? Кто обучает, как проверяется освоение, куда поступают вопросы, каковы часы поддержки и escalation? Как измеряется correction time и риск формального подтверждения без проверки?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L17. Портируемость, восстановление и выход</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> ИТ/ИБ/vendor management<br />
+<strong>Тип ответа:</strong> exit/DR plan<br />
+<strong>Показывать:</strong> если используются внешние сервисы или критичная инфраструктура · <strong>Подтверждение:</strong> <code>M09</code>, DR/exit-документы</p>
+<p><strong>Ответьте:</strong> как экспортируются originals, поля, индексы/embeddings, правила, prompts, evals и журналы; каков срок/стоимость выхода и удаление у поставщиков? Что происходит при outage, росте цены, смене модели или прекращении сервиса? Опишите backup, доказательный restore test, ручной fallback и decommission.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h2>5.2. Пилот, качество и приёмка</h2>
+<h3>C40. Scope двух пилотов</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор и владельцы процессов<br />
+<strong>Тип ответа:</strong> две отдельные scope-таблицы<br />
+<strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> утверждённый pilot charter</p>
+<p><strong>Ответьте:</strong> отдельно для тендеров и заявок задайте проверяемую гипотезу, период, источники/каналы, форматы, товарные семейства, пользователей, объём, режим <code>offline / shadow / draft</code>, разрешённые действия и явные исключения. Укажите baseline и целевое изменение. В пилоте по умолчанию запрещены подача на ЭТП, финальный bid/no-bid, окончательная цена и отправка КП без человека.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C41. Frozen gold set и ground truth</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец качества пилота; утверждают предметные владельцы<br />
+<strong>Тип ответа:</strong> sampling/annotation plan отдельно по контурам<br />
+<strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> <code>M11</code></p>
+<p><strong>Ответьте:</strong> определите sampling frame полного потока, обязательные страты и редкие high-cost challenge cases. Разделите development/calibration, frozen acceptance и свежий temporal holdout. Кто размечает формальные, технические, финансовые, юридические и каталожные labels, где обязательна двойная слепая разметка и кто арбитр? Как версионируются manifest, hashes, rubric, labels и adjudication?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C42. Метрики, пороги и статистическое правило</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец качества пилота и владельцы риска<br />
+<strong>Тип ответа:</strong> две заполненные приёмочные матрицы ниже<br />
+<strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> <code>M10</code>, <code>M11</code>, <code>M14</code></p>
+<p><strong>Ответьте:</strong> для каждого gate укажите единицу и знаменатель, scope/страты, baseline, формулу, численный порог БЕРВЕЛ, confidence interval/правило pass-fail, размер выборки, метод теста и владельца доказательства. Отдельно оценивайте критичные поля и редкие риски; одна средняя accuracy/F1 не является приёмкой. Если порог пуст, соответствующий gate не готов к тесту.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C43. Нулевая терпимость, review и итоговое решение</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор и владельцы риска<br />
+<strong>Тип ответа:</strong> severity matrix + decision rule<br />
+<strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> утверждённый протокол приёмки</p>
+<p><strong>Ответьте:</strong> перечислите события с нулевой терпимостью и немедленным hard fail/stop. Для остальных задайте AUTO/REVIEW/BLOCK, обязательный 100% review и случайную QA-выборку. Назначьте лиц, принимающих <code>go / conditional go / iterate / no-go</code>, правила conditional go, ограничения scope, kill-switch и ручной fallback. Ноль наблюдавшихся ошибок не означает доказанный нулевой риск: всегда фиксируйте знаменатель и неопределённость.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>Приёмочная матрица A — тендеры</h3>
+<blockquote>
+<p>Заполняется только для тендерного контура. Каждая строка — самостоятельный gate; средний успех не компенсирует hard fail.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Слой/риск</th>
+<th>Единица и знаменатель</th>
+<th>Scope/страты</th>
+<th>Baseline</th>
+<th>Метрика/формула</th>
+<th>Порог БЕРВЕЛ</th>
+<th>CI/правило</th>
+<th>Gold/version</th>
+<th>Метод</th>
+<th>Hard fail?</th>
+<th>Владелец</th>
+<th>Результат</th>
+<th>Решение/дефекты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-A01</td>
+<td>Обнаружение opportunity/change</td>
+<td>opportunity/event</td>
+<td>источник/режим</td>
+<td></td>
+<td>recall</td>
+<td></td>
+<td></td>
+<td></td>
+<td>сверка независимого источника</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T-A02</td>
+<td>Полный актуальный пакет</td>
+<td>lot-version package</td>
+<td>процедура/источник</td>
+<td></td>
+<td>exact package pass; required-doc recall</td>
+<td></td>
+<td></td>
+<td></td>
+<td>replay</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T-A03</td>
+<td>Атомарные критичные требования</td>
+<td>requirement instance</td>
+<td>тип требования</td>
+<td></td>
+<td>recall/precision; provenance completeness</td>
+<td></td>
+<td></td>
+<td></td>
+<td>adjudicated comparison</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T-A04</td>
+<td>Hard stop</td>
+<td>hard-stop instance</td>
+<td>stop type</td>
+<td></td>
+<td>recall; FN count; false-auto-pass</td>
+<td></td>
+<td></td>
+<td></td>
+<td>adjudicated comparison</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T-A05</td>
+<td>Техническая выполнимость</td>
+<td>lot/position</td>
+<td>товарная семья</td>
+<td></td>
+<td>critical-defect-free; review coverage</td>
+<td></td>
+<td></td>
+<td></td>
+<td>экспертная проверка</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T-A06</td>
+<td>Экономика</td>
+<td>calculation</td>
+<td>сценарий</td>
+<td></td>
+<td>независимое воспроизведение; отклонение</td>
+<td></td>
+<td></td>
+<td></td>
+<td>recomputation</td>
+<td>Да/Нет</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T-A07</td>
+<td>End-to-end решение</td>
+<td>lot-version</td>
+<td>core + strata</td>
+<td></td>
+<td>review-ready rate; cycle/touch time</td>
+<td></td>
+<td></td>
+<td></td>
+<td>shadow</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T-A08</td>
+<td>Аудит/override</td>
+<td>decision</td>
+<td>все действия</td>
+<td></td>
+<td>complete trace/replay rate</td>
+<td></td>
+<td></td>
+<td></td>
+<td>audit replay</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Приёмочная матрица B — входящие заявки</h3>
+<blockquote>
+<p>Заполняется только для контура заявок. Качество извлечения не компенсирует ложный автоматический матч, неверную цену или несанкционированную отправку.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Слой/риск</th>
+<th>Единица и знаменатель</th>
+<th>Scope/страты</th>
+<th>Baseline</th>
+<th>Метрика/формула</th>
+<th>Порог БЕРВЕЛ</th>
+<th>CI/правило</th>
+<th>Gold/version</th>
+<th>Метод</th>
+<th>Hard fail?</th>
+<th>Владелец</th>
+<th>Результат</th>
+<th>Решение/дефекты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-A01</td>
+<td>Цепочка/версия/дубль</td>
+<td>RFQ chain</td>
+<td>канал/артефакт</td>
+<td></td>
+<td>exact linkage; false-primary; duplicate/loss</td>
+<td></td>
+<td></td>
+<td></td>
+<td>chain replay</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R-A02</td>
+<td>Строки и таблицы</td>
+<td>row/cell/request</td>
+<td>формат/сложность</td>
+<td></td>
+<td>row recall; structure accuracy</td>
+<td></td>
+<td></td>
+<td></td>
+<td>adjudicated extraction</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R-A03</td>
+<td>Критичные поля</td>
+<td>field/row/request</td>
+<td>семья/формат</td>
+<td></td>
+<td>per-label P/R/F1; exact request pass</td>
+<td></td>
+<td></td>
+<td></td>
+<td>adjudicated extraction</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R-A04</td>
+<td>Нормализация и единицы</td>
+<td>attribute</td>
+<td>правило/семья</td>
+<td></td>
+<td>exact canonical accuracy; invalid conversion</td>
+<td></td>
+<td></td>
+<td></td>
+<td>recomputation</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R-A05</td>
+<td>Безопасный матч</td>
+<td>match decision</td>
+<td>семья/match type</td>
+<td></td>
+<td>false-auto-match; top-1; top-k recall; coverage</td>
+<td></td>
+<td></td>
+<td></td>
+<td>catalog + gold</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R-A06</td>
+<td>Цена/срок/approval</td>
+<td>quote line/request</td>
+<td>pricing route</td>
+<td></td>
+<td>deterministic match; unauthorized count</td>
+<td></td>
+<td></td>
+<td></td>
+<td>independent recomputation</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R-A07</td>
+<td>Quote-ready draft</td>
+<td>RFQ</td>
+<td>core + strata</td>
+<td></td>
+<td>exact-ready; cycle/touch; review workload</td>
+<td></td>
+<td></td>
+<td></td>
+<td>shadow</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>R-A08</td>
+<td>Интеграция/аудит</td>
+<td>operation/decision</td>
+<td>normal/peak</td>
+<td></td>
+<td>lost/duplicate/partial; complete trace</td>
+<td></td>
+<td></td>
+<td></td>
+<td>reconciliation/audit replay</td>
+<td>Да</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>L18. Размер выборки, доверительные интервалы и challenge set</h3>
+<p><strong>Когда:</strong> <strong>До пилота</strong> · <strong>Владелец:</strong> владелец качества/аналитик<br />
+<strong>Тип ответа:</strong> статистический план по каждой ключевой страте<br />
+<strong>Показывать:</strong> если acceptance использует доли/ошибки · <strong>Подтверждение:</strong> расчёт размера выборки</p>
+<p><strong>Ответьте:</strong> задайте допустимую ширину интервала или минимально обнаружимое ухудшение, confidence level/power, ожидаемую частоту и ключевые страты. Рассчитайте размер по каждой страте. Опишите редкие/adversarial случаи отдельно и не смешивайте их невзвешенный результат с метрикой основного потока.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L19. Production-readiness после пилота</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> ИТ, ИБ и владельцы процессов<br />
+<strong>Тип ответа:</strong> production gate checklist<br />
+<strong>Показывать:</strong> если пилот претендует на промышленный переход · <strong>Подтверждение:</strong> signed acceptance record</p>
+<p><strong>Ответьте:</strong> какие критерии обязательны для monitoring, regression, drift, alerting, support, rollback, capacity/cost, incident response, backup/restore и подписанного acceptance record? Какие ограничения conditional go должны быть сняты и кем? Какие версии model/prompt/rules/catalog/integration считаются принятыми?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<hr />
+<h1>6. Трассируемость, изменения и обратная связь</h1>
+<h3>C44. Сквозной audit trail</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИТ/ИБ; утверждают владельцы процессов<br />
+<strong>Тип ответа:</strong> каталог событий и обязательных полей<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M07</code>, <code>M09</code></p>
+<p><strong>Ответьте:</strong> какие связи обязательны для воспроизведения решения: <code>исходник/версия/hash → страница/ячейка → raw/canonical факт → правило/модель/справочник и версия → проверка/исправление → матч/расчёт → документ/решение → approve/override → ответственный/время/correlation ID</code>? Какие события, причины и сроки хранения нужны, а какие чувствительные поля запрещены в логах?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C45. Изменения, повторный расчёт и revalidation</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец изменений/ИТ и владельцы процессов<br />
+<strong>Тип ответа:</strong> change-class matrix<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> действующий change process, если есть</p>
+<p><strong>Ответьте:</strong> какие изменения карточки/вложения, каталога, стандарта, мощности, цены, правила, модели, prompt, provider, schema или интеграции требуют повторного расчёта, согласования, частичной или полной revalidation? Кто утверждает baseline и change request, как выполняются canary/rollback и как уведомляются пользователи?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>C46. Исходы и обратная связь</h3>
+<p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владельцы процессов и аналитики<br />
+<strong>Тип ответа:</strong> outcome schema и регламент закрытия кейса<br />
+<strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M10</code>, <code>M14</code></p>
+<p><strong>Ответьте:</strong> для тендеров фиксируйте no-bid/bid, причину, подачу, допуск/отклонение, победу/проигрыш, цену, фактическую маржу и исполнение; для заявок — исправления, уточнения, КП, отказ, заказ, маржу, причину потери и рекламацию. Кто и когда закрывает результат? Какие outcomes служат мониторингом процесса, а какие нельзя считать чистой метрикой AI из-за внешних факторов?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L20. Мониторинг качества и drift</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> service owner/data owner<br />
+<strong>Тип ответа:</strong> monitoring plan<br />
+<strong>Показывать:</strong> если решение переходит в эксплуатацию · <strong>Подтверждение:</strong> dashboard/alert design</p>
+<p><strong>Ответьте:</strong> какие сигналы отслеживаются по тем же стратам, что и приёмка: input/data drift, confidence/coverage shift, corrections/override, critical incidents, latency, backlog, cost и integration failures? Укажите источник, порог, частоту, alert owner и действие: усиление review, rollback/disable или revalidation.</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L21. Инциденты, fallback и kill switch</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> ИБ/ИТ/service owner<br />
+<strong>Тип ответа:</strong> severity/runbook matrix<br />
+<strong>Показывать:</strong> если решение переходит в эксплуатацию · <strong>Подтверждение:</strong> incident/BCP/DR runbooks</p>
+<p><strong>Ответьте:</strong> задайте severity, containment, notification, recovery, postmortem и SLA для утечки, вредоносного файла, неверной отправки/цены, массового ложного матча, пропуска hard stop, компрометации секрета и сбоя провайдера. Кто имеет kill-switch authority, какой ручной fallback и как проверяется восстановление?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<h3>L22. Сроки хранения доказательств и исходников</h3>
+<p><strong>Когда:</strong> <strong>До промышленного запуска</strong> · <strong>Владелец:</strong> юристы/ИБ/data owner<br />
+<strong>Тип ответа:</strong> retention schedule по типам данных<br />
+<strong>Показывать:</strong> если данные хранятся после обработки · <strong>Подтверждение:</strong> <code>M09</code></p>
+<p><strong>Ответьте:</strong> для originals, версий, извлечённых фактов, решений, audit logs, gold sets и backup задайте срок, основание, legal hold, архив, удаление/анонимизацию и подтверждение удаления у поставщиков. Кто разрешает продление и экспорт при завершении договора?</p>
+<p><strong>Ответ:</strong> ____________________________________________________________________<br />
+<strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
+<strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
+<hr />
+<h1>7. Запрашиваемые материалы и единый реестр приложений</h1>
+<h2>7.1. Материалы</h2>
+<blockquote>
+<p>Передавать только через согласованный защищённый канал. В этой таблице указываются безопасная ссылка/идентификатор и метаданные, а не секретное содержимое. Пароли, токены, PIN и закрытые ключи не передаются.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Когда</th>
+<th>Что предоставить</th>
+<th>Рекомендуемый владелец</th>
+<th>Показывать/условие</th>
+<th>Связанные вопросы</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M01</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Две карты as-is и RACI/SLA; действующие чек-листы, регламенты и шаблоны результата</td>
+<td>Владельцы процессов</td>
+<td>Для выбранных контуров</td>
+<td>C04, C07, C09</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M02</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Словарь тендерной выгрузки, параметры фильтра, последовательные выгрузки и 10–20 полных пакетов разных процедур со всеми редакциями/разъяснениями/протоколами</td>
+<td>Тендерный отдел</td>
+<td>Если выбраны тендеры</td>
+<td>C17–C20</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M03</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>30–50 полных первичных цепочек заявок: сообщение → вложения → уточнения → решение → КП/отказ → заказ, включая сложные и неуспешные случаи</td>
+<td>Продажи/RFQ</td>
+<td>Если выбраны заявки</td>
+<td>C27–C30</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M04</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Недостающий в образце конструкторский файл либо подтверждение недоступности; дополнительные чертежи/CAD и правила доступа/ревизий</td>
+<td>Технолог/КД</td>
+<td>Если анализируются чертежи</td>
+<td>C11, C20, C22</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M05</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Выгрузки каталога, кросс-кодов, единиц/упаковок, эквивалентности стандартов, техкарт, производимости, мощностей, покрытий, испытаний и сертификатов</td>
+<td>Номенклатура/технолог/производство/качество</td>
+<td>Всегда</td>
+<td>C10–C13, C31–C32</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M06</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Примеры расчёта себестоимости/цены, скидки/маржа/MOQ/логистика/обеспечение, договорный risk-checklist и матрица согласований</td>
+<td>Финансы/юристы</td>
+<td>Для выбранных контуров</td>
+<td>C21, C23–C24, C33</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M07</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Схема систем и владельцев данных; обезличенные записи и доступные API/export-описания без секретов</td>
+<td>ИТ/владельцы данных</td>
+<td>Всегда</td>
+<td>C14–C16, C35, C44</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M08</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Шаблоны технической матрицы, bid/no-bid заключения, частей заявки, КП, отказа и запроса уточнения; принятые/отклонённые примеры</td>
+<td>Владельцы процессов</td>
+<td>Для выбранных контуров</td>
+<td>C03, C20–C22, C26, C32, C34</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M09</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Требования ИБ/юристов к классификации, размещению, внешним сервисам, ключам, ролям, хранению, журналированию и удалению</td>
+<td>ИБ/юристы</td>
+<td>Всегда</td>
+<td>C36–C38, L17, L22</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M10</strong></td>
+<td><strong>Критично до ТЗ</strong></td>
+<td>Baseline-статистика обоих потоков и журнал решений/исходов за репрезентативный период</td>
+<td>Владельцы процессов/аналитика</td>
+<td>Для выбранных контуров</td>
+<td>C05–C06, C30, C39–C42, C46</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M11</strong></td>
+<td><strong>До пилота</strong></td>
+<td>Репрезентативные корпуса из сотен первичных кейсов и отдельный frozen gold set с двойной разметкой/арбитражем</td>
+<td>Владелец качества/data owner</td>
+<td>Для соответствующего пилота</td>
+<td>C41–C43, L12–L13, L18</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M12</strong></td>
+<td><strong>До пилота</strong></td>
+<td>Результаты live spike <code>getDocsLE</code>/агрегатора на эталонах и 100+ карточках каждого обязательного режима</td>
+<td>ИТ/тендерный отдел</td>
+<td>Если выбраны тендеры</td>
+<td>C18–C20, L09</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M13</strong></td>
+<td><strong>До пилота</strong></td>
+<td>Тестовые контуры, актуальные API-схемы, лимиты, журналы ошибок и сценарии восстановления интеграций</td>
+<td>ИТ/владельцы систем</td>
+<td>Если пилот интегрируется с системами</td>
+<td>C16, C35, L06</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M14</strong></td>
+<td><strong>До пилота</strong></td>
+<td>История тендеров и заявок с решениями, ставками/КП, причинами проигрыша/отказа и фактической экономикой</td>
+<td>Владельцы процессов/финансы</td>
+<td>Если калибруются ranking/метрики</td>
+<td>C42, C46, L10</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+<tr>
+<td><strong>M15</strong></td>
+<td><strong>До пилота</strong></td>
+<td>Реестр оборудования/поставщиков, коммерческие предложения, правила CapEx и примеры ROI/Payback</td>
+<td>Производство/финансы</td>
+<td>Только если C25 включает инвестиционную ветку</td>
+<td>C25</td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+</tr>
+</tbody>
+</table>
+<h2>7.2. Реестр приложений</h2>
+<table>
+<thead>
+<tr>
+<th>Запись</th>
+<th>ID материала</th>
+<th>Название/безопасное описание</th>
+<th>Владелец</th>
+<th>Версия/дата</th>
+<th>Какие вопросы подтверждает</th>
+<th>Статус</th>
+<th>Класс доступа</th>
+<th>Защищённый канал/ID</th>
+<th>Обезличивание</th>
+<th>Альтернатива при недоступности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-001</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>A-002</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>A-003</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐ Получено ☐ Ожидается ☐ Недоступно</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>8. Реестр неизвестного и противоречий</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Связанный вопрос</th>
+<th>Неизвестное/противоречие</th>
+<th>Статус</th>
+<th>Владелец уточнения</th>
+<th>Согласующие/решающий</th>
+<th>Срок</th>
+<th>Что нужно сделать</th>
+<th>Влияние на scope/ТЗ/пилот</th>
+<th>Временное ограничение</th>
+<th>Дата закрытия/решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>U-001</td>
+<td></td>
+<td></td>
+<td>☐ Открыто ☐ Решено ☐ Принят риск</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>U-002</td>
+<td></td>
+<td></td>
+<td>☐ Открыто ☐ Решено ☐ Принят риск</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>U-003</td>
+<td></td>
+<td></td>
+<td>☐ Открыто ☐ Решено ☐ Принят риск</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>9. Проверка готовности пакета</h1>
+<p>Пакет может служить основой для полного ТЗ, если:</p>
+<ul>
+<li>[ ] у всех применимых <code>C01–C46</code> есть согласованный ответ либо управляемое неизвестное с владельцем, сроком и влиянием;</li>
+<li>[ ] критичные материалы <code>M01–M10</code> получены или имеют согласованный план и безопасный канал передачи;</li>
+<li>[ ] общие ответы не противоречат двум предметным веткам;</li>
+<li>[ ] назначены владельцы источников истины, решений, экспертной проверки и приёмки;</li>
+<li>[ ] определены допустимый контур данных, границы автономности и ручные stop-маршруты;</li>
+<li>[ ] для тендеров и заявок отдельно заданы scope пилота, baseline, frozen gold set, метрики, численные пороги и владельцы решений;</li>
+<li>[ ] дубли устранены, а противоречия перенесены в реестр неизвестного;</li>
+<li>[ ] координатор подтвердил версию пакета и полноту реестров.</li>
+</ul>
+<p>Если не подтверждены scope, источники истины, владельцы решения, допустимый контур обработки, минимальные образцы или проверяемые критерии пилота, допустимый следующий результат — только план discovery/data-readiness, а не обещание полного ТЗ или промышленной системы.</p>
+<h2>Итоговое согласование</h2>
+<p><strong>Координатор:</strong> ____________________ / дата: __________<br />
+<strong>Бизнес-спонсор:</strong> ____________________ / дата: __________<br />
+<strong>Владелец тендерного процесса:</strong> ____________________ / дата: __________<br />
+<strong>Владелец процесса входящих заявок:</strong> ____________________ / дата: __________<br />
+<strong>ИТ/данные:</strong> ____________________ / дата: __________<br />
+<strong>ИБ/юристы:</strong> ____________________ / дата: __________<br />
+<strong>Владелец пилота/приёмки:</strong> ____________________ / дата: __________</p>
+</div>
+    <div class="empty-state" id="empty-state">По этому фильтру вопросов не найдено.</div>
+  </main>
+
+  <aside class="right-rail">
+    <section class="panel progress-card">
+      <p class="rail-heading">Готовность пакета</p>
+      <div class="progress-head"><span class="progress-number" id="progress-number">0%</span><span class="progress-label" id="progress-label">0 из 0</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="stat-list">
+        <div class="stat-row"><span>Ответ дан</span><strong id="stat-answered">0</strong></div>
+        <div class="stat-row"><span>Неизвестно</span><strong id="stat-unknown">0</strong></div>
+        <div class="stat-row"><span>Ожидается материал</span><strong id="stat-awaiting">0</strong></div>
+        <div class="stat-row"><span>Не применимо</span><strong id="stat-na">0</strong></div>
+        <div class="stat-row"><span>Без статуса</span><strong id="stat-empty">0</strong></div>
+      </div>
+      <div class="filter-grid" id="status-filters">
+        <button class="filter-btn active" type="button" data-filter="all">Все</button>
+        <button class="filter-btn" type="button" data-filter="empty">Без ответа</button>
+        <button class="filter-btn" type="button" data-filter="answered">Готово</button>
+        <button class="filter-btn" type="button" data-filter="unknown">Неизвестно</button>
+        <button class="filter-btn" type="button" data-filter="awaiting">Материал</button>
+        <button class="filter-btn" type="button" data-filter="na">Н/П</button>
+      </div>
+      <button class="btn btn-light" id="expand-all" type="button" style="width:100%;margin-top:12px">Свернуть все карточки</button>
+    </section>
+    <section class="privacy-card">
+      <strong>Конфиденциальность</strong>
+      Не вставляйте секреты, ключи, токены и пароли. Клиентские файлы передавайте только через согласованный защищённый канал.
+    </section>
+  </aside>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(() => {
+  const questionnaire = document.getElementById('questionnaire');
+  const originalTitle = questionnaire.querySelector(':scope > h1');
+  if (originalTitle) {
+    let node = originalTitle.nextElementSibling;
+    while (node && node.tagName !== 'H2') {
+      const next = node.nextElementSibling;
+      node.remove();
+      node = next;
+    }
+    originalTitle.remove();
+  }
+
+  const slugify = (text) => text.toLowerCase()
+    .replace(/[«»“”"']/g, '')
+    .replace(/[^a-zа-яё0-9]+/gi, '-')
+    .replace(/^-|-$/g, '');
+
+  // Wrap each numbered top-level section, enabling branch visibility and navigation.
+  const topNodes = [...questionnaire.children];
+  let currentSection = null;
+  let sectionIndex = 0;
+  topNodes.forEach(node => {
+    if (node.tagName === 'H1') {
+      currentSection = document.createElement('section');
+      currentSection.className = 'major-section';
+      currentSection.id = `section-${++sectionIndex}-${slugify(node.textContent).slice(0, 36)}`;
+      if (/Тендеры/.test(node.textContent)) currentSection.dataset.branch = 'tenders';
+      if (/Входящие заявки/.test(node.textContent)) currentSection.dataset.branch = 'rfq';
+      questionnaire.insertBefore(currentSection, node);
+    }
+    if (!currentSection) {
+      currentSection = document.createElement('section');
+      currentSection.className = 'major-section';
+      currentSection.id = `section-${++sectionIndex}`;
+      questionnaire.insertBefore(currentSection, node);
+    }
+    currentSection.appendChild(node);
+  });
+
+  // Wrap C/L question blocks as interactive cards.
+  const questionHeadings = [...questionnaire.querySelectorAll('h3')].filter(h => /^([CL]\d{2})\./.test(h.textContent.trim()));
+  questionHeadings.forEach(h => {
+    const match = h.textContent.trim().match(/^([CL]\d{2})\.\s*(.+)$/);
+    const id = match[1];
+    const title = match[2];
+    const article = document.createElement('article');
+    article.className = 'question-card';
+    article.id = id;
+    article.dataset.id = id;
+    article.dataset.kind = id[0];
+    article.dataset.status = 'empty';
+    const section = h.closest('.major-section');
+    if (section?.dataset.branch) article.dataset.branch = section.dataset.branch;
+
+    const nodes = [];
+    let n = h.nextElementSibling;
+    while (n && n.tagName !== 'H3' && n.tagName !== 'H2' && n.tagName !== 'H1') {
+      const next = n.nextElementSibling;
+      nodes.push(n);
+      n = next;
+    }
+    h.parentNode.insertBefore(article, h);
+
+    const dueTextNode = nodes.find(el => /Когда:/.test(el.textContent));
+    const dueText = dueTextNode?.textContent.match(/Когда:\s*([^·]+)/)?.[1]?.trim() || (id[0] === 'C' ? 'Критично до ТЗ' : 'До пилота');
+
+    const head = document.createElement('div');
+    head.className = 'card-head';
+    head.innerHTML = `<span class="id-badge">${id}</span><h3 class="card-title">${title}</h3><div class="card-state"><span class="due-badge">${dueText}</span><span class="state-badge">Без статуса</span><button class="collapse-btn" type="button" aria-label="Свернуть">⌄</button></div>`;
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    const meta = document.createElement('div');
+    meta.className = 'card-meta';
+    const prompt = document.createElement('div');
+    prompt.className = 'card-prompt';
+
+    nodes.forEach(el => {
+      const text = el.textContent.trim();
+      if (/^(Когда:|Тип ответа:|Показывать:)/.test(text)) {
+        meta.appendChild(el);
+      } else if (/^Ответьте:/.test(text)) {
+        prompt.appendChild(el);
+      } else if (/^(Ответ:|Статус:|Если неизвестно)/.test(text)) {
+        el.remove();
+      } else {
+        prompt.appendChild(el);
+      }
+    });
+    h.remove();
+    body.append(meta, prompt);
+
+    const answerGrid = document.createElement('div');
+    answerGrid.className = 'answer-grid';
+    answerGrid.innerHTML = `
+      <div class="field"><label for="answer-${id}">Ответ</label><textarea id="answer-${id}" name="answer-${id}" placeholder="Введите согласованный ответ или ссылку на структурированную таблицу ниже…"></textarea></div>
+      <div class="status-row"><span>Статус</span>
+        ${[['answered','Ответ дан'],['unknown','Неизвестно'],['na','Не применимо'],['awaiting','Ожидается материал']].map(([value,label]) => `<span class="status-option"><input type="radio" id="status-${id}-${value}" name="status-${id}" value="${value}"><label for="status-${id}-${value}">${label}</label></span>`).join('')}
+      </div>
+      <div class="context-panel unknown-panel">
+        <div class="field"><label>Владелец уточнения</label><input name="unknown-owner-${id}" placeholder="ФИО, должность"></div>
+        <div class="field"><label>Срок</label><input name="unknown-date-${id}" type="date"></div>
+        <div class="field wide"><label>Что нужно сделать</label><input name="unknown-action-${id}" placeholder="Действие или решение"></div>
+        <div class="field wide"><label>Влияние на scope / ТЗ / пилот</label><textarea name="unknown-impact-${id}"></textarea></div>
+        <div class="field wide"><label>Временное ограничение</label><input name="unknown-restriction-${id}" placeholder="Что разрешено до уточнения"></div>
+      </div>
+      <div class="context-panel material material-panel">
+        <div class="field"><label>ID материала</label><input name="material-id-${id}" placeholder="Например, M05 / A-002"></div>
+        <div class="field"><label>Ожидаемый срок</label><input name="material-date-${id}" type="date"></div>
+        <div class="field wide"><label>Владелец материала / комментарий</label><input name="material-owner-${id}" placeholder="ФИО, должность, что именно ожидается"></div>
+      </div>
+      <div class="field"><label for="comment-${id}">Комментарий / основание / согласующие</label><textarea id="comment-${id}" name="comment-${id}" style="min-height:58px"></textarea></div>`;
+    body.appendChild(answerGrid);
+    article.append(head, body);
+
+    head.addEventListener('click', e => {
+      if (e.target.closest('input, label')) return;
+      article.classList.toggle('collapsed');
+    });
+    article.querySelectorAll(`input[name="status-${id}"]`).forEach(radio => radio.addEventListener('change', () => {
+      setStatus(article, radio.value);
+      updateProgress();
+      applyFilters();
+    }));
+  });
+
+  // Improve long tables and make blank cells fillable.
+  [...questionnaire.querySelectorAll('table')].forEach((table, tableIndex) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'table-wrap';
+    table.parentNode.insertBefore(wrap, table);
+    wrap.appendChild(table);
+    const headers = [...table.querySelectorAll('thead th')].map(th => th.textContent.trim());
+    const statusIndex = headers.findIndex(text => text === 'Статус');
+    [...table.querySelectorAll('tbody tr')].forEach((row, rowIndex) => {
+      const cells = [...row.querySelectorAll('td')];
+      const rowId = cells[0]?.textContent.trim() || `row-${rowIndex}`;
+      if (statusIndex >= 0 && cells[statusIndex]) {
+        const options = /^U-/.test(rowId)
+          ? [['','Выберите…'],['open','Открыто'],['resolved','Решено'],['risk-accepted','Принят риск']]
+          : [['','Выберите…'],['received','Получено'],['awaiting','Ожидается'],['unavailable','Недоступно']];
+        cells[statusIndex].innerHTML = `<select class="status-select" name="registry-status-${rowId}">${options.map(([value,label]) => `<option value="${value}">${label}</option>`).join('')}</select>`;
+      }
+      cells.forEach((cell, cellIndex) => {
+        if (!cell.textContent.trim()) {
+          cell.contentEditable = 'true';
+          cell.dataset.exportKey = `table-${tableIndex}-row-${rowIndex}-cell-${cellIndex}`;
+        }
+      });
+    });
+  });
+
+  // Make the readiness checklist and final sign-off fillable.
+  [...questionnaire.querySelectorAll('li')].filter(li => /^\[ \]\s*/.test(li.textContent)).forEach((li, index) => {
+    li.innerHTML = li.innerHTML.replace(/^\[ \]\s*/, '');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.name = `readiness-${index + 1}`;
+    li.prepend(input);
+    li.classList.add('ready-check');
+  });
+  const approvalHeading = [...questionnaire.querySelectorAll('h2')].find(h => /Итоговое согласование/.test(h.textContent));
+  if (approvalHeading) {
+    const oldApproval = approvalHeading.nextElementSibling;
+    const roles = ['Координатор','Бизнес-спонсор','Владелец тендерного процесса','Владелец процесса входящих заявок','ИТ / данные','ИБ / юристы','Владелец пилота / приёмки'];
+    const grid = document.createElement('div');
+    grid.className = 'signature-grid';
+    grid.innerHTML = roles.map((role,index) => `<div class="signature-row ${index === roles.length - 1 ? 'full' : ''}"><strong>${role}</strong><input name="approval-name-${index + 1}" placeholder="ФИО, должность"><input name="approval-date-${index + 1}" type="date"></div>`).join('');
+    approvalHeading.insertAdjacentElement('afterend', grid);
+    if (oldApproval?.tagName === 'P') oldApproval.remove();
+  }
+
+  function setStatus(card, status) {
+    card.dataset.status = status || 'empty';
+    const badge = card.querySelector('.state-badge');
+    const labels = {empty:'Без статуса', answered:'Ответ дан', unknown:'Неизвестно', na:'Не применимо', awaiting:'Ожидается материал'};
+    badge.textContent = labels[status] || labels.empty;
+    card.querySelector('.unknown-panel')?.classList.toggle('visible', status === 'unknown');
+    card.querySelector('.material-panel')?.classList.toggle('visible', status === 'awaiting');
+  }
+
+  // Generate table of contents.
+  const toc = document.getElementById('toc');
+  const headings = [...questionnaire.querySelectorAll('.major-section > h1, .major-section > h2')];
+  headings.forEach((h, index) => {
+    if (!h.id) h.id = `heading-${index}-${slugify(h.textContent).slice(0,40)}`;
+    const a = document.createElement('a');
+    a.href = `#${h.id}`;
+    a.textContent = h.textContent.replace(/^\d+(\.\d+)?\.\s*/, '');
+    a.className = h.tagName === 'H2' ? 'level-2' : 'level-1';
+    const branch = h.closest('.major-section')?.dataset.branch;
+    if (branch) a.dataset.branch = branch;
+    toc.appendChild(a);
+  });
+
+  const state = { filter: 'all', query: '' };
+  const scopeTenders = document.getElementById('scope-tenders');
+  const scopeRfq = document.getElementById('scope-rfq');
+
+  function branchVisible(branch) {
+    if (branch === 'tenders') return scopeTenders.checked;
+    if (branch === 'rfq') return scopeRfq.checked;
+    return true;
+  }
+
+  function updateBranches() {
+    document.querySelectorAll('.major-section[data-branch]').forEach(section => {
+      section.classList.toggle('branch-hidden', !branchVisible(section.dataset.branch));
+    });
+    toc.querySelectorAll('[data-branch]').forEach(link => link.classList.toggle('branch-disabled', !branchVisible(link.dataset.branch)));
+    applyFilters();
+    updateProgress();
+  }
+  scopeTenders.addEventListener('change', updateBranches);
+  scopeRfq.addEventListener('change', updateBranches);
+
+  const search = document.getElementById('search');
+  search.addEventListener('input', () => { state.query = search.value.trim().toLowerCase(); applyFilters(); });
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.filter = btn.dataset.filter;
+    applyFilters();
+  }));
+
+  function visibleCards() {
+    return [...document.querySelectorAll('.question-card')].filter(card => branchVisible(card.dataset.branch));
+  }
+
+  function applyFilters() {
+    let shown = 0;
+    visibleCards().forEach(card => {
+      const matchText = !state.query || `${card.dataset.id} ${card.textContent}`.toLowerCase().includes(state.query);
+      const matchStatus = state.filter === 'all' || card.dataset.status === state.filter;
+      const show = matchText && matchStatus;
+      card.classList.toggle('filtered-out', !show);
+      if (show) shown++;
+    });
+    document.getElementById('empty-state').style.display = shown ? 'none' : 'block';
+  }
+
+  function updateProgress() {
+    const cards = visibleCards();
+    const counts = {answered:0, unknown:0, awaiting:0, na:0, empty:0};
+    cards.forEach(card => counts[card.dataset.status || 'empty']++);
+    const done = counts.answered + counts.na;
+    const pct = cards.length ? Math.round(done / cards.length * 100) : 0;
+    document.getElementById('progress-number').textContent = `${pct}%`;
+    document.getElementById('progress-label').textContent = `${done} из ${cards.length}`;
+    document.getElementById('progress-fill').style.width = `${pct}%`;
+    Object.keys(counts).forEach(k => document.getElementById(`stat-${k}`).textContent = counts[k]);
+  }
+
+  let allCollapsed = false;
+  document.getElementById('expand-all').addEventListener('click', e => {
+    allCollapsed = !allCollapsed;
+    document.querySelectorAll('.question-card').forEach(card => card.classList.toggle('collapsed', allCollapsed));
+    e.currentTarget.textContent = allCollapsed ? 'Развернуть все карточки' : 'Свернуть все карточки';
+  });
+
+  const toast = document.getElementById('toast');
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function collectData() {
+    const data = {format:'bervel-questionnaire', version:1, exportedAt:new Date().toISOString(), scopes:{tenders:scopeTenders.checked, rfq:scopeRfq.checked}, fields:{}, tables:{}};
+    document.querySelectorAll('input[name], textarea[name], select[name]').forEach(el => {
+      if (el.type === 'radio') {
+        if (el.checked) data.fields[el.name] = el.value;
+      } else if (el.type === 'checkbox') {
+        data.fields[el.name] = el.checked;
+      } else {
+        data.fields[el.name] = el.value;
+      }
+    });
+    document.querySelectorAll('[contenteditable="true"][data-export-key]').forEach(el => data.tables[el.dataset.exportKey] = el.innerHTML);
+    return data;
+  }
+
+  function applyData(data) {
+    if (!data || data.format !== 'bervel-questionnaire') throw new Error('Некорректный файл ответов');
+    scopeTenders.checked = data.scopes?.tenders !== false;
+    scopeRfq.checked = data.scopes?.rfq !== false;
+    Object.entries(data.fields || {}).forEach(([name, value]) => {
+      const nodes = document.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+      nodes.forEach(el => {
+        if (el.type === 'radio') el.checked = el.value === value;
+        else if (el.type === 'checkbox') el.checked = Boolean(value);
+        else el.value = value ?? '';
+      });
+    });
+    Object.entries(data.tables || {}).forEach(([key,value]) => {
+      const el = document.querySelector(`[data-export-key="${CSS.escape(key)}"]`);
+      if (el) el.innerHTML = value;
+    });
+    document.querySelectorAll('.question-card').forEach(card => {
+      const selected = card.querySelector(`input[name="status-${card.dataset.id}"]:checked`);
+      setStatus(card, selected?.value || 'empty');
+    });
+    updateBranches();
+    showToast('Ответы загружены');
+  }
+
+  document.getElementById('export-btn').addEventListener('click', () => {
+    const data = collectData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    const version = document.getElementById('meta-version').value || 'draft';
+    a.href = URL.createObjectURL(blob);
+    a.download = `bervel-questionnaire-${version}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast('JSON с ответами скачан');
+  });
+  document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
+  document.getElementById('import-file').addEventListener('change', async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try { applyData(JSON.parse(await file.text())); }
+    catch (error) { showToast(error.message || 'Не удалось загрузить файл'); }
+    e.target.value = '';
+  });
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
+
+  // Keep current section visible in the TOC.
+  const observer = new IntersectionObserver(entries => {
+    const active = entries.filter(e => e.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+    if (!active) return;
+    toc.querySelectorAll('a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${active.target.id}`));
+  }, {rootMargin:'-90px 0px -75% 0px', threshold:0});
+  headings.forEach(h => observer.observe(h));
+
+  updateBranches();
+  updateProgress();
+})();
+</script>
+</body>
+</html>
