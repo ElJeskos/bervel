@@ -1154,7 +1154,7 @@
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
       <div class="hero__meta-item"><dt>Вопросов</dt><dd>29</dd></div>
       <div class="hero__meta-item"><dt>Предзаполнено</dt><dd>11</dd></div>
-      <div class="hero__meta-item"><dt>Версия</dt><dd>2.1 · 01.09.2026</dd></div>
+      <div class="hero__meta-item"><dt>Версия</dt><dd>2.2 · 01.09.2026</dd></div>
     </dl>
   </div>
 </section>
@@ -2203,6 +2203,7 @@ void main(){
     }
 
     questions.forEach(function (question) {
+      question.open = true;
       var answer = question.querySelector('textarea');
       var confirm = question.querySelector('input[name^="confirm-"]');
       if (answer) answer.addEventListener('input', updateProgress);
