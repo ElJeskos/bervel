@@ -991,19 +991,6 @@
     cursor: pointer; transition: background .15s ease, color .15s ease;
   }
   .hero__cta:hover { background: var(--accent); color: var(--bg); }
-  .question-tools { padding: 32px 0; border-bottom: 1px solid var(--line); background: var(--surface); }
-  .question-tools .wrap { display: grid; grid-template-columns: minmax(260px, 1fr) auto; align-items: center; gap: 24px; }
-  .question-search {
-    width: 100%; border: 1px solid var(--line-strong); border-radius: 10px;
-    background: var(--bg); color: var(--text); padding: 13px 15px;
-    font: inherit; outline: none;
-  }
-  .question-search::placeholder { color: var(--text-mute); }
-  .question-search:focus { border-color: var(--accent-line); box-shadow: 0 0 0 3px var(--accent-mute); }
-  .question-tools__meta {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.5;
-    color: var(--text-mute); text-align: right; white-space: nowrap;
-  }
   .questionnaire-section { scroll-margin-top: 64px; }
   .question-list { border-top: 1px solid var(--line-strong); }
   .question { border-bottom: 1px solid var(--line); scroll-margin-top: 78px; }
@@ -1059,8 +1046,6 @@
   .question__confirm input:checked + span::before { background: var(--accent); }
   .question--complete .question__id { color: var(--text-mid); }
   .question--complete .question__title { color: var(--text-mid); }
-  .questions-empty { display: none; padding: 28px 0; color: var(--text-mute); font-size: 15px; }
-  .questions-empty[data-visible="true"] { display: block; }
   .next__cta { cursor: pointer; }
 
   @media (max-width: 720px) {
@@ -1071,8 +1056,6 @@
     .brand__cluster { gap: 6px; }
     .brand__action { display: none; }
     .hero__meta { grid-template-columns: 1fr 1fr; }
-    .question-tools .wrap { grid-template-columns: 1fr; gap: 10px; }
-    .question-tools__meta { text-align: left; white-space: normal; }
     .question__summary { grid-template-columns: 44px minmax(0,1fr) 14px; gap: 10px; padding: 18px 0; }
     .question__due { grid-column: 2; grid-row: 2; }
     .question__chev { grid-column: 3; grid-row: 1 / 3; }
@@ -1085,7 +1068,7 @@
   @media print {
     @page { size: A4; margin: 12mm; }
     body { padding-top: 0; }
-    .brand, .hero__bg, .next__bg, .question-tools, .hero__cta, .next { display: none !important; }
+    .brand, .hero__bg, .next__bg, .hero__cta, .next { display: none !important; }
     .hero { height: auto; min-height: 0; padding: 24px 0 36px; }
     .hero > .wrap { padding-block: 0; }
     .hero__title { font-size: 32px; }
@@ -1154,15 +1137,8 @@
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
       <div class="hero__meta-item"><dt>Вопросов</dt><dd>29</dd></div>
       <div class="hero__meta-item"><dt>Предзаполнено</dt><dd>19</dd></div>
-      <div class="hero__meta-item"><dt>Версия</dt><dd>2.2 · 01.09.2026</dd></div>
+      <div class="hero__meta-item"><dt>Версия</dt><dd>2.3 · 01.09.2026</dd></div>
     </dl>
-  </div>
-</section>
-
-<section class="question-tools" aria-label="Поиск по вопросам">
-  <div class="wrap">
-    <input class="question-search" id="question-search" type="search" placeholder="Найти вопрос или ID…" autocomplete="off">
-    <div class="question-tools__meta">Жёлтая метка — критично для старта<br>серая — можно уточнить позже</div>
   </div>
 </section>
 
@@ -1761,7 +1737,6 @@
     </div>
   </div>
 </section>
-  <div class="wrap"><div class="questions-empty" id="questions-empty">По этому запросу вопросы не найдены.</div></div>
 </main>
 
 <section class="next" id="cat-finish">
@@ -2210,8 +2185,6 @@ void main(){
 <script>
   (function () {
     var questions = Array.prototype.slice.call(document.querySelectorAll('.question'));
-    var search = document.getElementById('question-search');
-    var empty = document.getElementById('questions-empty');
     var percent = document.getElementById('progress-percent');
     var count = document.getElementById('progress-count');
     var fill = document.getElementById('progress-fill');
@@ -2241,24 +2214,6 @@ void main(){
       if (answer) answer.addEventListener('input', updateProgress);
       if (confirm) confirm.addEventListener('change', updateProgress);
     });
-
-    if (search) {
-      search.addEventListener('input', function () {
-        var query = search.value.trim().toLowerCase();
-        var shown = 0;
-        questions.forEach(function (question) {
-          var answer = question.querySelector('textarea');
-          var haystack = (question.textContent + ' ' + (answer ? answer.value : '')).toLowerCase();
-          var visible = !query || haystack.indexOf(query) !== -1;
-          question.hidden = !visible;
-          if (visible) {
-            shown += 1;
-            if (query) question.open = true;
-          }
-        });
-        empty.setAttribute('data-visible', shown ? 'false' : 'true');
-      });
-    }
 
     function scrollToQuestions() {
       var target = document.getElementById('cat-frame');
