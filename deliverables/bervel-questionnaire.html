@@ -1153,7 +1153,7 @@
     <dl class="hero__meta">
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
       <div class="hero__meta-item"><dt>Вопросов</dt><dd>29</dd></div>
-      <div class="hero__meta-item"><dt>Предзаполнено</dt><dd>11</dd></div>
+      <div class="hero__meta-item"><dt>Предзаполнено</dt><dd>19</dd></div>
       <div class="hero__meta-item"><dt>Версия</dt><dd>2.2 · 01.09.2026</dd></div>
     </dl>
   </div>
@@ -1185,7 +1185,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какие задачи должна решать первая версия системы?</p></div>
           <label class="question__answer" for="answer-C01">
             <span>Что уже известно</span>
-            <textarea id="answer-C01" name="answer-C01" placeholder="Коротко перечислите задачи первой версии.">По материалам проекта обсуждаются два направления: анализ тендеров и обработка входящих заявок. Подтвердите, что оба направления входят в первую версию, или укажите приоритет.</textarea>
+            <textarea id="answer-C01" name="answer-C01" placeholder="Коротко перечислите задачи первой версии.">Матрица заказчика подтверждает два направления первой версии: анализ тендеров и обработка входящих заявок. Если запуск будет поэтапным, укажите приоритет направлений.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C01">
           <input id="confirm-C01" name="confirm-C01" type="checkbox">
@@ -1194,7 +1194,7 @@
         </div>
       </details>
 
-      <details class="question" id="q-C02" data-id="C02" data-prefilled="false">
+      <details class="question" id="q-C02" data-id="C02" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C02</span>
           <span class="question__title">Пользователи системы</span>
@@ -1204,9 +1204,13 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Кто будет пользоваться системой?</p></div>
           <label class="question__answer" for="answer-C02">
-            <span>Ответ</span>
-            <textarea id="answer-C02" name="answer-C02" placeholder="Укажите роли и главную задачу каждой роли. Например: тендерный специалист — проверяет результат."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C02" name="answer-C02" placeholder="Укажите роли и главную задачу каждой роли. Например: тендерный специалист — проверяет результат.">По материалам проекта решение по тендеру принимает сотрудник БЕРВЕЛ, а результат по входящей заявке проверяет менеджер отдела продаж. Требуется перечислить все роли и задачи каждой роли.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C02">
+          <input id="confirm-C02" name="confirm-C02" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
 
@@ -1246,7 +1250,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Через какой основной источник нужно получать тендеры и документы?</p></div>
           <label class="question__answer" for="answer-C04">
             <span>Что уже известно</span>
-            <textarea id="answer-C04" name="answer-C04" placeholder="Выберите один основной источник и при необходимости запасной.">Предварительно рассматриваются ЕИС, Контур.Закупки или другой агрегатор. Ручная загрузка может остаться запасным вариантом. Подтвердите основной источник.</textarea>
+            <textarea id="answer-C04" name="answer-C04" placeholder="Выберите один основной источник и при необходимости запасной.">Сейчас используются выгрузки из Контур.Закупки или другого сервиса, а техническая документация скачивается вручную. ЕИС рассматривается как целевой источник, но это требует подтверждения и технической проверки.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C04">
           <input id="confirm-C04" name="confirm-C04" type="checkbox">
@@ -1271,7 +1275,7 @@
         </div>
       </details>
 
-      <details class="question" id="q-C06" data-id="C06" data-prefilled="false">
+      <details class="question" id="q-C06" data-id="C06" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C06</span>
           <span class="question__title">Подходящий тендер</span>
@@ -1281,13 +1285,17 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>По каким признакам тендер подходит БЕРВЕЛ?</p></div>
           <label class="question__answer" for="answer-C06">
-            <span>Ответ</span>
-            <textarea id="answer-C06" name="answer-C06" placeholder="Например: продукция, объём, регион, срок поставки, отрасль и условия участия."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C06" name="answer-C06" placeholder="Например: продукция, объём, регион, срок поставки, отрасль и условия участия.">Базовый признак — соответствие предмета закупки продукции и производственным возможностям БЕРВЕЛ. В проекте также предлагается учитывать объём, сроки, обеспечение и риски. Пороги, географию и отраслевые ограничения нужно подтвердить.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C06">
+          <input id="confirm-C06" name="confirm-C06" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
 
-      <details class="question" id="q-C07" data-id="C07" data-prefilled="false">
+      <details class="question" id="q-C07" data-id="C07" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C07</span>
           <span class="question__title">Причины отказа</span>
@@ -1297,9 +1305,13 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>В каких случаях тендер нужно сразу отклонить?</p></div>
           <label class="question__answer" for="answer-C07">
-            <span>Ответ</span>
-            <textarea id="answer-C07" name="answer-C07" placeholder="Перечислите только однозначные причины отказа."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C07" name="answer-C07" placeholder="Перечислите только однозначные причины отказа.">В примерах заявок встречаются отсутствие позиции в номенклатуре, неподдерживаемые размеры или класс и необходимость уточнения характеристик. Нужно подтвердить, какие из этих причин означают безусловный отказ именно от тендера.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C07">
+          <input id="confirm-C07" name="confirm-C07" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
 
@@ -1314,7 +1326,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Что система должна сделать с подходящим тендером?</p></div>
           <label class="question__answer" for="answer-C08">
             <span>Что уже известно</span>
-            <textarea id="answer-C08" name="answer-C08" placeholder="Перечислите действия системы по порядку.">Предварительно система должна прочитать документы, выделить требования, сопоставить позиции с продукцией БЕРВЕЛ, проверить возможность производства и посчитать экономику. Исправьте или дополните этот список.</textarea>
+            <textarea id="answer-C08" name="answer-C08" placeholder="Перечислите действия системы по порядку.">Система должна получить документы, извлечь требования, сопоставить позиции с продукцией и возможностями завода, проверить мощности и экономику, оценить риски и подготовить итоговое заключение. Нужно уточнить границы инвестиционного анализа и поиска оборудования.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C08">
           <input id="confirm-C08" name="confirm-C08" type="checkbox">
@@ -1334,7 +1346,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какое решение по тендеру всегда должен принимать сотрудник?</p></div>
           <label class="question__answer" for="answer-C09">
             <span>Что уже известно</span>
-            <textarea id="answer-C09" name="answer-C09" placeholder="Укажите решение и должность ответственного сотрудника.">Предварительно система готовит рекомендацию, но решение об участии или отказе принимает сотрудник БЕРВЕЛ.</textarea>
+            <textarea id="answer-C09" name="answer-C09" placeholder="Укажите решение и должность ответственного сотрудника.">Рабочая гипотеза: система готовит рекомендацию, а сотрудник БЕРВЕЛ принимает решение об участии или отказе. Требуется подтвердить это правило и должность ответственного.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C09">
           <input id="confirm-C09" name="confirm-C09" type="checkbox">
@@ -1352,7 +1364,7 @@
     <h2 class="cat__title">Обработка входящих заявок</h2>
     <p class="cat__intro">Нужен простой путь заявки: от получения до готового ответа клиенту.</p>
     <div class="question-list">
-      <details class="question" id="q-C10" data-id="C10" data-prefilled="false">
+      <details class="question" id="q-C10" data-id="C10" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C10</span>
           <span class="question__title">Каналы и форматы</span>
@@ -1362,9 +1374,13 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Через какие каналы и в каких форматах приходят входящие заявки?</p></div>
           <label class="question__answer" for="answer-C10">
-            <span>Ответ</span>
-            <textarea id="answer-C10" name="answer-C10" placeholder="Например: почта, сайт, мессенджер, телефон; текст письма, Excel, Word, PDF или скан."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C10" name="answer-C10" placeholder="Например: почта, сайт, мессенджер, телефон; текст письма, Excel, Word, PDF или скан.">Матрица заказчика подтверждает сайт и электронную почту. Форматы: JPG, PDF, Excel, Word, сканы и фотографии. Официальный сайт также принимает обращения по телефону и через обратный звонок. Нужно подтвердить основной канал и использование мессенджеров.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C10">
+          <input id="confirm-C10" name="confirm-C10" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
 
@@ -1400,7 +1416,7 @@
         </div>
       </details>
 
-      <details class="question" id="q-C13" data-id="C13" data-prefilled="false">
+      <details class="question" id="q-C13" data-id="C13" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C13</span>
           <span class="question__title">Готовый результат</span>
@@ -1410,9 +1426,13 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Что должно быть готово, чтобы заявка считалась обработанной?</p></div>
           <label class="question__answer" for="answer-C13">
-            <span>Ответ</span>
-            <textarea id="answer-C13" name="answer-C13" placeholder="Например: подобрана продукция, рассчитаны цена и срок, подготовлено предложение или дан обоснованный отказ."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C13" name="answer-C13" placeholder="Например: подобрана продукция, рассчитаны цена и срок, подготовлено предложение или дан обоснованный отказ.">По матрице заказчика результатом должно быть коммерческое предложение, обоснованный отказ или рекомендация по освоению нового продукта. Нужно подтвердить обязательные поля цены, срока и согласования.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C13">
+          <input id="confirm-C13" name="confirm-C13" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
     </div>
@@ -1436,7 +1456,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какая 1С используется и как из неё можно получать данные?</p></div>
           <label class="question__answer" for="answer-C14">
             <span>Что уже известно</span>
-            <textarea id="answer-C14" name="answer-C14" placeholder="Укажите конфигурацию, версию и удобный способ получения данных.">Известно, что 1С рассматривается как источник номенклатуры, техкарт, цен и производственных данных. Нужно указать конфигурацию и способ доступа: прямое подключение или выгрузка.</textarea>
+            <textarea id="answer-C14" name="answer-C14" placeholder="Укажите конфигурацию, версию и удобный способ получения данных.">В проектной концепции 1С рассматривается как источник номенклатуры, техкарт, цен и производственных данных. Наличие нужных данных, конфигурацию, версию и способ доступа — прямое подключение или выгрузку — нужно подтвердить.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C14">
           <input id="confirm-C14" name="confirm-C14" type="checkbox">
@@ -1456,7 +1476,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Есть ли CRM и какие данные в ней ведутся?</p></div>
           <label class="question__answer" for="answer-C15">
             <span>Что уже известно</span>
-            <textarea id="answer-C15" name="answer-C15" placeholder="Укажите название CRM и основные данные, которые в ней хранятся.">CRM или ERP упоминается как возможный источник данных о клиентах и результатах работы. Подтвердите систему и перечислите нужные данные.</textarea>
+            <textarea id="answer-C15" name="answer-C15" placeholder="Укажите название CRM и основные данные, которые в ней хранятся.">Матрица заказчика называет CRM и ERP возможными источниками данных по заявкам. Нужно подтвердить название системы, её реальное использование, нужные поля и статусы.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C15">
           <input id="confirm-C15" name="confirm-C15" type="checkbox">
@@ -1492,7 +1512,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Как сейчас рассчитывают себестоимость и загрузку мощностей?</p></div>
           <label class="question__answer" for="answer-C17">
             <span>Что уже известно</span>
-            <textarea id="answer-C17" name="answer-C17" placeholder="Укажите источник данных, название методики или файла и ответственного за проверку.">В проекте нужен расчёт себестоимости, маржи и возможности производства. Источники данных, внутренняя методика и ответственный пока не подтверждены.</textarea>
+            <textarea id="answer-C17" name="answer-C17" placeholder="Укажите источник данных, название методики или файла и ответственного за проверку.">Матрица требует считать себестоимость, маржу, прибыльность, инвестиции и производственные риски. Публично заявлены проектные мощности: 30 000 т/год калиброванного проката и 27 000 т/год высокопрочного крепежа. Источники оперативных данных, внутренняя методика, текущая загрузка и ответственный пока не подтверждены.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C17">
           <input id="confirm-C17" name="confirm-C17" type="checkbox">
@@ -1512,7 +1532,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какие характеристики товара система должна сравнивать?</p></div>
           <label class="question__answer" for="answer-C18">
             <span>Что уже известно</span>
-            <textarea id="answer-C18" name="answer-C18" placeholder="Оставьте только обязательные характеристики и добавьте недостающие.">Предварительный набор: стандарт, резьба, диаметр, длина, класс прочности, материал, покрытие, количество, допуски, испытания и документы качества.</textarea>
+            <textarea id="answer-C18" name="answer-C18" placeholder="Оставьте только обязательные характеристики и добавьте недостающие.">По матрице, примерам заявок и каталогу базовый набор включает тип продукции, ГОСТ, диаметр, длину, класс прочности, материал, покрытие, количество, единицу измерения и вес. Нужно утвердить обязательные поля отдельно для каждой товарной группы.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C18">
           <input id="confirm-C18" name="confirm-C18" type="checkbox">
@@ -1541,7 +1561,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>В каком виде пользователю нужен итоговый результат?</p></div>
           <label class="question__answer" for="answer-C19">
             <span>Что уже известно</span>
-            <textarea id="answer-C19" name="answer-C19" placeholder="Выберите подходящие варианты: таблица, экран, PDF, письмо, Excel, запись в 1С или CRM.">Предварительно нужны карточка результата, таблица требований и выгрузка в PDF. Также обсуждается запись подтверждённого результата в 1С или CRM.</textarea>
+            <textarea id="answer-C19" name="answer-C19" placeholder="Выберите подходящие варианты: таблица, экран, PDF, письмо, Excel, запись в 1С или CRM.">Матрица подтверждает итоговое заключение по тендеру и коммерческое предложение или отказ по заявке. Таблица, карточка, дашборд, PDF и запись в 1С или CRM пока являются вариантами концепции. Нужно выбрать обязательный формат и место сохранения.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C19">
           <input id="confirm-C19" name="confirm-C19" type="checkbox">
@@ -1550,7 +1570,7 @@
         </div>
       </details>
 
-      <details class="question" id="q-C20" data-id="C20" data-prefilled="false">
+      <details class="question" id="q-C20" data-id="C20" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C20</span>
           <span class="question__title">Бланки и оформление</span>
@@ -1560,13 +1580,17 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Есть ли готовые бланки или брендбук и кто согласует итоговый документ?</p></div>
           <label class="question__answer" for="answer-C20">
-            <span>Ответ</span>
-            <textarea id="answer-C20" name="answer-C20" placeholder="Приложите пример бланка или брендбук либо укажите, что оформление можно разработать с нуля."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C20" name="answer-C20" placeholder="Приложите пример бланка или брендбук либо укажите, что оформление можно разработать с нуля.">Есть четыре примера оформленных результатов и публичные каталоги БЕРВЕЛ в фирменном стиле. Официальный бланк, брендбук и сотрудник, который согласует итоговый документ, пока не указаны.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C20">
+          <input id="confirm-C20" name="confirm-C20" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
 
-      <details class="question" id="q-C21" data-id="C21" data-prefilled="false">
+      <details class="question" id="q-C21" data-id="C21" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C21</span>
           <span class="question__title">Рабочее место</span>
@@ -1576,13 +1600,17 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Где пользователю удобнее работать с системой?</p></div>
           <label class="question__answer" for="answer-C21">
-            <span>Ответ</span>
-            <textarea id="answer-C21" name="answer-C21" placeholder="Выберите основной вариант: отдельный веб-интерфейс, 1С, CRM или другое рабочее место."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C21" name="answer-C21" placeholder="Выберите основной вариант: отдельный веб-интерфейс, 1С, CRM или другое рабочее место.">В проектной концепции предложены отдельный личный кабинет, уведомления в Telegram и связи с 1С или CRM. БЕРВЕЛ ещё нужно выбрать основное рабочее место пользователя.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C21">
+          <input id="confirm-C21" name="confirm-C21" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
 
-      <details class="question" id="q-C22" data-id="C22" data-prefilled="false">
+      <details class="question" id="q-C22" data-id="C22" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C22</span>
           <span class="question__title">Главные экраны</span>
@@ -1592,9 +1620,13 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Какие 3–5 экранов нужны для ежедневной работы?</p></div>
           <label class="question__answer" for="answer-C22">
-            <span>Ответ</span>
-            <textarea id="answer-C22" name="answer-C22" placeholder="Например: список задач, карточка тендера или заявки, проверка данных, итог и история решений."></textarea>
+            <span>Что уже известно</span>
+            <textarea id="answer-C22" name="answer-C22" placeholder="Например: список задач, карточка тендера или заявки, проверка данных, итог и история решений.">Проектная концепция предлагает ранжированный список тендеров, карточку результата, дашборд и историю решений. Этот состав экранов нужно подтвердить и дополнить сценарием обработки входящих заявок.</textarea>
           </label>
+        <label class="question__confirm" for="confirm-C22">
+          <input id="confirm-C22" name="confirm-C22" type="checkbox">
+          <span>Подтверждаю</span>
+        </label>
         </div>
       </details>
 
@@ -1634,7 +1666,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какой объём должна обрабатывать система и за какое время?</p></div>
           <label class="question__answer" for="answer-C24">
             <span>Что уже известно</span>
-            <textarea id="answer-C24" name="answer-C24" placeholder="Укажите обычный объём, пик и допустимое время обработки для тендеров и заявок.">Ориентир по тендерам — около 2 291 закупки за квартал. Объём входящих заявок и допустимое время обработки пока нужно уточнить.</textarea>
+            <textarea id="answer-C24" name="answer-C24" placeholder="Укажите обычный объём, пик и допустимое время обработки для тендеров и заявок.">В предоставленной выгрузке — 2 291 закупка за период с 01.09.2025 по 26.03.2026. Пиковая нагрузка, объём входящих заявок и допустимое время обработки пока не указаны.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C24">
           <input id="confirm-C24" name="confirm-C24" type="checkbox">
@@ -1654,7 +1686,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Где можно разместить систему и можно ли использовать внешние сервисы?</p></div>
           <label class="question__answer" for="answer-C25">
             <span>Что уже известно</span>
-            <textarea id="answer-C25" name="answer-C25" placeholder="Укажите место размещения и данные, которые нельзя передавать за пределы завода.">Предварительная гипотеза — сервер БЕРВЕЛ. Нужно отдельно подтвердить, можно ли передавать документы внешним сервисам распознавания и языковым моделям.</textarea>
+            <textarea id="answer-C25" name="answer-C25" placeholder="Укажите место размещения и данные, которые нельзя передавать за пределы завода.">Проектная гипотеза — разместить систему на сервере БЕРВЕЛ и отдельно выбрать внешние или локальные модели. ИТ и службе безопасности нужно подтвердить место размещения, допустимые сервисы и данные, которые нельзя передавать наружу.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C25">
           <input id="confirm-C25" name="confirm-C25" type="checkbox">
