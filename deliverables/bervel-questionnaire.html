@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Опросник БЕРВЕЛ для подготовки ТЗ</title>
+<title>Опросник БЕРВЕЛ для подготовки ТЗ — версия 1.0</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314253f'/%3E%3Cpath d='M18 17h18c8 0 12 4 12 10 0 4-2 7-6 9 5 1 8 5 8 10 0 8-5 12-14 12H18V17zm10 9v7h7c3 0 4-1 4-4 0-2-1-3-4-3h-7zm0 15v8h8c3 0 5-1 5-4s-2-4-5-4h-8z' fill='%23d96f32'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -346,7 +346,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 
   <main class="content-column">
     <section class="cover-card" id="cover">
-      <div class="cover-kicker">Единый пакет ответов</div>
+      <div class="cover-kicker">Единый пакет ответов · версия формы 1.0 · 01.09.2026</div>
       <h1>Опросник для подготовки технического задания</h1>
       <p>Общая основа и две условные ветки. Ответы, приложения и управляемые неизвестные остаются в одном согласованном документе.</p>
       <div class="cover-grid">
@@ -360,7 +360,8 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       <div class="cover-note">◉ Файл работает локально: введённые данные не отправляются в сеть. Для сохранения используйте «Скачать JSON».</div>
     </section>
     <div class="questionnaire-content" id="questionnaire"><h1>Опросник БЕРВЕЛ для подготовки технического задания</h1>
-<p><strong>Статус документа:</strong> черновик для согласования<br />
+<p><strong>Статус документа:</strong> финальная версия для заполнения<br />
+<strong>Версия формы:</strong> 1.0 от 01.09.2026<br />
 <strong>Версия пакета ответов:</strong> ____________________<br />
 <strong>Дата открытия:</strong> ____________________<br />
 <strong>Срок заполнения:</strong> ____________________<br />
@@ -393,8 +394,68 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <ul>
 <li><strong>Критично до ТЗ</strong> — без ответа нельзя надёжно зафиксировать границу, правило, ответственность, источник истины, допустимый контур данных или критерий результата.</li>
 <li><strong>До пилота</strong> — ответ не блокирует рамочное ТЗ, но блокирует соответствующий тест, интеграцию или работу с данными БЕРВЕЛ.</li>
-<li><strong>До промышленного запуска</strong> — ответ обязателен для production-readiness и эксплуатации.</li>
+<li><strong>До промышленного запуска</strong> — ответ обязателен для готовности к промышленной эксплуатации.</li>
 </ul>
+<h3>Ключевые термины</h3>
+<p>В карточках используются общепринятые рабочие сокращения. Если термин допускает разные трактовки, в ответе укажите принятое БЕРВЕЛ определение.</p>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Смысл в этом опроснике</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scope</code></td>
+<td>Согласованные границы: что входит в этап или пилот и что явно исключено.</td>
+</tr>
+<tr>
+<td><code>baseline</code></td>
+<td>Измеримый исходный уровень текущего процесса, с которым сравнивается результат.</td>
+</tr>
+<tr>
+<td><code>bid/no-bid</code> · <code>RFQ</code></td>
+<td>Ответственное решение об участии в тендере · входящий запрос клиента на цену и условия.</td>
+</tr>
+<tr>
+<td><code>hard gate / hard stop</code></td>
+<td>Безусловное проверяемое условие, которое блокирует автоматическое продолжение или требует человека.</td>
+</tr>
+<tr>
+<td><code>REVIEW</code> · <code>override</code></td>
+<td>Обязательная проверка человеком · осознанное отклонение от правила уполномоченным сотрудником с зафиксированным основанием.</td>
+</tr>
+<tr>
+<td><code>gold set</code> · <code>ground truth</code></td>
+<td>Замороженная репрезентативная контрольная выборка · утверждённый экспертами эталонный ответ.</td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td>Оценка уверенности системы, а не гарантия корректности; пороги утверждаются по данным БЕРВЕЛ.</td>
+</tr>
+<tr>
+<td><code>provenance / audit trail</code></td>
+<td>Прослеживаемая цепочка от исходного документа и версии до факта, проверки, расчёта и решения.</td>
+</tr>
+<tr>
+<td><code>drift</code> · <code>revalidation</code></td>
+<td>Изменение данных или процесса со временем · повторная проверка решения после значимого изменения.</td>
+</tr>
+<tr>
+<td><code>fallback</code></td>
+<td>Согласованный безопасный ручной или резервный маршрут при блокировке или сбое.</td>
+</tr>
+<tr>
+<td><code>offline / shadow / draft</code></td>
+<td>Проверка на истории · параллельная работа без влияния на процесс · подготовка черновика без самостоятельного внешнего действия.</td>
+</tr>
+<tr>
+<td><code>SLA</code> · <code>NFR</code> · <code>RTO/RPO</code></td>
+<td>Срок/уровень сервиса · нефункциональные требования · целевые сроки восстановления и допустимая потеря данных.</td>
+</tr>
+</tbody>
+</table>
 <h3>Формат ответа на неизвестное</h3>
 <blockquote>
 <p><strong>Владелец уточнения:</strong> ФИО, должность<br />
@@ -2055,7 +2116,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     const data = collectData();
     const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
     const a = document.createElement('a');
-    const version = document.getElementById('meta-version').value || 'draft';
+    const version = document.getElementById('meta-version').value || 'new';
     a.href = URL.createObjectURL(blob);
     a.download = `bervel-questionnaire-${version}.json`;
     a.click();
