@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Опросник БЕРВЕЛ для подготовки ТЗ — версия 1.5</title>
+<title>Опросник БЕРВЕЛ для подготовки ТЗ — версия 1.6</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314253f'/%3E%3Cpath d='M18 17h18c8 0 12 4 12 10 0 4-2 7-6 9 5 1 8 5 8 10 0 8-5 12-14 12H18V17zm10 9v7h7c3 0 4-1 4-4 0-2-1-3-4-3h-7zm0 15v8h8c3 0 5-1 5-4s-2-4-5-4h-8z' fill='%23d96f32'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -49,7 +49,8 @@ button { color: inherit; }
   z-index: 50;
   height: 76px;
   display: grid;
-  grid-template-columns: 310px 1fr auto;
+  grid-template-columns: 310px minmax(300px, 440px) auto;
+  justify-content: space-between;
   gap: 24px;
   align-items: center;
   padding: 0 28px;
@@ -68,16 +69,13 @@ button { color: inherit; }
 .brand-copy { min-width: 0; }
 .brand-title { font-weight: 750; letter-spacing: -.02em; white-space: nowrap; }
 .brand-subtitle { color: #aebdd0; font-size: 12px; white-space: nowrap; }
-.topbar-center { display: flex; align-items: center; gap: 10px; }
-.scope-label { color: #aebdd0; font-size: 12px; text-transform: uppercase; letter-spacing: .09em; margin-right: 2px; }
-.scope-toggle {
-  display: inline-flex; align-items: center; gap: 8px;
-  border: 1px solid #496079; background: #203750; color: #d8e2ec;
-  padding: 9px 12px; border-radius: 999px; cursor: pointer; user-select: none;
-  transition: .15s ease;
-}
-.scope-toggle input { accent-color: var(--accent); }
-.scope-toggle:has(input:checked) { border-color: #f2a06d; background: #314662; color: #fff; }
+.topbar-progress { width: 100%; }
+.topbar-progress-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.topbar-progress-title { color: #d5deea; font-size: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.topbar-progress-value { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+.topbar-progress .progress-number { color: #fff; font-size: 16px; }
+.topbar-progress .progress-label { color: #aebdd0; }
+.topbar-progress .progress-track { height: 6px; margin: 4px 0 0; background: rgba(255,255,255,.18); }
 .top-actions { display: flex; align-items: center; gap: 8px; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 7px;
@@ -189,11 +187,6 @@ button { color: inherit; }
 .question-card:hover { border-color: #c8d2df; box-shadow: 0 8px 24px rgba(20,37,63,.06); }
 .question-card[data-kind="C"] { border-left-color: var(--accent); }
 .question-card[data-kind="L"] { border-left-color: var(--blue); }
-.question-card[data-status="prefilled"] { border-left-color: var(--blue); }
-.question-card[data-status="answered"] { border-left-color: var(--green); }
-.question-card[data-status="unknown"] { border-left-color: var(--red); }
-.question-card[data-status="awaiting"] { border-left-color: var(--amber); }
-.question-card[data-status="na"] { border-left-color: var(--subtle); opacity: .82; }
 .card-head {
   display: grid; grid-template-columns: 58px 1fr auto; gap: 13px; align-items: center;
   padding: 16px 17px; background: #fafbfd; border-bottom: 1px solid var(--line); cursor: pointer;
@@ -205,13 +198,12 @@ button { color: inherit; }
 .question-card[data-kind="L"] .id-badge { background: var(--blue); }
 .card-title { margin: 0 !important; font-size: 17px; line-height: 1.25; letter-spacing: -.01em; }
 .card-state { display: flex; align-items: center; gap: 8px; }
-.due-badge, .state-badge {
+.due-badge {
   display: inline-flex; align-items: center; border-radius: 999px;
-  padding: 5px 9px; font-size: 11px; font-weight: 750; white-space: nowrap;
+  padding: 5px 9px; color: #694025; background: var(--accent-soft);
+  font-size: 11px; font-weight: 750; white-space: nowrap;
 }
-.due-badge { color: #694025; background: var(--accent-soft); }
 .question-card[data-kind="L"] .due-badge { color: #315eaa; background: var(--blue-soft); }
-.state-badge { color: #667085; background: var(--surface-3); }
 .collapse-btn { border: 0; background: transparent; color: var(--subtle); font-size: 18px; cursor: pointer; transition: transform .15s ease; }
 .question-card.collapsed .collapse-btn { transform: rotate(-90deg); }
 .card-body { padding: 17px 18px 19px; }
@@ -244,26 +236,16 @@ button { color: inherit; }
 .signature-row input { min-width: 0; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; padding: 8px 9px; outline: none; }
 .signature-row input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
 .signature-row.full { grid-column: 1 / -1; }
-.status-row { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
-.status-row > span { margin-right: 4px; color: #46546a; font-size: 12px; font-weight: 750; }
-.status-option { position: relative; }
-.status-option input { position: absolute; opacity: 0; pointer-events: none; }
-.status-option label {
-  display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px;
+.confirmation-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.confirmation-option { position: relative; }
+.confirmation-option input { position: absolute; opacity: 0; pointer-events: none; }
+.confirmation-option label {
+  display: inline-flex; align-items: center; padding: 8px 12px;
   border: 1px solid var(--line); border-radius: 9px; background: #fff;
-  color: #5a6779; font-size: 12px; font-weight: 650; cursor: pointer; user-select: none;
+  color: #5a6779; font-size: 12px; font-weight: 700; cursor: pointer; user-select: none;
 }
-.status-option label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #c9d0da; }
-.status-option input:checked + label { color: var(--navy); border-color: #9eabbc; background: var(--surface-2); }
-.status-option input[value="prefilled"]:checked + label::before { background: var(--blue); }
-.status-option input[value="answered"]:checked + label::before { background: var(--green); }
-.status-option input[value="unknown"]:checked + label::before { background: var(--red); }
-.status-option input[value="na"]:checked + label::before { background: var(--subtle); }
-.status-option input[value="awaiting"]:checked + label::before { background: var(--amber); }
-.context-panel { display: none; grid-template-columns: 1fr 160px; gap: 10px; padding: 12px; border-radius: 10px; background: var(--red-soft); border: 1px solid #f3d0d0; }
-.context-panel.visible { display: grid; }
-.context-panel.material { background: var(--amber-soft); border-color: #f0ddb2; }
-.context-panel .wide { grid-column: 1 / -1; }
+.confirmation-option input:focus-visible + label { outline: 3px solid var(--blue-soft); outline-offset: 2px; }
+.confirmation-option input:checked + label { color: #fff; border-color: var(--navy); background: var(--navy); }
 .table-wrap { overflow-x: auto; margin: 14px 0 22px; border: 1px solid var(--line); border-radius: 12px; }
 table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; line-height: 1.4; }
 th { position: sticky; top: 0; z-index: 1; color: #fff; background: var(--navy-2); text-align: left; font-weight: 700; }
@@ -274,40 +256,23 @@ tbody tr:nth-child(even) td { background: #fafbfd; }
 td[contenteditable="true"] { min-width: 120px; background: #fffdf8 !important; outline: none; }
 td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 .section-note { margin: 12px 0; padding: 13px 14px; background: var(--blue-soft); border: 1px solid #d5e1fa; border-radius: 10px; color: #3c5580; }
-.progress-card { padding: 17px; }
-.progress-head { display: flex; justify-content: space-between; align-items: baseline; }
 .progress-number { font-size: 25px; font-weight: 800; color: var(--navy); }
 .progress-label { color: var(--muted); font-size: 12px; }
 .progress-track { height: 9px; overflow: hidden; background: var(--surface-3); border-radius: 999px; margin: 10px 0 15px; }
 .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), #ee9b67); border-radius: inherit; transition: width .2s ease; }
-.stat-list { display: grid; gap: 8px; }
-.stat-row { display: flex; justify-content: space-between; gap: 12px; color: #536174; font-size: 12px; }
-.stat-row strong { color: var(--ink); }
-.filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 14px; }
-.filter-btn {
-  border: 1px solid var(--line); background: #fff; border-radius: 9px; padding: 8px;
-  color: #586679; font-size: 11px; font-weight: 700; cursor: pointer;
-}
-.filter-btn.active { color: var(--accent); border-color: #efb28e; background: var(--accent-soft); }
-.privacy-card { margin-top: 12px; padding: 14px; color: #4a5b70; background: #f7fafc; border: 1px solid var(--line); border-radius: 14px; font-size: 12px; }
+.privacy-card { padding: 14px; color: #4a5b70; background: #f7fafc; border: 1px solid var(--line); border-radius: 14px; font-size: 12px; }
 .privacy-card strong { display: block; color: var(--navy); margin-bottom: 4px; }
 .empty-state { display: none; padding: 36px; text-align: center; color: var(--muted); }
 .branch-hidden, .filtered-out { display: none !important; }
-.toast {
-  position: fixed; right: 28px; bottom: 28px; z-index: 80;
-  padding: 11px 15px; border-radius: 10px; color: #fff; background: var(--navy);
-  box-shadow: var(--shadow); opacity: 0; transform: translateY(12px); pointer-events: none; transition: .2s ease;
-}
-.toast.show { opacity: 1; transform: translateY(0); }
 @media (max-width: 1450px) {
   .shell { grid-template-columns: 250px minmax(700px, 1fr); }
   .right-rail { position: fixed; right: 20px; bottom: 20px; top: auto; width: 250px; z-index: 40; max-height: none; }
-  .topbar { grid-template-columns: 255px 1fr auto; }
+  .topbar { grid-template-columns: 255px minmax(260px, 340px) auto; }
 }
 @media print {
   @page { size: A4; margin: 12mm; }
   body { background: #fff; font-size: 10pt; }
-  .topbar, .left-rail, .right-rail, .btn, .collapse-btn, .privacy-card, .toast { display: none !important; }
+  .topbar, .left-rail, .right-rail, .btn, .collapse-btn, .privacy-card { display: none !important; }
   .shell { display: block; width: auto; margin: 0; }
   .cover-card { color: #111; background: #fff; border: 1px solid #bbb; box-shadow: none; }
   .cover-card input { color: #111; background: #fff; border-color: #aaa; }
@@ -315,9 +280,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
   .question-card { break-inside: avoid; box-shadow: none; }
   .question-card.collapsed .card-body { display: block; }
   .major-section > h1 { margin-left: 0; margin-right: 0; }
-  .status-option input:checked + label { border-color: #333; }
-  .status-option input:not(:checked) + label { display: none; }
-  .context-panel.visible { display: grid; }
+  .confirmation-option input:checked + label { color: #111; border-color: #333; background: #fff; }
   table { font-size: 7.5pt; }
   th { color: #111; background: #eee; }
 }
@@ -332,10 +295,12 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       <div class="brand-subtitle">Основание для технического задания</div>
     </div>
   </div>
-  <div class="topbar-center">
-    <span class="scope-label">Направления</span>
-    <label class="scope-toggle"><input id="scope-tenders" type="checkbox" checked> Тендеры</label>
-    <label class="scope-toggle"><input id="scope-rfq" type="checkbox" checked> Входящие заявки</label>
+  <div class="topbar-progress" aria-label="Заполненность документа">
+    <div class="topbar-progress-head">
+      <span class="topbar-progress-title">Заполненность документа</span>
+      <span class="topbar-progress-value"><strong class="progress-number" id="progress-number">0%</strong><span class="progress-label" id="progress-label">0 из 0</span></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
   <div class="top-actions">
     <button class="btn btn-primary" id="print-btn" type="button">Печать / PDF</button>
@@ -352,23 +317,9 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
   </aside>
 
   <main class="content-column">
-    <section class="cover-card" id="cover">
-      <div class="cover-kicker">Предзаполненный пакет ответов · версия формы 1.5 · 01.09.2026</div>
-      <h1>Опросник для подготовки технического задания</h1>
-      <p>Общая основа и две условные ветки. Ответы, приложения и управляемые неизвестные остаются в одном согласованном документе.</p>
-      <div class="cover-grid">
-        <div class="cover-field"><label for="meta-version">Версия пакета</label><input id="meta-version" name="meta-version" placeholder="Например, 0.1"></div>
-        <div class="cover-field"><label for="meta-opened">Дата открытия</label><input id="meta-opened" name="meta-opened" type="date"></div>
-        <div class="cover-field"><label for="meta-deadline">Срок заполнения</label><input id="meta-deadline" name="meta-deadline" type="date"></div>
-        <div class="cover-field"><label for="meta-coordinator">Координатор</label><input id="meta-coordinator" name="meta-coordinator" placeholder="ФИО, должность, контакты"></div>
-        <div class="cover-field"><label for="meta-sponsor">Бизнес-спонсор</label><input id="meta-sponsor" name="meta-sponsor" placeholder="ФИО, должность"></div>
-        <div class="cover-field"><label for="meta-departments">Подразделения</label><input id="meta-departments" name="meta-departments" placeholder="Через запятую"></div>
-      </div>
-      <div class="cover-note">◉ Файл работает локально: введённые данные не отправляются в сеть.</div>
-    </section>
     <div class="questionnaire-content" id="questionnaire"><h1>Опросник БЕРВЕЛ для подготовки технического задания</h1>
 <p><strong>Статус документа:</strong> предзаполненная версия для подтверждения<br />
-<strong>Версия формы:</strong> 1.5 от 01.09.2026<br />
+<strong>Версия формы:</strong> 1.6 от 01.09.2026<br />
 <strong>Версия пакета ответов:</strong> ____________________<br />
 <strong>Дата открытия:</strong> ____________________<br />
 <strong>Срок заполнения:</strong> ____________________<br />
@@ -378,7 +329,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <strong>Подразделения, участвующие в заполнении:</strong> ____________________</p>
 <h2>0. Как заполнять опросник</h2>
 <div class="prefill-banner">
-<strong>Пакет 0.2 уже предзаполнен по материалам проекта</strong>
+<strong>Пакет 0.3 уже предзаполнен по материалам проекта</strong>
 <p>Факты из таблицы требований клиента и проектные предположения перенесены в карточки с указанием источника. Они не считаются согласованными требованиями автоматически.</p>
 <ul>
 <li><code>Предзаполнено</code> — проверьте текст, исправьте при необходимости и только затем выберите «Ответ дан».</li>
@@ -554,7 +505,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор; согласуют владельцы двух процессов<br />
 <strong>Тип ответа:</strong> повторяемая таблица «контур → проблема → baseline → целевой эффект → владелец»<br />
 <strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> утверждённая карточка инициативы или KPI, если есть</p>
-<p><strong>Вопрос:</strong> Какую наблюдаемую проблему нужно описать отдельно по каждому выбранному направлению, кого она затрагивает, как часто возникает и каким показателем измеряется ущерб? Каковы текущее значение, желаемое изменение и срок, кто является бизнес-владельцем и владельцем процесса, а кто принимает итоговое решение о запуске, запуске с ограничениями, доработке или отказе от запуска?</p>
+<p><strong>Вопрос:</strong> Какую наблюдаемую проблему должен решить тендерный процесс, кого она затрагивает, как часто возникает и каким показателем измеряется ущерб? Каковы текущее значение, желаемое изменение и срок, кто является бизнес-владельцем и владельцем процесса, а кто принимает итоговое решение о запуске, запуске с ограничениями, доработке или отказе от запуска?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -562,7 +513,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор<br />
 <strong>Тип ответа:</strong> таблица <code>входит / не входит / требует решения</code><br />
 <strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> утверждённый scope или протокол решения</p>
-<p><strong>Вопрос:</strong> Какие подразделения, пользователи, источники и типы тендеров, каналы заявок, товарные семейства, языки, регионы и объёмы входят в первый этап? Какие явные исключения нужно учесть, кто принимает решение по каждому спорному пункту и на какую дату оно назначено?</p>
+<p><strong>Вопрос:</strong> Какие подразделения, пользователи, источники и типы тендеров, товарные группы, языки, регионы и объёмы входят в первый этап? Какие явные исключения нужно учесть, кто принимает решение по каждому спорному пункту и на какую дату оно назначено?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -570,7 +521,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владельцы процессов; согласуют ИТ, юристы и ИБ<br />
 <strong>Тип ответа:</strong> матрица <code>сценарий → последний автоматизированный шаг → выход → запрещённое действие</code><br />
 <strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> примеры текущих выходных документов по <code>M08</code></p>
-<p><strong>Вопрос:</strong> Какой последний шаг допустим в каждом направлении: обнаружение, анализ, рекомендация, черновик документа, запись черновика в систему или внешнее действие? Какие результаты обязательны, включая решение об участии или отказе, таблицу требований, экономический расчёт, список уточнений, черновик коммерческого предложения, отказ или рекомендацию по освоению? Что система не вправе делать без человека?</p>
+<p><strong>Вопрос:</strong> Какой последний автоматизированный шаг допустим в тендерном процессе: обнаружение, анализ, рекомендация, черновик документа, запись черновика в систему или внешнее действие? Какие результаты обязательны, включая решение об участии или отказе, таблицу требований, экономический расчёт, список уточнений и рекомендацию по освоению? Что система не вправе делать без человека?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -578,7 +529,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>До промышленного запуска</strong>, только для плана развития · <strong>Владелец:</strong> бизнес-спонсор<br />
 <strong>Тип ответа:</strong> ранжированный перечень с условиями возврата в scope<br />
 <strong>Показывать:</strong> если БЕРВЕЛ хочет зафиксировать roadmap · <strong>Подтверждение:</strong> протокол портфельного решения</p>
-<p><strong>Вопрос:</strong> Какие задачи помимо анализа тендеров и обработки входящих заявок можно отложить на будущее? Для каждой укажите деловой сигнал, необходимые данные и решение, после которых её можно включить в проект. Как проверить выполнение этих условий и не расширить первый этап автоматически?</p>
+<p><strong>Вопрос:</strong> Какие задачи помимо анализа тендеров можно отложить на будущее? Для каждой укажите деловой сигнал, необходимые данные и решение, после которых её можно включить в проект. Как проверить выполнение этих условий и не расширить первый этап автоматически?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -595,7 +546,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владелец процесса; данные подтверждает ИТ/аналитика<br />
 <strong>Тип ответа:</strong> числа с единицей, периодом и источником<br />
 <strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> выгрузка baseline по <code>M10</code></p>
-<p><strong>Вопрос:</strong> Сколько за выбранный период поступило заявок или тендеров, файлов, страниц, строк и версий? Укажите обычное значение и границы, которые не превышаются в 90% и 95% случаев, сезонность и пики, сроки клиента или процедуры, рабочие часы, размер очереди, время ожидания и время непосредственной работы по этапам. Какие значения основаны на выгрузке, а какие являются экспертной оценкой?</p>
+<p><strong>Вопрос:</strong> Сколько за выбранный период поступило тендеров, файлов, страниц, строк и версий? Укажите обычное значение и границы, которые не превышаются в 90% и 95% случаев, сезонность и пики, сроки процедуры, рабочие часы, размер очереди, время ожидания и время непосредственной работы по этапам. Какие значения основаны на выгрузке, а какие являются экспертной оценкой?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -704,7 +655,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> ИТ/архитектор данных; утверждают бизнес-владельцы данных<br />
 <strong>Тип ответа:</strong> SoR-матрица <code>сущность/поле → система → владелец → правило конфликта</code><br />
 <strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M07</code></p>
-<p><strong>Вопрос:</strong> В какой системе следует искать основные данные о клиенте, контакте, заявке или тендере, коде товарной позиции, техкарте, возможности производства, доступном остатке, загрузке, цене, себестоимости, скидке, валюте и курсе, заказе, решении, сертификате и фактическом результате? Как разделяются сведения об одном объекте между системами, разрешаются противоречия и назначается ответственный за утверждение?</p>
+<p><strong>Вопрос:</strong> В какой системе следует искать основные данные о заказчике, контакте, закупке, лоте, коде товарной позиции, техкарте, возможности производства, доступном остатке, загрузке, цене, себестоимости, скидке, валюте и курсе, заказе, решении, сертификате и фактическом результате? Как разделяются сведения об одном объекте между системами, разрешаются противоречия и назначается ответственный за утверждение?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -1026,7 +977,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> бизнес-спонсор и владельцы процессов<br />
 <strong>Тип ответа:</strong> отдельная scope-таблица для каждого выбранного контура<br />
 <strong>Показывать:</strong> для каждого выбранного контура · <strong>Подтверждение:</strong> утверждённый pilot charter</p>
-<p><strong>Вопрос:</strong> Можете для каждого выбранного направления задать проверяемое предположение, период, источники и каналы, форматы, группы товаров, пользователей, объём, режим проверки без влияния на работу, параллельной работы или подготовки черновика, разрешённые действия, явные исключения, исходное значение и целевое изменение? В пилоте по умолчанию запрещены подача на ЭТП, окончательное решение об участии, окончательная цена и отправка коммерческого предложения без человека?</p>
+<p><strong>Вопрос:</strong> Можете для тендерного процесса задать проверяемое предположение, период, источники и каналы, форматы, группы товаров, пользователей, объём, режим проверки без влияния на работу, параллельной работы или подготовки черновика, разрешённые действия, явные исключения, исходное значение и целевое изменение? В пилоте по умолчанию запрещены подача на ЭТП, окончательное решение об участии и окончательная цена без человека?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -1400,7 +1351,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <p><strong>Когда:</strong> <strong>Критично до ТЗ</strong> · <strong>Владелец:</strong> владельцы процессов и аналитики<br />
 <strong>Тип ответа:</strong> outcome schema и регламент закрытия кейса<br />
 <strong>Показывать:</strong> всегда · <strong>Подтверждение:</strong> <code>M10</code>, <code>M14</code></p>
-<p><strong>Вопрос:</strong> Как фиксировать по тендерам решение об участии или отказе, причину, подачу, допуск или отклонение, победу или проигрыш, цену, фактическую маржу и исполнение, а по заявкам исправления, уточнения, коммерческое предложение, отказ, заказ, маржу, причину потери и рекламацию? Кто закрывает каждый результат и в какой момент? Какие исходы использовать для контроля процесса и какие не считать чистой оценкой системы из-за внешних факторов?</p>
+<p><strong>Вопрос:</strong> Как фиксировать по тендерам решение об участии или отказе, причину, подачу, допуск или отклонение, победу или проигрыш, цену, фактическую маржу и исполнение? Кто закрывает каждый результат и в какой момент? Какие исходы использовать для контроля процесса и какие не считать чистой оценкой системы из-за внешних факторов?</p>
 <p><strong>Ответ:</strong> ____________________________________________________________________<br />
 <strong>Статус:</strong> ☐ Ответ дан ☐ Неизвестно ☐ Не применимо ☐ Ожидается материал<br />
 <strong>Если неизвестно — владелец / срок / влияние / временное ограничение:</strong> ____________________</p>
@@ -1726,59 +1677,35 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 <strong>ИБ/юристы:</strong> ____________________ / дата: __________<br />
 <strong>Владелец пилота/приёмки:</strong> ____________________ / дата: __________</p>
 </div>
-    <div class="empty-state" id="empty-state">По этому фильтру вопросов не найдено.</div>
+    <div class="empty-state" id="empty-state">По этому поиску вопросы не найдены.</div>
   </main>
 
   <aside class="right-rail">
-    <section class="panel progress-card">
-      <p class="rail-heading">Критичные вопросы до ТЗ</p>
-      <div class="progress-head"><span class="progress-number" id="progress-number">0%</span><span class="progress-label" id="progress-label">0 из 0</span></div>
-      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-      <div class="stat-list">
-        <div class="stat-row"><span>Предзаполнено</span><strong id="stat-prefilled">0</strong></div>
-        <div class="stat-row"><span>Ответ дан</span><strong id="stat-answered">0</strong></div>
-        <div class="stat-row"><span>Неизвестно</span><strong id="stat-unknown">0</strong></div>
-        <div class="stat-row"><span>Ожидается материал</span><strong id="stat-awaiting">0</strong></div>
-        <div class="stat-row"><span>Не применимо</span><strong id="stat-na">0</strong></div>
-        <div class="stat-row"><span>Без статуса</span><strong id="stat-empty">0</strong></div>
-      </div>
-      <div class="filter-grid" id="status-filters">
-        <button class="filter-btn active" type="button" data-filter="all">Все</button>
-        <button class="filter-btn" type="button" data-filter="empty">Без ответа</button>
-        <button class="filter-btn" type="button" data-filter="prefilled">Предзаполнено</button>
-        <button class="filter-btn" type="button" data-filter="answered">Готово</button>
-        <button class="filter-btn" type="button" data-filter="unknown">Неизвестно</button>
-        <button class="filter-btn" type="button" data-filter="awaiting">Материал</button>
-        <button class="filter-btn" type="button" data-filter="na">Н/П</button>
-      </div>
-      <button class="btn btn-light" id="expand-all" type="button" style="width:100%;margin-top:12px">Свернуть все карточки</button>
-    </section>
     <section class="privacy-card">
       <strong>Конфиденциальность</strong>
       Не вставляйте секреты, ключи, токены и пароли. Клиентские файлы передавайте только через согласованный защищённый канал.
     </section>
   </aside>
 </div>
-<div class="toast" id="toast"></div>
 <script type="application/json" id="prefill-data">
 {
   "meta": {
-    "meta-version": "0.2",
+    "meta-version": "0.3",
     "meta-opened": "2026-09-01"
   },
   "cards": {
     "C01": {
-      "answer": "Что уже известно:\n• Тендеры: требуется сократить ручной разбор потока закупок, сопоставлять требования с возможностями завода и формировать обоснованное заключение об участии.\n• Входящие заявки: требуется распознавать заявки разных форматов, сопоставлять их с номенклатурой и готовить ответ менеджеру.\nТребуется дополнить: измеримый исходный уровень, целевой эффект и срок отдельно по каждому направлению; бизнес-владелец, владелец процесса и лицо, принимающее итоговое решение.",
+      "answer": "Что уже известно:\n• требуется сократить ручной разбор потока закупок, сопоставлять требования с возможностями завода и формировать обоснованное заключение об участии.\nТребуется дополнить: измеримый исходный уровень, целевой эффект и срок для тендерного процесса; бизнес-владелец, владелец процесса и лицо, принимающее итоговое решение.",
       "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
     "C02": {
-      "answer": "Предварительные границы первого этапа:\n• Направление 1 — анализ тендеров.\n• Направление 2 — обработка входящих заявок.\n• Направления 3–11 исходной матрицы рассматриваются как горизонт развития и не должны автоматически расширять первый этап.\nПредварительные входы: тендерные выгрузки и документация, внутренние технологические данные; заявки с сайта и почты, CRM/ERP.\nТребуется дополнить: подразделения и пользователи, обязательные режимы закупок, товарные семейства, языки, регионы, объёмы и явные исключения. Глубина инвестиционной ветки вынесена в противоречие U-001 / C25.",
+      "answer": "Предварительные границы первого этапа:\n• анализ тендеров;\n• направления 2–11 исходной матрицы рассматриваются как горизонт развития и не должны автоматически расширять первый этап.\nПредварительные входы: тендерные выгрузки и документация, внутренние технологические данные.\nТребуется дополнить: подразделения и пользователи, обязательные режимы закупок, товарные группы, языки, регионы, объёмы и явные исключения. Глубина инвестиционной ветки вынесена в противоречие U-001 / C25.",
       "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026).",
       "status": "prefilled"
     },
     "C03": {
-      "answer": "Направление тендеров — предварительно последний автоматизированный шаг: анализ и рекомендация. Обязательные выходы: заключение о целесообразности участия, оценка производимости, экономика и риски, перечень пробелов/уточнений, потенциальные продукты и при согласованном границы проекта — оборудование/инвестиции. Финальное решение принимает сотрудник.\nНаправление входящих заявок — предварительно последний шаг: черновик ответа. Обязательные выходы: черновик КП, письмо-отказ с альтернативой либо запрос уточнения/рекомендация по освоению. Клиенту документ отправляет менеджер после проверки.\nЗапись в CRM/1С описана как проектная гипотеза и требует отдельного подтверждения.",
+      "answer": "Для тендеров предварительно определён последний автоматизированный шаг: анализ и рекомендация. Обязательные выходы: заключение о целесообразности участия, оценка производимости, экономика и риски, перечень пробелов и уточнений, потенциальные продукты и, если это входит в границы проекта, оборудование и инвестиции. Финальное решение принимает сотрудник.\nЗапись результата в CRM/1С описана как проектная гипотеза и требует отдельного подтверждения.",
       "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
@@ -1788,17 +1715,17 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       "status": "prefilled"
     },
     "C05": {
-      "answer": "В проектной концепции используется ориентир около 2 291 закупки за квартал. В материалах есть выгрузка тендерного потока за IV квартал 2025 и I квартал 2026.\nЭто предварительный ориентир, а не согласованный исходный уровень. Требуется подтвердить фактическое число закупок после дедупликации, документы/строки/версии, сезонность, пики, дедлайны и время непосредственной работы. По входящим заявкам количественные показатели отсутствуют.",
+      "answer": "В проектной концепции используется ориентир около 2 291 закупки за квартал. В материалах есть выгрузка тендерного потока за IV квартал 2025 и I квартал 2026.\nЭто предварительный ориентир, а не согласованный исходный уровень. Требуется подтвердить фактическое число закупок после удаления дублей, документы, строки и версии, сезонность, пики, сроки и время непосредственной работы.",
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ. Метаданные вложений подтверждают наличие выгрузки; исходные клиентские файлы в форму не перенесены.",
       "status": "prefilled"
     },
     "C08": {
-      "answer": "Предварительная модель полномочий:\n• автоматизация может по расписанию собирать входы, извлекать и нормализовать данные, сопоставлять позиции, рассчитывать показатели и готовить рекомендации/черновики;\n• решение об участии в тендере остаётся за сотрудником;\n• ответ по входящей заявке не отправляется автоматически — менеджер проверяет и отправляет его;\n• запись результата в CRM, ERP и 1С предложена как гипотеза.\nТребуется утвердить режим для каждого действия, пределы риска/суммы и запрещённые операции.",
+      "answer": "Предварительная модель полномочий:\n• автоматизация может по расписанию собирать входы, извлекать и приводить данные к единому виду, сопоставлять позиции, рассчитывать показатели и готовить рекомендации и черновики;\n• решение об участии в тендере остаётся за сотрудником;\n• запись результата в CRM, ERP и 1С предложена как гипотеза.\nТребуется утвердить режим для каждого действия, пределы риска и суммы, а также запрещённые операции.",
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
     "C09": {
-      "answer": "Уже зафиксирована базовая граница проверка человеком: итоговое решение по тендеру принимает сотрудник, а ответ клиенту по заявке отправляет менеджер после проверки черновика.\nНе определены: каталог обязательных остановок и событий, требующих проверки человеком, роли согласование, исправление, отклонение и ручное изменение решения, обязательность основания, срок проверки, контролёр ручного изменения решения и финальная подпись по каждому типу результата.",
+      "answer": "Уже зафиксирована базовая граница проверки человеком: итоговое решение по тендеру принимает сотрудник.\nНе определены: список обязательных остановок и событий, требующих проверки человеком; роли для согласования, исправления, отклонения и ручного изменения решения; обязательность основания, срок проверки, контроль ручных изменений и финальная подпись.",
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
@@ -1813,17 +1740,17 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       "status": "prefilled"
     },
     "C14": {
-      "answer": "Предварительный перечень источников:\n• тендеры и документация — Контур Закупки/возможный другой сервис и ЕИС;\n• технология и производимость — внутренние данные компании, предположительно 1С, номенклатура и техкарты;\n• входящие заявки — сайт и электронная почта;\n• клиенты/результаты — CRM/ERP;\n• цены и сроки — прайс и 1С как проектная гипотеза.\nДля каждой сущности требуется подтвердить единственный источник истины, таблицу/поле, владельца и правила разрешения конфликтов.",
+      "answer": "Предварительный перечень источников:\n• тендеры и документация — Контур.Закупки, возможный другой сервис и ЕИС;\n• технология и производимость — внутренние данные компании, предположительно 1С, номенклатура и техкарты;\n• заказчики и результаты — CRM/ERP;\n• цены и сроки — прайс и 1С как проектная гипотеза.\nДля каждого объекта требуется подтвердить основной источник, таблицу или поле, владельца и правила разрешения противоречий.",
       "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
     "C15": {
-      "answer": "Фактически доступны как минимум:\n• тендерная выгрузка за IV квартал 2025 и I квартал 2026;\n• один реальный тендерный пакет из шести документов;\n• четыре примера входящих заявок разных форматов.\nТакже названы, но не инвентаризированы: внутренние технологические данные, 1С, номенклатура, техкарты, прайс, CRM/ERP.\nТребуется заполнить владельцев, назначение, объём, период, формат, качество, права, доступ, версию и обновление каждого набора.",
+      "answer": "Фактически доступны как минимум:\n• тендерная выгрузка за IV квартал 2025 и I квартал 2026;\n• один реальный тендерный пакет из шести документов.\nТакже названы, но не описаны полностью: внутренние технологические данные, 1С, номенклатура, техкарты, прайс и CRM/ERP.\nТребуется заполнить владельцев, назначение, объём, период, формат, качество, права, доступ, версию и порядок обновления каждого набора.",
       "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ. Сырые вложения не встроены в форму и остаются в защищённом контуре Notion.",
       "status": "prefilled"
     },
     "C16": {
-      "answer": "Проектная гипотеза: читать номенклатуру, техкарты, цену/срок и иные производственные данные из 1С; использовать CRM для заявок; после проверки записывать результат в CRM/1С.\nТребуется подтвердить конкретные системы и среды, разрешённые операции с сущностями и полями, внешние идентификаторы, идемпотентность, запреты перезаписи, момент записи и правила исправлений/ручного изменения решения.",
+      "answer": "Проектная гипотеза: читать номенклатуру, техкарты, цену, срок и другие производственные данные из 1С; использовать CRM для сведений о заказчиках и результатах тендеров; после проверки записывать результат в CRM/1С.\nТребуется подтвердить конкретные системы и среды, разрешённые операции с объектами и полями, внешние номера, защиту от повторной записи одной операции, запреты перезаписи, момент записи и правила исправлений и ручных изменений.",
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
@@ -1862,65 +1789,24 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
-    "C27": {
-      "answer": "Подтверждённые каналы из клиентской матрицы: заявки с сайта и почты. Указанные форматы: JPG/фото, PDF, Excel, Word и другие. В материалах есть четыре реальных примера, включая PDF и фото.\nМессенджеры и ручная загрузка упомянуты только в проектной концепции. Требуется определить единицу заявки, цепочку письма/вложений/уточнений, версии и правила дублей.",
-      "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
-    "C28": {
-      "answer": "Предварительный минимум извлекаемых полей из проектной концепции: номенклатура, ГОСТ/стандарт, диаметр, длина, класс прочности, покрытие и количество.\nКлиентская матрица подтверждает задачу распознавания номенклатуры и технических характеристик. Требуется утвердить обязательные поля по стадиям и товарным семействам, единицы, общие условия документа/секции и обработку пропусков.",
-      "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
-    "C31": {
-      "answer": "Проектная концепция предлагает статусы: «производим», «частично», «не производим», «спецзаказ». Клиентская матрица требует определить производимые и непроизводимые позиции и формировать рекомендации по освоению нового продукта.\nТребуется утвердить полный справочник статусов, доказательства, правила проверки человеком и остановки и владельца решения для аналога/спецзаказа.",
-      "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
-    "C32": {
-      "answer": "Ожидаемые выходы допускают отказ при невозможности и альтернативу; отдельно предусмотрены рекомендации по освоению нового продукта.\nНе определены правила аналога, частичного КП, поставки оставшейся части позже, внешней комплектации, несколько вариантов и полномочия на замену. Исходная потребность должна сохраняться без подмены, но это требует подтверждения.",
-      "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
-    "C34": {
-      "answer": "Клиентская матрица требует коммерческое предложение, письмо-отказ при невозможности и рекомендации по освоению. Проектная концепция предлагает документ на бланке, веб-страницу, PDF или презентацию. Итог клиенту отправляет менеджер после проверки; автоматическая внешняя отправка не предполагается.\nТребуется предоставить/утвердить шаблоны, юридические поля, язык, формат, подпись, канал и версии.",
-      "comment": "Источник: «ТЗ-матрица заказчика — расшифровка» (дословная клиентская матрица от 22.06.2026). Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
-    "C35": {
-      "answer": "Проектная гипотеза: после проверки записывать результат обработки, КП/отказ и связанные статусы в CRM и 1С; исправления сотрудника возвращать в историю.\nНе определены сущности, поля, внешние идентификаторы, момент записи, разрешённые изменения, статусы, история ручных изменений решения и правила повторной синхронизации.",
-      "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
-    "L14": {
-      "answer": "Предложенные представления результата: документ на бланке завода, веб-страница, PDF-презентация; для тендеров — таблица/панель показателей и отчёт в PDF.\nЭто варианты проектной концепции. Брендовые шаблоны, обязательный основной формат и требования к доступности не утверждены.",
-      "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
-    "L15": {
-      "answer": "В текущей проектной концепции автоматический диалог и самостоятельная отправка клиенту не входят в границу: система готовит черновик, менеджер проверяет и отправляет его.\nТребуется подтверждение БЕРВЕЛ; возможный будущий автоматический диалог должен оформляться отдельным границы проекта.",
-      "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
-      "status": "prefilled"
-    },
     "C37": {
       "answer": "Проектная концепция предлагает размещать ядро на сервере завода. Для языковой модели перечислены варианты: подписка или программный интерфейс либо локальная модель.\nЭто не решение по допустимому контуру данных. Требуется подтверждение ИТ/ИБ/юристов по сервер завода или закрытое облако, регионам, сети, внешним внешние сервисы распознавания документов и языковые модели, хранению провайдера, обучению на данных и трансграничной передаче.",
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
     "C44": {
-      "answer": "Проектная концепция предусматривает историю решений в базе и результат с обоснованием; для входящей заявки предполагается запись результата и исправлений в CRM/1С.\nНе определена полная цепочка связь с источником: исходник/версия/хеш → координата/факт → правило/модель/справочник → проверка → расчёт → документ/решение → ответственный/время.",
+      "answer": "Проектная концепция предусматривает историю тендерных решений в базе, результат с обоснованием и запись проверенного результата в CRM/1С.\nНе определена полная связь с источником: исходный файл, версия и контрольная сумма → координата и факт → правило, модель и справочник → проверка → расчёт → документ и решение → ответственный и время.",
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     },
     "C46": {
-      "answer": "Предварительно предусмотрено возвращать правки сотрудника в систему для калибровки ранжирования и сохранять историю решений.\nНе определён обязательный набор фактических исходов: участие или отказ, допуск, победа/проигрыш, цена и маржа; исправления заявки, КП/отказ, заказ и причина потери. Требуются владельцы, источник истины и период обратной связи.",
+      "answer": "Предварительно предусмотрено возвращать правки сотрудника в систему для настройки ранжирования и сохранять историю решений.\nНе определён обязательный набор фактических исходов: участие или отказ, допуск или отклонение, победа или проигрыш, цена, фактическая маржа и исполнение. Требуются владельцы, основной источник данных и период обратной связи.",
       "comment": "Источник: карточка проекта «БЕРВЕЛ» в Notion. Статус: проектная гипотеза MOX, требуется подтверждение БЕРВЕЛ.",
       "status": "prefilled"
     }
   },
   "materials": {
-    "M02": "partial",
-    "M03": "partial"
+    "M02": "partial"
   },
   "rows": {
     "A-001": {
@@ -1946,18 +1832,6 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       "8": "Notion, карточка проекта БЕРВЕЛ",
       "9": "Не подтверждено; не выносить из защищённого канала",
       "10": "Запросить безопасную повторную передачу"
-    },
-    "A-003": {
-      "1": "M03",
-      "2": "Четыре примера входящих заявок, включая PDF и фото",
-      "3": "Продажи — подтвердить ФИО",
-      "4": "Версии/даты требуют проверки по исходникам",
-      "5": "C15, C27–C30",
-      "6": "received",
-      "7": "Конфиденциальные клиентские данные",
-      "8": "Notion, карточка проекта БЕРВЕЛ",
-      "9": "Не подтверждено; не выносить из защищённого канала",
-      "10": "Запросить 30–50 полных обезличенных цепочек через защищённый канал"
     },
     "U-001": {
       "1": "C25",
@@ -2000,6 +1874,18 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     originalTitle.remove();
   }
 
+  // Remove the introductory instructions; the form opens directly on the questions.
+  const instructionsHeading = [...questionnaire.children]
+    .find(node => node.tagName === 'H2' && /^0\.\s/.test(node.textContent.trim()));
+  if (instructionsHeading) {
+    let node = instructionsHeading;
+    while (node && node.tagName !== 'H1') {
+      const next = node.nextElementSibling;
+      node.remove();
+      node = next;
+    }
+  }
+
   const slugify = (text) => text.toLowerCase()
     .replace(/[«»“”"']/g, '')
     .replace(/[^a-zа-яё0-9]+/gi, '-')
@@ -2027,23 +1913,35 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     currentSection.appendChild(node);
   });
 
-  // Keep each acceptance matrix conditional on its selected process contour.
-  const wrapAcceptanceMatrix = (pattern, branch) => {
+  // The delivered form covers tenders only and excludes service appendices.
+  questionnaire.querySelectorAll('.major-section').forEach(section => {
+    const heading = section.querySelector(':scope > h1')?.textContent || '';
+    if (/Входящие заявки|Запрашиваемые материалы|Реестр неизвестных|Проверка готовности/.test(heading)) section.remove();
+  });
+
+  // Renumber the remaining visible sections after removing the RFQ and appendix sections.
+  [...questionnaire.querySelectorAll('.major-section')].forEach((section, index) => {
+    const number = index + 1;
+    const heading = section.querySelector(':scope > h1');
+    if (heading) heading.textContent = heading.textContent.replace(/^\d+\./, `${number}.`);
+    [...section.querySelectorAll(':scope > h2')].forEach((subheading, subIndex) => {
+      subheading.textContent = subheading.textContent.replace(/^\d+\.\d+\./, `${number}.${subIndex + 1}.`);
+    });
+  });
+
+  // Remove both detailed acceptance tables; the acceptance questions remain.
+  const removeContentBlock = pattern => {
     const heading = [...questionnaire.querySelectorAll('h3')].find(h => pattern.test(h.textContent));
     if (!heading) return;
-    const block = document.createElement('section');
-    block.className = 'acceptance-branch';
-    block.dataset.acceptanceBranch = branch;
-    heading.parentNode.insertBefore(block, heading);
     let node = heading;
     while (node && (node === heading || !/^H[123]$/.test(node.tagName))) {
       const next = node.nextElementSibling;
-      block.appendChild(node);
+      node.remove();
       node = next;
     }
   };
-  wrapAcceptanceMatrix(/матрица A — тендеры/, 'tenders');
-  wrapAcceptanceMatrix(/матрица B — входящие заявки/, 'rfq');
+  removeContentBlock(/матрица A — тендеры/);
+  removeContentBlock(/матрица B — входящие заявки/);
 
   // Wrap C/L question blocks as interactive cards.
   const questionHeadings = [...questionnaire.querySelectorAll('h3')].filter(h => /^([CL]\d{2})\./.test(h.textContent.trim()));
@@ -2051,12 +1949,13 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     const match = h.textContent.trim().match(/^([CL]\d{2})\.\s*(.+)$/);
     const id = match[1];
     const title = match[2];
+    const isPrefilled = Boolean(prefill.cards?.[id]);
     const article = document.createElement('article');
     article.className = 'question-card';
     article.id = id;
     article.dataset.id = id;
     article.dataset.kind = id[0];
-    article.dataset.status = 'empty';
+    article.dataset.prefilled = String(isPrefilled);
     const section = h.closest('.major-section');
     if (section?.dataset.branch) article.dataset.branch = section.dataset.branch;
 
@@ -2074,7 +1973,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
 
     const head = document.createElement('div');
     head.className = 'card-head';
-    head.innerHTML = `<span class="id-badge">${id}</span><h3 class="card-title">${title}</h3><div class="card-state"><span class="due-badge">${dueText}</span><span class="state-badge">Без статуса</span><button class="collapse-btn" type="button" aria-label="Свернуть">⌄</button></div>`;
+    head.innerHTML = `<span class="id-badge">${id}</span><h3 class="card-title">${title}</h3><div class="card-state"><span class="due-badge">${dueText}</span><button class="collapse-btn" type="button" aria-label="Свернуть">⌄</button></div>`;
     const body = document.createElement('div');
     body.className = 'card-body';
     const prompt = document.createElement('div');
@@ -2099,21 +1998,9 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     answerGrid.className = 'answer-grid';
     answerGrid.innerHTML = `
       <div class="field"><label for="answer-${id}">Ответ</label><textarea id="answer-${id}" name="answer-${id}" placeholder="Введите согласованный ответ или ссылку на структурированную таблицу ниже…"></textarea></div>
-      <div class="status-row"><span>Статус</span>
-        ${[['prefilled','Предзаполнено'],['answered','Ответ дан'],['unknown','Неизвестно'],['na','Не применимо'],['awaiting','Ожидается материал']].map(([value,label]) => `<span class="status-option"><input type="radio" id="status-${id}-${value}" name="status-${id}" value="${value}"><label for="status-${id}-${value}">${label}</label></span>`).join('')}
-      </div>
-      <div class="context-panel unknown-panel">
-        <div class="field"><label>Владелец уточнения</label><input name="unknown-owner-${id}" placeholder="ФИО, должность"></div>
-        <div class="field"><label>Срок</label><input name="unknown-date-${id}" type="date"></div>
-        <div class="field wide"><label>Что нужно сделать</label><input name="unknown-action-${id}" placeholder="Действие или решение"></div>
-        <div class="field wide"><label>Влияние на границы проекта, ТЗ или пилот</label><textarea name="unknown-impact-${id}"></textarea></div>
-        <div class="field wide"><label>Временное ограничение</label><input name="unknown-restriction-${id}" placeholder="Что разрешено до уточнения"></div>
-      </div>
-      <div class="context-panel material material-panel">
-        <div class="field"><label>ID материала</label><input name="material-id-${id}" placeholder="Например, M05 / A-002"></div>
-        <div class="field"><label>Ожидаемый срок</label><input name="material-date-${id}" type="date"></div>
-        <div class="field wide"><label>Владелец материала / комментарий</label><input name="material-owner-${id}" placeholder="ФИО, должность, что именно ожидается"></div>
-      </div>`;
+      ${isPrefilled ? `<div class="confirmation-row" role="group" aria-label="Подтверждение предзаполненного ответа">
+        <span class="confirmation-option"><input type="checkbox" id="confirm-${id}" name="confirm-${id}" value="confirmed"><label for="confirm-${id}">Подтверждаю</label></span>
+      </div>` : ''}`;
     body.appendChild(answerGrid);
     article.append(head, body);
 
@@ -2121,12 +2008,8 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       if (e.target.closest('input, label')) return;
       article.classList.toggle('collapsed');
     });
-    article.querySelectorAll(`input[name="status-${id}"]`).forEach(radio => radio.addEventListener('change', () => {
-      setStatus(article, radio.value);
-      updateProgress();
-      applyFilters();
-    }));
-    answerGrid.querySelectorAll('input, textarea').forEach(field => field.addEventListener('input', updateProgress));
+    article.querySelectorAll(`input[name="confirm-${id}"]`).forEach(radio => radio.addEventListener('change', updateProgress));
+    answerGrid.querySelectorAll('textarea').forEach(field => field.addEventListener('input', updateProgress));
   });
 
   // Improve long tables and make blank cells fillable.
@@ -2167,21 +2050,12 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
   const approvalHeading = [...questionnaire.querySelectorAll('h2')].find(h => /Итоговое согласование/.test(h.textContent));
   if (approvalHeading) {
     const oldApproval = approvalHeading.nextElementSibling;
-    const roles = ['Координатор','Бизнес-спонсор','Владелец тендерного процесса','Владелец процесса входящих заявок','ИТ / данные','ИБ / юристы','Владелец пилота / приёмки'];
+    const roles = ['Координатор','Бизнес-спонсор','Владелец тендерного процесса','ИТ / данные','ИБ / юристы','Владелец пилота / приёмки'];
     const grid = document.createElement('div');
     grid.className = 'signature-grid';
     grid.innerHTML = roles.map((role,index) => `<div class="signature-row ${index === roles.length - 1 ? 'full' : ''}"><strong>${role}</strong><input name="approval-name-${index + 1}" placeholder="ФИО, должность"><input name="approval-date-${index + 1}" type="date"></div>`).join('');
     approvalHeading.insertAdjacentElement('afterend', grid);
     if (oldApproval?.tagName === 'P') oldApproval.remove();
-  }
-
-  function setStatus(card, status) {
-    card.dataset.status = status || 'empty';
-    const badge = card.querySelector('.state-badge');
-    const labels = {empty:'Без статуса', prefilled:'Предзаполнено — подтвердить', answered:'Ответ дан', unknown:'Неизвестно', na:'Не применимо', awaiting:'Ожидается материал'};
-    badge.textContent = labels[status] || labels.empty;
-    card.querySelector('.unknown-panel')?.classList.toggle('visible', status === 'unknown');
-    card.querySelector('.material-panel')?.classList.toggle('visible', status === 'awaiting');
   }
 
   // Generate table of contents.
@@ -2193,54 +2067,21 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
     a.href = `#${h.id}`;
     a.textContent = h.textContent.replace(/^\d+(\.\d+)?\.\s*/, '');
     a.className = h.tagName === 'H2' ? 'level-2' : 'level-1';
-    const branch = h.closest('.major-section')?.dataset.branch;
-    if (branch) a.dataset.branch = branch;
     toc.appendChild(a);
   });
 
-  const state = { filter: 'all', query: '' };
-  const scopeTenders = document.getElementById('scope-tenders');
-  const scopeRfq = document.getElementById('scope-rfq');
-
-  function branchVisible(branch) {
-    if (branch === 'tenders') return scopeTenders.checked;
-    if (branch === 'rfq') return scopeRfq.checked;
-    return true;
-  }
-
-  function updateBranches() {
-    document.querySelectorAll('.major-section[data-branch]').forEach(section => {
-      section.classList.toggle('branch-hidden', !branchVisible(section.dataset.branch));
-    });
-    document.querySelectorAll('[data-acceptance-branch]').forEach(section => {
-      section.classList.toggle('branch-hidden', !branchVisible(section.dataset.acceptanceBranch));
-    });
-    toc.querySelectorAll('[data-branch]').forEach(link => link.classList.toggle('branch-disabled', !branchVisible(link.dataset.branch)));
-    applyFilters();
-    updateProgress();
-  }
-  scopeTenders.addEventListener('change', updateBranches);
-  scopeRfq.addEventListener('change', updateBranches);
-
+  const state = { query: '' };
   const search = document.getElementById('search');
   search.addEventListener('input', () => { state.query = search.value.trim().toLowerCase(); applyFilters(); });
-  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    state.filter = btn.dataset.filter;
-    applyFilters();
-  }));
 
   function visibleCards() {
-    return [...document.querySelectorAll('.question-card')].filter(card => branchVisible(card.dataset.branch));
+    return [...document.querySelectorAll('.question-card')];
   }
 
   function applyFilters() {
     let shown = 0;
     visibleCards().forEach(card => {
-      const matchText = !state.query || `${card.dataset.id} ${card.textContent}`.toLowerCase().includes(state.query);
-      const matchStatus = state.filter === 'all' || card.dataset.status === state.filter;
-      const show = matchText && matchStatus;
+      const show = !state.query || `${card.dataset.id} ${card.textContent}`.toLowerCase().includes(state.query);
       card.classList.toggle('filtered-out', !show);
       if (show) shown++;
     });
@@ -2248,78 +2089,19 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
   }
 
   function updateProgress() {
-    const cards = visibleCards().filter(card => card.dataset.kind === 'C');
-    const counts = {prefilled:0, answered:0, unknown:0, awaiting:0, na:0, empty:0};
-    cards.forEach(card => counts[card.dataset.status || 'empty']++);
+    const cards = visibleCards();
     const isComplete = card => {
       const id = card.dataset.id;
-      if (card.dataset.status === 'answered') return Boolean(card.querySelector(`[name="answer-${id}"]`)?.value.trim());
-      if (card.dataset.status === 'unknown') {
-        return ['owner', 'date', 'action', 'impact', 'restriction']
-          .every(field => Boolean(card.querySelector(`[name="unknown-${field}-${id}"]`)?.value.trim()));
+      if (card.dataset.prefilled === 'true') {
+        return Boolean(card.querySelector(`input[name="confirm-${id}"]:checked`));
       }
-      if (card.dataset.status === 'na') return Boolean(card.querySelector(`[name="answer-${id}"]`)?.value.trim());
-      return false;
+      return Boolean(card.querySelector(`[name="answer-${id}"]`)?.value.trim());
     };
     const done = cards.filter(isComplete).length;
     const pct = cards.length ? Math.round(done / cards.length * 100) : 0;
     document.getElementById('progress-number').textContent = `${pct}%`;
     document.getElementById('progress-label').textContent = `${done} из ${cards.length}`;
     document.getElementById('progress-fill').style.width = `${pct}%`;
-    Object.keys(counts).forEach(k => document.getElementById(`stat-${k}`).textContent = counts[k]);
-  }
-
-  let allCollapsed = false;
-  document.getElementById('expand-all').addEventListener('click', e => {
-    allCollapsed = !allCollapsed;
-    document.querySelectorAll('.question-card').forEach(card => card.classList.toggle('collapsed', allCollapsed));
-    e.currentTarget.textContent = allCollapsed ? 'Развернуть все карточки' : 'Свернуть все карточки';
-  });
-
-  const toast = document.getElementById('toast');
-  function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-
-  function collectData() {
-    const data = {format:'bervel-questionnaire', version:2, exportedAt:new Date().toISOString(), scopes:{tenders:scopeTenders.checked, rfq:scopeRfq.checked}, fields:{}, tables:{}};
-    document.querySelectorAll('input[name], textarea[name], select[name]').forEach(el => {
-      if (el.type === 'radio') {
-        if (el.checked) data.fields[el.name] = el.value;
-      } else if (el.type === 'checkbox') {
-        data.fields[el.name] = el.checked;
-      } else {
-        data.fields[el.name] = el.value;
-      }
-    });
-    document.querySelectorAll('[contenteditable="true"][data-export-key]').forEach(el => data.tables[el.dataset.exportKey] = el.innerHTML);
-    return data;
-  }
-
-  function applyData(data) {
-    if (!data || data.format !== 'bervel-questionnaire') throw new Error('Некорректный файл ответов');
-    scopeTenders.checked = data.scopes?.tenders !== false;
-    scopeRfq.checked = data.scopes?.rfq !== false;
-    Object.entries(data.fields || {}).forEach(([name, value]) => {
-      const nodes = document.querySelectorAll(`[name="${CSS.escape(name)}"]`);
-      nodes.forEach(el => {
-        if (el.type === 'radio') el.checked = el.value === value;
-        else if (el.type === 'checkbox') el.checked = Boolean(value);
-        else el.value = value ?? '';
-      });
-    });
-    Object.entries(data.tables || {}).forEach(([key,value]) => {
-      const el = document.querySelector(`[data-export-key="${CSS.escape(key)}"]`);
-      if (el) el.innerHTML = value;
-    });
-    document.querySelectorAll('.question-card').forEach(card => {
-      const selected = card.querySelector(`input[name="status-${card.dataset.id}"]:checked`);
-      setStatus(card, selected?.value || 'empty');
-    });
-    updateBranches();
-    showToast('Ответы загружены');
   }
 
   function setPrefillRow(rowId, values) {
@@ -2344,10 +2126,6 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
       const card = document.getElementById(id);
       if (!card) return;
       card.querySelector(`[name="answer-${id}"]`).value = values.answer || '';
-      const status = values.status || 'prefilled';
-      const radio = card.querySelector(`input[name="status-${id}"][value="${status}"]`);
-      if (radio) radio.checked = true;
-      setStatus(card, status);
     });
     Object.entries(prefill.materials || {}).forEach(([id, status]) => {
       const select = document.querySelector(`[name="registry-status-${CSS.escape(id)}"]`);
@@ -2367,7 +2145,7 @@ td[contenteditable="true"]:focus { box-shadow: inset 0 0 0 2px var(--accent); }
   headings.forEach(h => observer.observe(h));
 
   applyInitialPrefill();
-  updateBranches();
+  applyFilters();
   updateProgress();
 })();
 </script>
