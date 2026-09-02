@@ -1068,6 +1068,41 @@
   .question__choice input:focus-visible + span { outline: 1px solid var(--accent); outline-offset: 2px; }
   .question__choice input:checked + span { border-color: var(--accent-line); background: var(--accent-mute); color: var(--accent); }
   .question__choice input:checked + span::before { background: var(--accent); }
+  .question__checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .question__check { position: relative; cursor: pointer; }
+  .question__check input { position: absolute; opacity: 0; pointer-events: none; }
+  .question__check span {
+    display: flex; align-items: center; min-height: 48px; padding: 12px 14px;
+    border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface);
+    color: var(--text-mid); font-size: 15px; transition: color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .question__check span::before {
+    content: ''; width: 14px; height: 14px; margin-right: 10px; flex: 0 0 auto;
+    border: 1px solid var(--text-faint); border-radius: 4px; background: transparent;
+  }
+  .question__check input:focus-visible + span { outline: 1px solid var(--accent); outline-offset: 2px; }
+  .question__check input:checked + span { border-color: var(--accent-line); background: var(--accent-mute); color: var(--accent); }
+  .question__check input:checked + span::before { border-color: var(--accent); background: var(--accent); box-shadow: inset 0 0 0 3px var(--surface); }
+  .question__other-toggle {
+    display: flex; grid-column: 1 / -1; align-items: center; width: 100%; min-height: 48px; padding: 12px 14px;
+    border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); color: var(--text-mid);
+    font: inherit; font-size: 15px; text-align: left; cursor: pointer;
+    transition: color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .question__other-toggle::before { content: '+'; width: 16px; margin-right: 8px; color: var(--accent); }
+  .question__other-toggle:hover,
+  .question__other-toggle[aria-expanded="true"] { border-color: var(--accent-line); background: var(--accent-mute); color: var(--accent); }
+  .question__other-toggle[aria-expanded="true"]::before { content: '−'; }
+  .question__other-toggle:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+  .question__other { display: grid; grid-column: 1 / -1; gap: 8px; margin-top: 4px; }
+  .question__other[hidden] { display: none; }
+  .question__other > span { color: var(--text-mid); font-size: 14px; }
+  .question__other input {
+    width: 100%; border: 1px solid var(--line-strong); border-radius: 10px;
+    background: var(--surface); color: var(--text); padding: 13px 14px; font: inherit; font-size: 15px; outline: none;
+  }
+  .question__other input::placeholder { color: var(--text-faint); }
+  .question__other input:focus { border-color: var(--accent-line); box-shadow: 0 0 0 3px var(--accent-mute); }
   .question--complete .question__id { color: var(--text-mid); }
   .question--complete .question__title { color: var(--text-mid); }
   .next__cta { cursor: pointer; }
@@ -1088,6 +1123,7 @@
     .question__prompt { grid-template-columns: 1fr; gap: 8px; }
     .question__known-toggle,
     .question__known { margin-left: 0; }
+    .question__checks { grid-template-columns: 1fr; }
     .question__answer textarea { min-height: 160px; }
   }
 
@@ -1118,7 +1154,7 @@
       <svg class="brand__logo-mark" viewBox="397 0 224 224" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M621.073 111.26C621.073 173.463 571.619 223.088 509.66 223.088C447.7 223.088 397.677 173.463 397.677 111.26C397.677 49.0578 447.14 0 509.66 0C572.179 0 621.073 49.049 621.073 111.26ZM422.706 111.26C422.706 160.292 462.488 199.77 509.668 199.77C556.849 199.77 596.062 160.283 596.062 111.26C596.062 62.2381 556.849 23.4158 509.668 23.4158C462.488 23.4158 422.706 62.2114 422.706 111.26Z" fill="#8ADDD4"/></svg>
     </a>
     <div class="brand__progress" aria-label="Заполненность документа">
-      <div class="brand__progress-head"><span class="brand__progress-label">Заполненность</span><span class="brand__progress-value"><strong id="progress-percent">0%</strong> · <span id="progress-count">0 из 23</span></span></div>
+      <div class="brand__progress-head"><span class="brand__progress-label">Заполненность</span><span class="brand__progress-value"><strong id="progress-percent">0%</strong> · <span id="progress-count">0 из 25</span></span></div>
       <div class="brand__progress-track"><div class="brand__progress-fill" id="progress-fill"></div></div>
     </div>
     <div class="brand__cluster">
@@ -1132,13 +1168,13 @@
   <div class="wrap">
     <div class="hero__eyebrow">Простой опросник к техническому заданию · БЕРВЕЛ</div>
     <h1 class="hero__title">Уточнить систему для <span class="accent">анализа тендеров</span></h1>
-    <p class="hero__lead">23 коротких вопроса про тендеры, данные завода, интерфейс и запуск. <strong>На каждый вопрос можно ответить коротко.</strong></p>
+    <p class="hero__lead">25 коротких вопросов про тендеры, данные завода, интерфейс и запуск. <strong>На каждый вопрос можно ответить коротко.</strong></p>
     <button class="hero__cta" id="start-btn" type="button">Перейти к вопросам ↓</button>
     <dl class="hero__meta">
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
-      <div class="hero__meta-item"><dt>Вопросов</dt><dd>23</dd></div>
+      <div class="hero__meta-item"><dt>Вопросов</dt><dd>25</dd></div>
       <div class="hero__meta-item"><dt>Есть сведения</dt><dd>17</dd></div>
-      <div class="hero__meta-item"><dt>Версия</dt><dd>3.2 · 02.09.2026</dd></div>
+      <div class="hero__meta-item"><dt>Версия</dt><dd>4.2 · 02.09.2026</dd></div>
     </dl>
   </div>
 </section>
@@ -1168,7 +1204,7 @@
           </div>
           <label class="question__answer" for="answer-C01">
             <span>Ответ</span>
-            <textarea id="answer-C01" name="answer-C01" required aria-required="true" placeholder="Коротко перечислите задачи первой версии."></textarea>
+            <textarea id="answer-C01" name="answer-C01" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C01" name="confirm-C01" type="checkbox" checked hidden>
         </div>
@@ -1182,7 +1218,7 @@
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Какие роли пользователей необходимы в системе — например, менеджер, администратор и руководитель — и какие задачи выполняет каждая роль?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Какие роли пользователей необходимы в системе — например, менеджер, администратор и руководитель?</p></div>
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C02">Показать что известно</button>
           <div class="question__known" id="known-C02" hidden>
             <span>Что нам уже известно</span>
@@ -1191,7 +1227,7 @@
           </div>
           <label class="question__answer" for="answer-C02">
             <span>Ответ</span>
-            <textarea id="answer-C02" name="answer-C02" required aria-required="true" placeholder="Например: менеджер — проверяет результат; администратор — настраивает систему; руководитель — смотрит отчёты."></textarea>
+            <textarea id="answer-C02" name="answer-C02" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C02" name="confirm-C02" type="checkbox" checked hidden>
         </div>
@@ -1205,10 +1241,10 @@
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Какое максимальное количество пользователей будет одновременно работать в системе? Укажите количество по каждой роли.</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Какое максимальное количество пользователей будет одновременно работать в системе?</p></div>
           <label class="question__answer" for="answer-C03">
             <span>Ответ</span>
-            <textarea id="answer-C03" name="answer-C03" required aria-required="true" placeholder="Например: 10 менеджеров, 2 администратора и 3 руководителя; всего — 15 пользователей одновременно."></textarea>
+            <textarea id="answer-C03" name="answer-C03" required aria-required="true"></textarea>
           </label>
         </div>
       </details>
@@ -1222,26 +1258,60 @@
     <h2 class="cat__title">Получение и отбор тендеров</h2>
     <p class="cat__intro">Эти ответы определят, откуда брать закупки и по каким правилам их отбирать.</p>
     <div class="question-list">
-      <details class="question" id="q-C04" data-id="C04" data-prefilled="true">
+      <details class="question" id="q-C04.1" data-id="C04.1" data-prefilled="true">
         <summary class="question__summary">
-          <span class="question__id">C04</span>
-          <span class="question__title">Основной источник</span>
+          <span class="question__id">C04.1</span>
+          <span class="question__title">Источники информации о тендерах</span>
           <span class="question__due question__due--critical">Критично для старта</span>
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Через какой основной источник нужно получать тендеры и документы?</p></div>
-          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C04">Показать что известно</button>
-          <div class="question__known" id="known-C04" hidden>
+          <div class="question__prompt"><span>Вопрос</span><p>Какие источники информации о тендерах есть у БЕРВЕЛ?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C04.1">Показать что известно</button>
+          <div class="question__known" id="known-C04.1" hidden>
             <span>Что нам уже известно</span>
-            <p class="question__known-text">Сейчас для поиска закупок используются выгрузки из Контур.Закупки или другого сервиса, а техническая документация скачивается вручную. В проектной концепции ЕИС рассматривается как целевой источник.</p>
-            <button class="question__known-use" type="button" data-answer-target="answer-C04">Использовать как ответ</button>
+            <p class="question__known-text">Сейчас БЕРВЕЛ использует выгрузки из Контур.Закупки или другого сервиса, а техническую документацию скачивает вручную по ссылке на закупку. В проектной концепции ЕИС рассматривается как возможный автоматический источник.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C04.1">Использовать как ответ</button>
           </div>
-          <label class="question__answer" for="answer-C04">
+          <label class="question__answer" for="answer-C04.1">
             <span>Ответ</span>
-            <textarea id="answer-C04" name="answer-C04" required aria-required="true" placeholder="Выберите один основной источник и при необходимости запасной."></textarea>
+            <textarea id="answer-C04.1" name="answer-C04.1" required aria-required="true"></textarea>
           </label>
-          <input id="confirm-C04" name="confirm-C04" type="checkbox" checked hidden>
+          <input id="confirm-C04.1" name="confirm-C04.1" type="checkbox" checked hidden>
+        </div>
+      </details>
+
+      <details class="question" id="q-C04.2" data-id="C04.2" data-prefilled="true">
+        <summary class="question__summary">
+          <span class="question__id">C04.2</span>
+          <span class="question__title">Методы подключения</span>
+          <span class="question__due question__due--critical">Критично для старта</span>
+          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="question__body">
+          <div class="question__prompt"><span>Вопрос</span><p>Какие методы подключения доступны для каждого источника: API, CSV, Google Таблицы, 1С, CRM или другие?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C04.2">Показать что известно</button>
+          <div class="question__known" id="known-C04.2" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">ЕИС предоставляет юридическим лицам сервис получения информации и документов в машиночитаемом виде после регистрации и авторизации через ЕСИА. Контур.Закупки предлагает API для передачи закупок и документации в 1С, CRM, Excel и другие учётные системы. Какие способы доступны БЕРВЕЛ по действующим договорам и доступам, пока не подтверждено.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C04.2" data-choice-values="API">Использовать как ответ</button>
+          </div>
+          <div class="question__answer">
+            <span id="answer-C04.2-label">Ответ</span>
+            <div class="question__checks" id="answer-C04.2" role="group" aria-labelledby="answer-C04.2-label" aria-required="true">
+              <label class="question__check"><input type="checkbox" name="answer-C04.2" value="API"><span>API</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C04.2" value="CSV"><span>CSV</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C04.2" value="Google Таблицы"><span>Google Таблицы</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C04.2" value="1С"><span>1С</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C04.2" value="CRM"><span>CRM</span></label>
+              <button class="question__other-toggle" type="button" aria-expanded="false" aria-controls="answer-C04.2-other-field">Другие</button>
+              <label class="question__other" id="answer-C04.2-other-field" for="answer-C04.2-other" hidden>
+                <span>Другой способ подключения</span>
+                <input id="answer-C04.2-other" name="answer-C04.2-other" type="text">
+              </label>
+            </div>
+          </div>
+          <input id="confirm-C04.2" name="confirm-C04.2" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1253,10 +1323,10 @@
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Есть ли у БЕРВЕЛ рабочий доступ к выбранному источнику?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>К каким источникам информации о тендерах у БЕРВЕЛ уже есть доступ и каким способом: через личный кабинет, API или выгрузку?</p></div>
           <label class="question__answer" for="answer-C05">
             <span>Ответ</span>
-            <textarea id="answer-C05" name="answer-C05" required aria-required="true" placeholder="Укажите «да» или «нет» и название источника. Для ЕИС уточните, зарегистрирован ли завод как получатель данных. Секреты и пароли не нужны."></textarea>
+            <textarea id="answer-C05" name="answer-C05" required aria-required="true"></textarea>
           </label>
         </div>
       </details>
@@ -1269,7 +1339,7 @@
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>По каким признакам тендер подходит БЕРВЕЛ?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Каким критериям должен соответствовать тендер, чтобы считаться подходящим для БЕРВЕЛ?</p></div>
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C06">Показать что известно</button>
           <div class="question__known" id="known-C06" hidden>
             <span>Что нам уже известно</span>
@@ -1278,7 +1348,7 @@
           </div>
           <label class="question__answer" for="answer-C06">
             <span>Ответ</span>
-            <textarea id="answer-C06" name="answer-C06" required aria-required="true" placeholder="Например: продукция, объём, регион, срок поставки, отрасль и условия участия."></textarea>
+            <textarea id="answer-C06" name="answer-C06" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C06" name="confirm-C06" type="checkbox" checked hidden>
         </div>
@@ -1287,12 +1357,12 @@
       <details class="question" id="q-C07" data-id="C07" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C07</span>
-          <span class="question__title">Причины отказа</span>
+          <span class="question__title">Неподходящий тендер</span>
           <span class="question__due question__due--critical">Критично для старта</span>
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>В каких случаях тендер нужно сразу отклонить?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Каким критериям не должен соответствовать тендер, чтобы считаться неподходящим для БЕРВЕЛ?</p></div>
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C07">Показать что известно</button>
           <div class="question__known" id="known-C07" hidden>
             <span>Что нам уже известно</span>
@@ -1301,7 +1371,7 @@
           </div>
           <label class="question__answer" for="answer-C07">
             <span>Ответ</span>
-            <textarea id="answer-C07" name="answer-C07" required aria-required="true" placeholder="Перечислите только однозначные причины отказа."></textarea>
+            <textarea id="answer-C07" name="answer-C07" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C07" name="confirm-C07" type="checkbox" checked hidden>
         </div>
@@ -1319,7 +1389,7 @@
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C08">Показать что известно</button>
           <div class="question__known" id="known-C08" hidden>
             <span>Что нам уже известно</span>
-            <p class="question__known-text">В матрице ТЗ для тендерного направления перечислены следующие действия системы:
+            <p class="question__known-text">В исходном ТЗ для тендерного направления перечислены следующие действия системы:
 • «Автоматическая загрузка и структурирование тендерной документации».
 • «Анализ чертежей и технических требований к продукции».
 • «Сопоставление требований тендера с текущими производственными возможностями».
@@ -1329,12 +1399,12 @@
 • «Оценка производственных рисков и узких мест технологического процесса».
 • «Формирование итогового отчета с финансово-экономическим обоснованием участия в тендере и рекомендациями».
 
-Источник: «ИИ-агент для БЕРВЕЛ — матрица ТЗ, 22.06.2026.xlsx», направление 1 «Тендеры».</p>
+Источник: исходное ТЗ БЕРВЕЛ от 22.06.2026, направление 1 «Тендеры».</p>
             <button class="question__known-use" type="button" data-answer-target="answer-C08">Использовать как ответ</button>
           </div>
           <label class="question__answer" for="answer-C08">
             <span>Ответ</span>
-            <textarea id="answer-C08" name="answer-C08" rows="13" required aria-required="true" placeholder="Перечислите действия системы по порядку."></textarea>
+            <textarea id="answer-C08" name="answer-C08" rows="13" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C08" name="confirm-C08" type="checkbox" checked hidden>
         </div>
@@ -1357,7 +1427,7 @@
           </div>
           <label class="question__answer" for="answer-C09">
             <span>Ответ</span>
-            <textarea id="answer-C09" name="answer-C09" required aria-required="true" placeholder="Укажите решение, которое всегда остаётся за человеком."></textarea>
+            <textarea id="answer-C09" name="answer-C09" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C09" name="confirm-C09" type="checkbox" checked hidden>
         </div>
@@ -1372,15 +1442,54 @@
     <h2 class="cat__title">Данные и расчёты для тендеров</h2>
     <p class="cat__intro">Фиксируем данные, которые нужны для проверки требований тендера, подбора продукции и расчёта экономики.</p>
     <div class="question-list">
-      <details class="question" id="q-C14" data-id="C14" data-prefilled="true">
+      <details class="question" id="q-C10" data-id="C10" data-prefilled="true">
         <summary class="question__summary">
-          <span class="question__id">C14</span>
-          <span class="question__title">Данные в 1С</span>
+          <span class="question__id">C10</span>
+          <span class="question__title">Существующая база данных</span>
           <span class="question__due question__due--critical">Критично для старта</span>
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Какая 1С используется и как из неё можно получать данные?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Есть ли у БЕРВЕЛ база данных, из которой система сможет получать необходимые данные? Если да, какая?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C10">Показать что известно</button>
+          <div class="question__known" id="known-C10" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В проектной концепции упоминаются 1С, номенклатура, техкарты и база данных для хранения истории решений. Какая база данных уже используется БЕРВЕЛ и можно ли получать из неё данные, в материалах не указано.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C10">Использовать как ответ</button>
+          </div>
+          <label class="question__answer" for="answer-C10">
+            <span>Ответ</span>
+            <textarea id="answer-C10" name="answer-C10" required aria-required="true"></textarea>
+          </label>
+          <input id="confirm-C10" name="confirm-C10" type="checkbox" checked hidden>
+        </div>
+      </details>
+
+      <details class="question" id="q-C11" data-id="C11" data-prefilled="false">
+        <summary class="question__summary">
+          <span class="question__id">C11</span>
+          <span class="question__title">Подключение к базе данных</span>
+          <span class="question__due question__due--critical">Критично для старта</span>
+          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="question__body">
+          <div class="question__prompt"><span>Вопрос</span><p>Разрешено ли подключить нашу систему к этой базе данных?</p></div>
+          <label class="question__answer" for="answer-C11">
+            <span>Ответ</span>
+            <textarea id="answer-C11" name="answer-C11" required aria-required="true"></textarea>
+          </label>
+        </div>
+      </details>
+
+      <details class="question" id="q-C14" data-id="C14" data-prefilled="true">
+        <summary class="question__summary">
+          <span class="question__id">C14</span>
+          <span class="question__title">Передача данных</span>
+          <span class="question__due question__due--critical">Критично для старта</span>
+          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="question__body">
+          <div class="question__prompt"><span>Вопрос</span><p>Каким способом вы планируете передавать в тендерную систему данные о продукции и бизнесе: через базу данных, PDF-файлы или выгрузку из CRM? Если через CRM — в каком формате?</p></div>
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C14">Показать что известно</button>
           <div class="question__known" id="known-C14" hidden>
             <span>Что нам уже известно</span>
@@ -1389,7 +1498,7 @@
           </div>
           <label class="question__answer" for="answer-C14">
             <span>Ответ</span>
-            <textarea id="answer-C14" name="answer-C14" required aria-required="true" placeholder="Укажите конфигурацию, версию и удобный способ получения данных."></textarea>
+            <textarea id="answer-C14" name="answer-C14" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C14" name="confirm-C14" type="checkbox" checked hidden>
         </div>
@@ -1398,12 +1507,12 @@
       <details class="question" id="q-C15" data-id="C15" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C15</span>
-          <span class="question__title">Результаты тендеров в CRM</span>
+          <span class="question__title">Передача результатов тендеров</span>
           <span class="question__due question__due--critical">Критично для старта</span>
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Нужно ли сохранять результаты тендерного анализа в CRM и какие данные передавать?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Куда нужно передавать результаты тендерного анализа из тендерной системы? Перечислите все системы.</p></div>
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C15">Показать что известно</button>
           <div class="question__known" id="known-C15" hidden>
             <span>Что нам уже известно</span>
@@ -1412,32 +1521,55 @@
           </div>
           <label class="question__answer" for="answer-C15">
             <span>Ответ</span>
-            <textarea id="answer-C15" name="answer-C15" required aria-required="true" placeholder="Укажите название CRM, нужные поля и статусы тендера."></textarea>
+            <textarea id="answer-C15" name="answer-C15" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C15" name="confirm-C15" type="checkbox" checked hidden>
         </div>
       </details>
 
-      <details class="question" id="q-C17" data-id="C17" data-prefilled="true">
+      <details class="question" id="q-C17.1" data-id="C17.1" data-prefilled="true">
         <summary class="question__summary">
-          <span class="question__id">C17</span>
-          <span class="question__title">Экономика и мощности</span>
+          <span class="question__id">C17.1</span>
+          <span class="question__title">Методология расчётов</span>
           <span class="question__due question__due--critical">Критично для старта</span>
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Как сейчас рассчитывают себестоимость и загрузку мощностей?</p></div>
-          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C17">Показать что известно</button>
-          <div class="question__known" id="known-C17" hidden>
+          <div class="question__prompt"><span>Вопрос</span><p>Предоставит ли БЕРВЕЛ готовую методологию расчёта себестоимости, маржи, рентабельности и загрузки мощностей?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C17.1">Показать что известно</button>
+          <div class="question__known" id="known-C17.1" hidden>
             <span>Что нам уже известно</span>
-            <p class="question__known-text">Матрица ТЗ предусматривает расчёт себестоимости, маржи, прибыльности, инвестиций и производственных рисков. Публично заявлены проектные мощности: 30 000 т/год калиброванного проката и 27 000 т/год высокопрочного крепежа. Источники оперативных данных, внутренняя методика расчёта и текущая загрузка в предоставленных материалах не указаны.</p>
-            <button class="question__known-use" type="button" data-answer-target="answer-C17">Использовать как ответ</button>
+            <p class="question__known-text">Исходное ТЗ предусматривает расчёт себестоимости, маржи, прибыльности, инвестиций и производственных рисков. Готовая внутренняя методология и формулы расчётов в предоставленных материалах не указаны.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C17.1">Использовать как ответ</button>
           </div>
-          <label class="question__answer" for="answer-C17">
+          <label class="question__answer" for="answer-C17.1">
             <span>Ответ</span>
-            <textarea id="answer-C17" name="answer-C17" required aria-required="true" placeholder="Укажите источник данных, название методики или файла и способ проверки."></textarea>
+            <textarea id="answer-C17.1" name="answer-C17.1" required aria-required="true"></textarea>
           </label>
-          <input id="confirm-C17" name="confirm-C17" type="checkbox" checked hidden>
+          <input id="confirm-C17.1" name="confirm-C17.1" type="checkbox" checked hidden>
+        </div>
+      </details>
+
+      <details class="question" id="q-C17.2" data-id="C17.2" data-prefilled="true">
+        <summary class="question__summary">
+          <span class="question__id">C17.2</span>
+          <span class="question__title">Актуальные данные для расчётов</span>
+          <span class="question__due question__due--critical">Критично для старта</span>
+          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="question__body">
+          <div class="question__prompt"><span>Вопрос</span><p>Можно ли получать актуальные исходные данные для этих расчётов онлайн?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C17.2">Показать что известно</button>
+          <div class="question__known" id="known-C17.2" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">Публично заявлены проектные мощности: 30 000 т/год калиброванного проката и 27 000 т/год высокопрочного крепежа. Источники оперативных данных и текущая загрузка в предоставленных материалах не указаны.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C17.2">Использовать как ответ</button>
+          </div>
+          <label class="question__answer" for="answer-C17.2">
+            <span>Ответ</span>
+            <textarea id="answer-C17.2" name="answer-C17.2" required aria-required="true"></textarea>
+          </label>
+          <input id="confirm-C17.2" name="confirm-C17.2" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1453,13 +1585,28 @@
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C18">Показать что известно</button>
           <div class="question__known" id="known-C18" hidden>
             <span>Что нам уже известно</span>
-            <p class="question__known-text">По матрице ТЗ, примерам товарного подбора и каталогу базовый набор характеристик включает тип продукции, ГОСТ, диаметр, длину, класс прочности, материал, покрытие, количество, единицу измерения и вес. Обязательный состав полей для отдельных товарных групп пока не зафиксирован.</p>
+            <p class="question__known-text">По исходному ТЗ, примерам товарного подбора и каталогу базовый набор характеристик включает тип продукции, ГОСТ, диаметр, длину, класс прочности, материал, покрытие, количество, единицу измерения и вес. Обязательный состав полей для отдельных товарных групп пока не зафиксирован.</p>
             <button class="question__known-use" type="button" data-answer-target="answer-C18">Использовать как ответ</button>
           </div>
-          <label class="question__answer" for="answer-C18">
-            <span>Ответ</span>
-            <textarea id="answer-C18" name="answer-C18" required aria-required="true" placeholder="Оставьте только обязательные характеристики и добавьте недостающие."></textarea>
-          </label>
+          <div class="question__answer">
+            <span id="answer-C18-label">Ответ</span>
+            <div class="question__checks" id="answer-C18" role="group" aria-labelledby="answer-C18-label" aria-required="true">
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Тип продукции"><span>Тип продукции</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="ГОСТ"><span>ГОСТ</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Диаметр"><span>Диаметр</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Длина"><span>Длина</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Класс прочности"><span>Класс прочности</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Материал"><span>Материал</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Покрытие"><span>Покрытие</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Количество"><span>Количество</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Единица измерения"><span>Единица измерения</span></label>
+              <label class="question__check"><input type="checkbox" name="answer-C18" value="Вес"><span>Вес</span></label>
+              <label class="question__other" for="answer-C18-other">
+                <span>Другое</span>
+                <input id="answer-C18-other" name="answer-C18-other" type="text">
+              </label>
+            </div>
+          </div>
           <input id="confirm-C18" name="confirm-C18" type="checkbox" checked hidden>
         </div>
       </details>
@@ -1473,7 +1620,7 @@
     <h2 class="cat__title">Что увидит пользователь</h2>
     <p class="cat__intro">Ответы помогут определить основные экраны и удобный вид результата тендерного анализа.</p>
     <div class="question-list">
-      <details class="question" id="q-C19" data-id="C19" data-prefilled="true">
+      <details class="question" id="q-C19" data-id="C19" data-prefilled="false">
         <summary class="question__summary">
           <span class="question__id">C19</span>
           <span class="question__title">Формат результата</span>
@@ -1482,17 +1629,10 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>В каком виде пользователю нужен итоговый результат по тендеру?</p></div>
-          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C19">Показать что известно</button>
-          <div class="question__known" id="known-C19" hidden>
-            <span>Что нам уже известно</span>
-            <p class="question__known-text">Матрица ТЗ предусматривает итоговое заключение по тендеру. В проектной концепции рассматриваются таблица, карточка, дашборд, PDF и запись в 1С или CRM. Обязательный формат и место сохранения пока не зафиксированы.</p>
-            <button class="question__known-use" type="button" data-answer-target="answer-C19">Использовать как ответ</button>
-          </div>
           <label class="question__answer" for="answer-C19">
             <span>Ответ</span>
-            <textarea id="answer-C19" name="answer-C19" required aria-required="true" placeholder="Выберите подходящие варианты: таблица, экран, PDF, письмо, Excel, запись в 1С или CRM."></textarea>
+            <textarea id="answer-C19" name="answer-C19" required aria-required="true"></textarea>
           </label>
-          <input id="confirm-C19" name="confirm-C19" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1513,13 +1653,13 @@
           </div>
           <label class="question__answer" for="answer-C20">
             <span>Ответ</span>
-            <textarea id="answer-C20" name="answer-C20" required aria-required="true" placeholder="Приложите пример бланка или брендбук либо укажите, что оформление можно разработать с нуля."></textarea>
+            <textarea id="answer-C20" name="answer-C20" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C20" name="confirm-C20" type="checkbox" checked hidden>
         </div>
       </details>
 
-      <details class="question" id="q-C21" data-id="C21" data-prefilled="true">
+      <details class="question" id="q-C21" data-id="C21" data-prefilled="false">
         <summary class="question__summary">
           <span class="question__id">C21</span>
           <span class="question__title">Рабочее место</span>
@@ -1528,58 +1668,13 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Где пользователю удобнее работать с тендерной системой?</p></div>
-          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C21">Показать что известно</button>
-          <div class="question__known" id="known-C21" hidden>
-            <span>Что нам уже известно</span>
-            <p class="question__known-text">В проектной концепции предусмотрены отдельный личный кабинет, уведомления в Telegram и интеграции с 1С или CRM. Основное рабочее место пользователя пока не зафиксировано.</p>
-            <button class="question__known-use" type="button" data-answer-target="answer-C21">Использовать как ответ</button>
-          </div>
           <label class="question__answer" for="answer-C21">
             <span>Ответ</span>
-            <textarea id="answer-C21" name="answer-C21" required aria-required="true" placeholder="Выберите основной вариант: отдельный веб-интерфейс, 1С, CRM или другое рабочее место."></textarea>
+            <textarea id="answer-C21" name="answer-C21" required aria-required="true"></textarea>
           </label>
-          <input id="confirm-C21" name="confirm-C21" type="checkbox" checked hidden>
         </div>
       </details>
 
-      <details class="question" id="q-C22" data-id="C22" data-prefilled="true">
-        <summary class="question__summary">
-          <span class="question__id">C22</span>
-          <span class="question__title">Главные экраны</span>
-          <span class="question__due">Можно уточнить позже</span>
-          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </summary>
-        <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Какие 3–5 экранов нужны для ежедневной работы?</p></div>
-          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C22">Показать что известно</button>
-          <div class="question__known" id="known-C22" hidden>
-            <span>Что нам уже известно</span>
-            <p class="question__known-text">Проектная концепция включает ранжированный список тендеров, карточку результата, дашборд и историю решений. Окончательный состав экранов тендерного контура пока не зафиксирован.</p>
-            <button class="question__known-use" type="button" data-answer-target="answer-C22">Использовать как ответ</button>
-          </div>
-          <label class="question__answer" for="answer-C22">
-            <span>Ответ</span>
-            <textarea id="answer-C22" name="answer-C22" required aria-required="true" placeholder="Например: список тендеров, карточка тендера, проверка требований, итог и история решений."></textarea>
-          </label>
-          <input id="confirm-C22" name="confirm-C22" type="checkbox" checked hidden>
-        </div>
-      </details>
-
-      <details class="question" id="q-C23" data-id="C23" data-prefilled="false">
-        <summary class="question__summary">
-          <span class="question__id">C23</span>
-          <span class="question__title">Настройки системы</span>
-          <span class="question__due">Можно уточнить позже</span>
-          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </summary>
-        <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Как администратор должен менять правила отбора тендеров, справочники, роли и уведомления?</p></div>
-          <label class="question__answer" for="answer-C23">
-            <span>Ответ</span>
-            <textarea id="answer-C23" name="answer-C23" required aria-required="true" placeholder="Например: через раздел настроек, загрузку Excel или данные из 1С."></textarea>
-          </label>
-        </div>
-      </details>
     </div>
   </div>
 </section>
@@ -1607,7 +1702,7 @@
           </div>
           <label class="question__answer" for="answer-C24">
             <span>Ответ</span>
-            <textarea id="answer-C24" name="answer-C24" required aria-required="true" placeholder="Укажите обычный объём тендеров, пик и допустимое время обработки."></textarea>
+            <textarea id="answer-C24" name="answer-C24" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C24" name="confirm-C24" type="checkbox" checked hidden>
         </div>
@@ -1616,21 +1711,21 @@
       <details class="question" id="q-C25" data-id="C25" data-prefilled="true">
         <summary class="question__summary">
           <span class="question__id">C25</span>
-          <span class="question__title">Размещение системы</span>
+          <span class="question__title">Требования к серверу</span>
           <span class="question__due question__due--critical">Критично для старта</span>
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Где можно разместить тендерную систему и можно ли использовать внешние сервисы?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Есть ли у БЕРВЕЛ требования к размещению или характеристикам сервера?</p></div>
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C25">Показать что известно</button>
           <div class="question__known" id="known-C25" hidden>
             <span>Что нам уже известно</span>
-            <p class="question__known-text">В проектной концепции рассматриваются размещение системы на сервере БЕРВЕЛ и выбор внешних или локальных моделей. Допустимые сервисы и данные, которые нельзя передавать наружу, в предоставленных материалах не указаны.</p>
+            <p class="question__known-text">По умолчанию предполагается развернуть систему на облачном сервере.</p>
             <button class="question__known-use" type="button" data-answer-target="answer-C25">Использовать как ответ</button>
           </div>
           <label class="question__answer" for="answer-C25">
             <span>Ответ</span>
-            <textarea id="answer-C25" name="answer-C25" required aria-required="true" placeholder="Укажите место размещения и данные, которые нельзя передавать за пределы завода."></textarea>
+            <textarea id="answer-C25" name="answer-C25" required aria-required="true"></textarea>
           </label>
           <input id="confirm-C25" name="confirm-C25" type="checkbox" checked hidden>
         </div>
@@ -1647,7 +1742,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какие нейросети можно использовать: американские, китайские или только установленные на сервере БЕРВЕЛ?</p></div>
           <label class="question__answer" for="answer-C26">
             <span>Ответ</span>
-            <textarea id="answer-C26" name="answer-C26" required aria-required="true" placeholder="Укажите, модели каких стран разрешены и можно ли передавать тендерные документы во внешние сервисы."></textarea>
+            <textarea id="answer-C26" name="answer-C26" required aria-required="true"></textarea>
           </label>
         </div>
       </details>
@@ -1689,7 +1784,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>На каких тендерах и по каким показателям БЕРВЕЛ примет пилот?</p></div>
           <label class="question__answer" for="answer-C29">
             <span>Ответ</span>
-            <textarea id="answer-C29" name="answer-C29" required aria-required="true" placeholder="Укажите набор реальных тендеров и 3–5 простых показателей: точность, полнота, время или удобство."></textarea>
+            <textarea id="answer-C29" name="answer-C29" required aria-required="true"></textarea>
           </label>
         </div>
       </details>
@@ -1702,10 +1797,8 @@
   <div class="next__bg" id="next-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="next__eyebrow">После заполнения</div>
-    <h2 class="next__heading">Отправить ответы</h2>
-    <p class="next__lead">Заполните каждый ответ. Если по вопросу уже есть сведения, их можно посмотреть и использовать как ответ. Когда опросник будет готов на 100%, кнопка станет активной.</p>
     <button class="next__cta" id="submit-answers" type="button" disabled>Отправить ответы →</button>
-    <p class="next__status" id="submit-status" role="status" aria-live="polite">Заполнено 0 из 23 обязательных вопросов.</p>
+    <p class="next__status" id="submit-status" role="status" aria-live="polite">Заполнено 0 из 25 обязательных вопросов.</p>
   </div>
 </section>
 
@@ -2161,8 +2254,13 @@ void main(){
       var id = question.getAttribute('data-id');
       var textarea = question.querySelector('textarea[name="answer-' + id + '"]');
       if (textarea) return textarea.value.trim();
-      var selected = question.querySelector('input[name="answer-' + id + '"]:checked');
-      return selected ? selected.value.trim() : '';
+      var values = Array.prototype.map.call(
+        question.querySelectorAll('input[name="answer-' + id + '"]:checked'),
+        function (input) { return input.value.trim(); }
+      );
+      var other = question.querySelector('input[name="answer-' + id + '-other"]');
+      if (other && other.value.trim()) values.push('Другое: ' + other.value.trim());
+      return values.join('; ');
     }
 
     function isComplete(question) {
@@ -2209,7 +2307,7 @@ void main(){
       var confirm = question.querySelector('input[name^="confirm-"]');
       if (textarea) textarea.addEventListener('input', updateProgress);
       Array.prototype.forEach.call(choices, function (choice) {
-        choice.addEventListener('change', updateProgress);
+        choice.addEventListener(choice.type === 'text' ? 'input' : 'change', updateProgress);
       });
       if (confirm) confirm.addEventListener('change', updateProgress);
     });
@@ -2225,15 +2323,39 @@ void main(){
       });
     });
 
+    Array.prototype.forEach.call(document.querySelectorAll('.question__other-toggle'), function (button) {
+      button.addEventListener('click', function () {
+        var field = document.getElementById(button.getAttribute('aria-controls'));
+        if (!field) return;
+        var willOpen = field.hidden;
+        field.hidden = !willOpen;
+        button.setAttribute('aria-expanded', String(willOpen));
+        if (willOpen) {
+          var input = field.querySelector('input');
+          if (input) input.focus();
+        }
+      });
+    });
+
     Array.prototype.forEach.call(document.querySelectorAll('.question__known-use'), function (button) {
       button.addEventListener('click', function () {
         var panel = button.closest('.question__known');
         var answer = document.getElementById(button.getAttribute('data-answer-target'));
         var knownText = panel && panel.querySelector('.question__known-text');
         if (!answer || !knownText) return;
-        answer.value = knownText.textContent.trim();
-        answer.dispatchEvent(new Event('input', { bubbles: true }));
-        answer.focus();
+        if (answer.matches('textarea, input')) {
+          answer.value = knownText.textContent.trim();
+          answer.dispatchEvent(new Event('input', { bubbles: true }));
+          answer.focus();
+          return;
+        }
+        var checkboxes = answer.querySelectorAll('input[type="checkbox"]');
+        var knownValues = (button.getAttribute('data-choice-values') || '').split('|').filter(Boolean);
+        Array.prototype.forEach.call(checkboxes, function (checkbox) {
+          checkbox.checked = !knownValues.length || knownValues.indexOf(checkbox.value) !== -1;
+          checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        if (checkboxes.length) checkboxes[0].focus();
       });
     });
 
@@ -2284,7 +2406,7 @@ void main(){
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             schemaVersion: 'bervel-questionnaire/v1',
-            questionnaireVersion: '3.2',
+            questionnaireVersion: '4.2',
             submissionId: submissionId,
             website: '',
             answers: collectAnswers()
