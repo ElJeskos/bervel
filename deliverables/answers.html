@@ -78,7 +78,7 @@
   .accent { color: var(--accent); }
   .hero__lead { max-width: 670px; color: var(--text-mid); font-size: 20px; line-height: 1.55; }
   .panel { min-height: 48vh; padding: 88px 0 120px; }
-  .auth { display: grid; grid-template-columns: minmax(0, 1fr) minmax(420px, .8fr); gap: 80px; align-items: start; }
+  .auth { max-width: 580px; margin: 0 auto; }
   .section-label {
     margin-bottom: 18px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace;
     font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
@@ -105,7 +105,6 @@
   .button:disabled { cursor: not-allowed; opacity: .45; }
   .button:disabled:hover { background: #2C3534; color: var(--accent); }
   .button--quiet { background: var(--surface-2); color: var(--text-mid); }
-  .auth__hint { margin-top: 16px; color: var(--text-mute); font-size: 13px; }
   .message { min-height: 20px; margin-top: 14px; color: var(--text-mid); font-size: 14px; }
   .message--error { color: var(--high); }
   .results[hidden], .auth[hidden] { display: none; }
@@ -144,7 +143,6 @@
     .hero .wrap { padding-block: 70px 56px; }
     .hero__lead { font-size: 17px; }
     .panel { padding: 58px 0 84px; }
-    .auth { grid-template-columns: 1fr; gap: 34px; }
     .results__head { align-items: start; flex-direction: column; }
     .submission__summary { grid-template-columns: 48px 1fr 14px; gap: 12px; }
     .submission__meta { grid-column: 2; }
@@ -179,10 +177,6 @@
   <section class="panel">
     <div class="wrap">
       <div class="auth" id="auth-view">
-        <div>
-          <div class="section-label">01 · Доступ</div>
-          <h2>Введите пароль, чтобы открыть ответы</h2>
-        </div>
         <form class="auth__card" id="auth-form">
           <label for="access-key">
             <span>Пароль</span>
