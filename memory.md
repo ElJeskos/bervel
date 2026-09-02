@@ -11,18 +11,18 @@ As of 2026-09-02, the questionnaire submission flow is working end to end:
 - the API is published to the FvsB/EcoStandard DEV environment through the canonical Git/PR deployment flow;
 - production `moxdev2.ru` and the EcoStandard database are not used by this integration.
 
-The first live browser submission was saved successfully with ID
-`b4f02c84-b57f-44ad-a07d-f57c956ab639`. A read-only database check confirmed one row,
-questionnaire version `2.9`, and all 23 answers. The same row was then displayed in the
-protected answers panel.
+The latest live browser test submission was saved successfully with ID
+`046a42e1-6979-4fe5-96b3-4f60850f2ef7`. A read-only database check confirmed questionnaire
+version `4.2`, all 25 answers, and a valid payload SHA-256. The same row was then displayed as
+the newest version in the protected answers panel.
 
 ## Data flow
 
 1. Every questionnaire textarea is required.
 2. A prefilled answer is complete only when it still contains text and its confirmation is checked.
-3. The **Отправить ответы** button remains disabled until progress is `23 из 23` / `100%`.
+3. The **Отправить ответы** button remains disabled until progress is `25 из 25` / `100%`.
 4. The browser sends JSON to the DEV API with schema `bervel-questionnaire/v1`.
-5. The API validates the exact 23 question IDs, non-empty answers, required confirmations,
+5. The API validates the exact 25 question IDs, non-empty answers, required confirmations,
    questionnaire version, body size, UUID, and request origin.
 6. The API writes one immutable submission row to SQLite. Repeating the same UUID and payload
    is idempotent; reusing a UUID with different data is rejected.
@@ -139,5 +139,5 @@ sqlite3 "$HOME/moxdev3.beget.tech/.bervel-questionnaire/data/answers.sqlite3" \
 
 Do not print `answers_json` during routine diagnostics because it contains customer answers.
 For functional acceptance, use a fresh 1920×1080 Playwright session: verify the disabled state at
-22/23, enabled state at 23/23, successful button state after POST, the row in the read-only query,
-and the same 23 answers in `answers.html`.
+24/25, enabled state at 25/25, successful button state after POST, the row in the read-only query,
+and the same 25 answers in `answers.html`.
