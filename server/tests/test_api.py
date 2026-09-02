@@ -22,7 +22,7 @@ API_PATH = "/server/bervel-questionnaire.php"
 ALLOWED_ORIGIN = "http://127.0.0.1:8899"
 ADMIN_TOKEN = "integration-test-admin-token"
 QUESTION_IDS = [
-    "C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09",
+    "C01", "C02", "C04", "C05", "C06", "C07", "C08", "C09",
     "C14", "C15", "C17", "C18", "C19", "C20", "C21", "C22", "C23",
     "C24", "C25", "C26", "C27", "C29",
 ]
@@ -41,7 +41,7 @@ def free_port() -> int:
 def payload(submission_id: str | None = None) -> dict:
     return {
         "schemaVersion": "bervel-questionnaire/v1",
-        "questionnaireVersion": "2.9",
+        "questionnaireVersion": "3.1",
         "submissionId": submission_id or str(uuid.uuid4()),
         "website": "",
         "answers": [
@@ -133,7 +133,7 @@ class ApiTest(unittest.TestCase):
         status, response = self.request("POST", submission, origin=ALLOWED_ORIGIN)
         self.assertEqual(status, 201)
         self.assertTrue(response["ok"])
-        self.assertEqual(response["data"]["answerCount"], 23)
+        self.assertEqual(response["data"]["answerCount"], 22)
         self.assertFalse(response["data"]["duplicate"])
 
         status, response = self.request("POST", submission, origin=ALLOWED_ORIGIN)
@@ -149,8 +149,8 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(response["data"]["count"], 1)
         saved = response["data"]["submissions"][0]
         self.assertEqual(saved["id"], submission["submissionId"])
-        self.assertEqual(saved["answerCount"], 23)
-        self.assertEqual(len(saved["answers"]), 23)
+        self.assertEqual(saved["answerCount"], 22)
+        self.assertEqual(len(saved["answers"]), 22)
 
         with sqlite3.connect(self.database) as database:
             count = database.execute(

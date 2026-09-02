@@ -1118,7 +1118,7 @@
       <svg class="brand__logo-mark" viewBox="397 0 224 224" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M621.073 111.26C621.073 173.463 571.619 223.088 509.66 223.088C447.7 223.088 397.677 173.463 397.677 111.26C397.677 49.0578 447.14 0 509.66 0C572.179 0 621.073 49.049 621.073 111.26ZM422.706 111.26C422.706 160.292 462.488 199.77 509.668 199.77C556.849 199.77 596.062 160.283 596.062 111.26C596.062 62.2381 556.849 23.4158 509.668 23.4158C462.488 23.4158 422.706 62.2114 422.706 111.26Z" fill="#8ADDD4"/></svg>
     </a>
     <div class="brand__progress" aria-label="Заполненность документа">
-      <div class="brand__progress-head"><span class="brand__progress-label">Заполненность</span><span class="brand__progress-value"><strong id="progress-percent">0%</strong> · <span id="progress-count">0 из 23</span></span></div>
+      <div class="brand__progress-head"><span class="brand__progress-label">Заполненность</span><span class="brand__progress-value"><strong id="progress-percent">0%</strong> · <span id="progress-count">0 из 22</span></span></div>
       <div class="brand__progress-track"><div class="brand__progress-fill" id="progress-fill"></div></div>
     </div>
     <div class="brand__cluster">
@@ -1132,13 +1132,13 @@
   <div class="wrap">
     <div class="hero__eyebrow">Простой опросник к техническому заданию · БЕРВЕЛ</div>
     <h1 class="hero__title">Уточнить систему для <span class="accent">анализа тендеров</span></h1>
-    <p class="hero__lead">23 коротких вопроса про тендеры, данные завода, интерфейс и запуск. <strong>На каждый вопрос можно ответить коротко.</strong></p>
+    <p class="hero__lead">22 коротких вопроса про тендеры, данные завода, интерфейс и запуск. <strong>На каждый вопрос можно ответить коротко.</strong></p>
     <button class="hero__cta" id="start-btn" type="button">Перейти к вопросам ↓</button>
     <dl class="hero__meta">
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
-      <div class="hero__meta-item"><dt>Вопросов</dt><dd>23</dd></div>
+      <div class="hero__meta-item"><dt>Вопросов</dt><dd>22</dd></div>
       <div class="hero__meta-item"><dt>Есть сведения</dt><dd>17</dd></div>
-      <div class="hero__meta-item"><dt>Версия</dt><dd>3.0 · 02.09.2026</dd></div>
+      <div class="hero__meta-item"><dt>Версия</dt><dd>3.1 · 02.09.2026</dd></div>
     </dl>
   </div>
 </section>
@@ -1149,7 +1149,7 @@
   <div class="wrap">
     <div class="cat__head"><span class="cat__num">01 · РАМКИ</span></div>
     <h2 class="cat__title">Что делаем и для кого</h2>
-    <p class="cat__intro">Сначала уточняем состав первой версии, пользователей и ожидаемые сроки.</p>
+    <p class="cat__intro">Сначала уточняем состав первой версии и пользователей системы.</p>
     <div class="question-list">
       <details class="question" id="q-C01" data-id="C01" data-prefilled="true">
         <summary class="question__summary">
@@ -1197,21 +1197,6 @@
         </div>
       </details>
 
-      <details class="question" id="q-C03" data-id="C03" data-prefilled="false">
-        <summary class="question__summary">
-          <span class="question__id">C03</span>
-          <span class="question__title">Сроки запуска</span>
-          <span class="question__due question__due--critical">Критично для старта</span>
-          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </summary>
-        <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>К какой дате нужны прототип, пилот и рабочая версия?</p></div>
-          <label class="question__answer" for="answer-C03">
-            <span>Ответ</span>
-            <textarea id="answer-C03" name="answer-C03" required aria-required="true" placeholder="Укажите желаемые даты или важные внешние сроки."></textarea>
-          </label>
-        </div>
-      </details>
     </div>
   </div>
 </section>
@@ -1705,7 +1690,7 @@
     <h2 class="next__heading">Отправить ответы</h2>
     <p class="next__lead">Заполните каждый ответ. Если по вопросу уже есть сведения, их можно посмотреть и использовать как ответ. Когда опросник будет готов на 100%, кнопка станет активной.</p>
     <button class="next__cta" id="submit-answers" type="button" disabled>Отправить ответы →</button>
-    <p class="next__status" id="submit-status" role="status" aria-live="polite">Заполнено 0 из 23 обязательных вопросов.</p>
+    <p class="next__status" id="submit-status" role="status" aria-live="polite">Заполнено 0 из 22 обязательных вопросов.</p>
   </div>
 </section>
 
@@ -2284,7 +2269,7 @@ void main(){
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             schemaVersion: 'bervel-questionnaire/v1',
-            questionnaireVersion: '3.0',
+            questionnaireVersion: '3.1',
             submissionId: submissionId,
             website: '',
             answers: collectAnswers()
