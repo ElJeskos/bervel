@@ -1068,19 +1068,6 @@
   .question__choice input:focus-visible + span { outline: 1px solid var(--accent); outline-offset: 2px; }
   .question__choice input:checked + span { border-color: var(--accent-line); background: var(--accent-mute); color: var(--accent); }
   .question__choice input:checked + span::before { background: var(--accent); }
-  .question__confirm { display: inline-flex; width: max-content; margin-top: 14px; cursor: pointer; }
-  .question__confirm input { position: absolute; opacity: 0; pointer-events: none; }
-  .question__confirm span {
-    display: inline-flex; align-items: center; padding: 9px 14px; border-radius: 999px;
-    background: var(--surface-2); color: var(--text-mid); font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: .03em; transition: color .15s ease, background .15s ease;
-  }
-  .question__confirm span::before {
-    content: ''; width: 7px; height: 7px; border-radius: 50%; margin-right: 9px; background: var(--text-faint);
-  }
-  .question__confirm input:focus-visible + span { outline: 1px solid var(--accent); outline-offset: 2px; }
-  .question__confirm input:checked + span { color: var(--accent); background: var(--accent-mute); }
-  .question__confirm input:checked + span::before { background: var(--accent); }
   .question--complete .question__id { color: var(--text-mid); }
   .question--complete .question__title { color: var(--text-mid); }
   .next__cta { cursor: pointer; }
@@ -1150,7 +1137,7 @@
     <dl class="hero__meta">
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
       <div class="hero__meta-item"><dt>Вопросов</dt><dd>23</dd></div>
-      <div class="hero__meta-item"><dt>Предзаполнено</dt><dd>17</dd></div>
+      <div class="hero__meta-item"><dt>Есть сведения</dt><dd>17</dd></div>
       <div class="hero__meta-item"><dt>Версия</dt><dd>2.9 · 02.09.2026</dd></div>
     </dl>
   </div>
@@ -1196,14 +1183,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Кто будет пользоваться тендерной системой?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C02">Показать что известно</button>
+          <div class="question__known" id="known-C02" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">По материалам проекта система готовит рекомендацию по тендеру, а окончательное решение об участии или отказе принимает сотрудник БЕРВЕЛ.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C02">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C02">
-            <span>Что уже известно</span>
-            <textarea id="answer-C02" name="answer-C02" required aria-required="true" placeholder="Укажите роли и главную задачу каждой роли. Например: тендерный специалист — проверяет результат.">По материалам проекта система готовит рекомендацию, а решение по тендеру принимает сотрудник БЕРВЕЛ. Требуется перечислить роли пользователей тендерного контура и задачи каждой роли.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C02" name="answer-C02" required aria-required="true" placeholder="Укажите роли и главную задачу каждой роли. Например: тендерный специалист — проверяет результат."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C02">
-          <input id="confirm-C02" name="confirm-C02" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C02" name="confirm-C02" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1241,14 +1231,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Через какой основной источник нужно получать тендеры и документы?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C04">Показать что известно</button>
+          <div class="question__known" id="known-C04" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">Сейчас для поиска закупок используются выгрузки из Контур.Закупки или другого сервиса, а техническая документация скачивается вручную. В проектной концепции ЕИС рассматривается как целевой источник.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C04">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C04">
-            <span>Что уже известно</span>
-            <textarea id="answer-C04" name="answer-C04" required aria-required="true" placeholder="Выберите один основной источник и при необходимости запасной.">Сейчас используются выгрузки из Контур.Закупки или другого сервиса, а техническая документация скачивается вручную. ЕИС рассматривается как целевой источник, но это требует подтверждения и технической проверки.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C04" name="answer-C04" required aria-required="true" placeholder="Выберите один основной источник и при необходимости запасной."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C04">
-          <input id="confirm-C04" name="confirm-C04" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C04" name="confirm-C04" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1277,14 +1270,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>По каким признакам тендер подходит БЕРВЕЛ?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C06">Показать что известно</button>
+          <div class="question__known" id="known-C06" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">Базовый признак подходящего тендера — соответствие предмета закупки продукции и производственным возможностям БЕРВЕЛ. В проектной концепции также учитываются объём, сроки, обеспечение и риски. Пороги, географические и отраслевые ограничения пока не зафиксированы.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C06">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C06">
-            <span>Что уже известно</span>
-            <textarea id="answer-C06" name="answer-C06" required aria-required="true" placeholder="Например: продукция, объём, регион, срок поставки, отрасль и условия участия.">Базовый признак — соответствие предмета закупки продукции и производственным возможностям БЕРВЕЛ. В проекте также предлагается учитывать объём, сроки, обеспечение и риски. Пороги, географию и отраслевые ограничения нужно подтвердить.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C06" name="answer-C06" required aria-required="true" placeholder="Например: продукция, объём, регион, срок поставки, отрасль и условия участия."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C06">
-          <input id="confirm-C06" name="confirm-C06" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C06" name="confirm-C06" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1297,14 +1293,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>В каких случаях тендер нужно сразу отклонить?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C07">Показать что известно</button>
+          <div class="question__known" id="known-C07" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В примерах товарного подбора встречаются следующие причины расхождений: отсутствие позиции в номенклатуре, неподдерживаемые размеры или класс прочности, а также необходимость уточнить характеристики. Безусловные причины отказа от тендера пока не зафиксированы.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C07">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C07">
-            <span>Что уже известно</span>
-            <textarea id="answer-C07" name="answer-C07" required aria-required="true" placeholder="Перечислите только однозначные причины отказа.">В примерах товарного подбора встречаются отсутствие позиции в номенклатуре, неподдерживаемые размеры или класс и необходимость уточнения характеристик. Нужно подтвердить, какие из этих причин означают безусловный отказ от тендера.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C07" name="answer-C07" required aria-required="true" placeholder="Перечислите только однозначные причины отказа."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C07">
-          <input id="confirm-C07" name="confirm-C07" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C07" name="confirm-C07" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1317,9 +1316,10 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Что система должна сделать с подходящим тендером?</p></div>
-          <label class="question__answer" for="answer-C08">
-            <span>Что уже известно</span>
-            <textarea id="answer-C08" name="answer-C08" rows="13" required aria-required="true" placeholder="Перечислите действия системы по порядку.">Фрагменты из матрицы ТЗ заказчика:
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C08">Показать что известно</button>
+          <div class="question__known" id="known-C08" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В матрице ТЗ для тендерного направления перечислены следующие действия системы:
 • «Автоматическая загрузка и структурирование тендерной документации».
 • «Анализ чертежей и технических требований к продукции».
 • «Сопоставление требований тендера с текущими производственными возможностями».
@@ -1329,12 +1329,14 @@
 • «Оценка производственных рисков и узких мест технологического процесса».
 • «Формирование итогового отчета с финансово-экономическим обоснованием участия в тендере и рекомендациями».
 
-Источник: «ИИ-агент для БЕРВЕЛ — матрица ТЗ, 22.06.2026.xlsx», направление 1 «Тендеры».</textarea>
+Источник: «ИИ-агент для БЕРВЕЛ — матрица ТЗ, 22.06.2026.xlsx», направление 1 «Тендеры».</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C08">Использовать как ответ</button>
+          </div>
+          <label class="question__answer" for="answer-C08">
+            <span>Ответ</span>
+            <textarea id="answer-C08" name="answer-C08" rows="13" required aria-required="true" placeholder="Перечислите действия системы по порядку."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C08">
-          <input id="confirm-C08" name="confirm-C08" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C08" name="confirm-C08" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1347,14 +1349,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>На каких этапах тендерной системы должен участвовать человек?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C09">Показать что известно</button>
+          <div class="question__known" id="known-C09" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">По рабочей гипотезе система готовит рекомендацию, а сотрудник БЕРВЕЛ принимает окончательное решение об участии или отказе.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C09">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C09">
-            <span>Что уже известно</span>
-            <textarea id="answer-C09" name="answer-C09" required aria-required="true" placeholder="Укажите решение, которое всегда остаётся за человеком.">Рабочая гипотеза: система готовит рекомендацию, а сотрудник БЕРВЕЛ принимает решение об участии или отказе. Требуется подтвердить это правило.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C09" name="answer-C09" required aria-required="true" placeholder="Укажите решение, которое всегда остаётся за человеком."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C09">
-          <input id="confirm-C09" name="confirm-C09" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C09" name="confirm-C09" type="checkbox" checked hidden>
         </div>
       </details>
     </div>
@@ -1376,14 +1381,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Какая 1С используется и как из неё можно получать данные?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C14">Показать что известно</button>
+          <div class="question__known" id="known-C14" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В проектной концепции 1С рассматривается как источник номенклатуры, техкарт, цен и производственных данных. Конфигурация, версия и способ получения данных из 1С пока не зафиксированы.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C14">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C14">
-            <span>Что уже известно</span>
-            <textarea id="answer-C14" name="answer-C14" required aria-required="true" placeholder="Укажите конфигурацию, версию и удобный способ получения данных.">В проектной концепции 1С рассматривается как источник номенклатуры, техкарт, цен и производственных данных. Наличие нужных данных, конфигурацию, версию и способ доступа — прямое подключение или выгрузку — нужно подтвердить.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C14" name="answer-C14" required aria-required="true" placeholder="Укажите конфигурацию, версию и удобный способ получения данных."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C14">
-          <input id="confirm-C14" name="confirm-C14" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C14" name="confirm-C14" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1396,14 +1404,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Нужно ли сохранять результаты тендерного анализа в CRM и какие данные передавать?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C15">Показать что известно</button>
+          <div class="question__known" id="known-C15" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">CRM и ERP рассматриваются как возможные места хранения результатов тендерного анализа. Конкретная система, её использование, необходимые поля и статусы тендера пока не зафиксированы.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C15">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C15">
-            <span>Что уже известно</span>
-            <textarea id="answer-C15" name="answer-C15" required aria-required="true" placeholder="Укажите название CRM, нужные поля и статусы тендера.">CRM и ERP рассматриваются как возможные места хранения результатов тендерного анализа. Нужно подтвердить название системы, её реальное использование, нужные поля и статусы тендера.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C15" name="answer-C15" required aria-required="true" placeholder="Укажите название CRM, нужные поля и статусы тендера."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C15">
-          <input id="confirm-C15" name="confirm-C15" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C15" name="confirm-C15" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1416,14 +1427,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Как сейчас рассчитывают себестоимость и загрузку мощностей?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C17">Показать что известно</button>
+          <div class="question__known" id="known-C17" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">Матрица ТЗ предусматривает расчёт себестоимости, маржи, прибыльности, инвестиций и производственных рисков. Публично заявлены проектные мощности: 30 000 т/год калиброванного проката и 27 000 т/год высокопрочного крепежа. Источники оперативных данных, внутренняя методика расчёта и текущая загрузка в предоставленных материалах не указаны.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C17">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C17">
-            <span>Что уже известно</span>
-            <textarea id="answer-C17" name="answer-C17" required aria-required="true" placeholder="Укажите источник данных, название методики или файла и способ проверки.">Матрица требует считать себестоимость, маржу, прибыльность, инвестиции и производственные риски. Публично заявлены проектные мощности: 30 000 т/год калиброванного проката и 27 000 т/год высокопрочного крепежа. Источники оперативных данных, внутренняя методика и текущая загрузка пока не подтверждены.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C17" name="answer-C17" required aria-required="true" placeholder="Укажите источник данных, название методики или файла и способ проверки."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C17">
-          <input id="confirm-C17" name="confirm-C17" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C17" name="confirm-C17" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1436,14 +1450,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Какие характеристики товара система должна сравнивать?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C18">Показать что известно</button>
+          <div class="question__known" id="known-C18" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">По матрице ТЗ, примерам товарного подбора и каталогу базовый набор характеристик включает тип продукции, ГОСТ, диаметр, длину, класс прочности, материал, покрытие, количество, единицу измерения и вес. Обязательный состав полей для отдельных товарных групп пока не зафиксирован.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C18">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C18">
-            <span>Что уже известно</span>
-            <textarea id="answer-C18" name="answer-C18" required aria-required="true" placeholder="Оставьте только обязательные характеристики и добавьте недостающие.">По матрице, примерам товарного подбора и каталогу базовый набор включает тип продукции, ГОСТ, диаметр, длину, класс прочности, материал, покрытие, количество, единицу измерения и вес. Нужно утвердить обязательные поля отдельно для каждой товарной группы.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C18" name="answer-C18" required aria-required="true" placeholder="Оставьте только обязательные характеристики и добавьте недостающие."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C18">
-          <input id="confirm-C18" name="confirm-C18" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C18" name="confirm-C18" type="checkbox" checked hidden>
         </div>
       </details>
     </div>
@@ -1465,14 +1482,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>В каком виде пользователю нужен итоговый результат по тендеру?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C19">Показать что известно</button>
+          <div class="question__known" id="known-C19" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">Матрица ТЗ предусматривает итоговое заключение по тендеру. В проектной концепции рассматриваются таблица, карточка, дашборд, PDF и запись в 1С или CRM. Обязательный формат и место сохранения пока не зафиксированы.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C19">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C19">
-            <span>Что уже известно</span>
-            <textarea id="answer-C19" name="answer-C19" required aria-required="true" placeholder="Выберите подходящие варианты: таблица, экран, PDF, письмо, Excel, запись в 1С или CRM.">Матрица подтверждает итоговое заключение по тендеру. Таблица, карточка, дашборд, PDF и запись в 1С или CRM пока являются вариантами концепции. Нужно выбрать обязательный формат и место сохранения.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C19" name="answer-C19" required aria-required="true" placeholder="Выберите подходящие варианты: таблица, экран, PDF, письмо, Excel, запись в 1С или CRM."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C19">
-          <input id="confirm-C19" name="confirm-C19" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C19" name="confirm-C19" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1485,14 +1505,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Есть ли готовые бланки или брендбук для итогового документа по тендеру?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C20">Показать что известно</button>
+          <div class="question__known" id="known-C20" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В предоставленных материалах есть четыре примера оформленных результатов и публичные каталоги БЕРВЕЛ в фирменном стиле. Официальный бланк и брендбук не предоставлены.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C20">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C20">
-            <span>Что уже известно</span>
-            <textarea id="answer-C20" name="answer-C20" required aria-required="true" placeholder="Приложите пример бланка или брендбук либо укажите, что оформление можно разработать с нуля.">Есть четыре примера оформленных результатов и публичные каталоги БЕРВЕЛ в фирменном стиле. Официальный бланк и брендбук пока не указаны.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C20" name="answer-C20" required aria-required="true" placeholder="Приложите пример бланка или брендбук либо укажите, что оформление можно разработать с нуля."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C20">
-          <input id="confirm-C20" name="confirm-C20" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C20" name="confirm-C20" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1505,14 +1528,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Где пользователю удобнее работать с тендерной системой?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C21">Показать что известно</button>
+          <div class="question__known" id="known-C21" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В проектной концепции предусмотрены отдельный личный кабинет, уведомления в Telegram и интеграции с 1С или CRM. Основное рабочее место пользователя пока не зафиксировано.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C21">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C21">
-            <span>Что уже известно</span>
-            <textarea id="answer-C21" name="answer-C21" required aria-required="true" placeholder="Выберите основной вариант: отдельный веб-интерфейс, 1С, CRM или другое рабочее место.">В проектной концепции предложены отдельный личный кабинет, уведомления в Telegram и связи с 1С или CRM. БЕРВЕЛ ещё нужно выбрать основное рабочее место пользователя.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C21" name="answer-C21" required aria-required="true" placeholder="Выберите основной вариант: отдельный веб-интерфейс, 1С, CRM или другое рабочее место."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C21">
-          <input id="confirm-C21" name="confirm-C21" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C21" name="confirm-C21" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1525,14 +1551,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Какие 3–5 экранов нужны для ежедневной работы?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C22">Показать что известно</button>
+          <div class="question__known" id="known-C22" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">Проектная концепция включает ранжированный список тендеров, карточку результата, дашборд и историю решений. Окончательный состав экранов тендерного контура пока не зафиксирован.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C22">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C22">
-            <span>Что уже известно</span>
-            <textarea id="answer-C22" name="answer-C22" required aria-required="true" placeholder="Например: список тендеров, карточка тендера, проверка требований, итог и история решений.">Проектная концепция предлагает ранжированный список тендеров, карточку результата, дашборд и историю решений. Этот состав экранов нужно подтвердить для тендерного контура.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C22" name="answer-C22" required aria-required="true" placeholder="Например: список тендеров, карточка тендера, проверка требований, итог и история решений."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C22">
-          <input id="confirm-C22" name="confirm-C22" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C22" name="confirm-C22" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1570,14 +1599,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Какой объём тендеров должна обрабатывать система и за какое время?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C24">Показать что известно</button>
+          <div class="question__known" id="known-C24" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В предоставленной выгрузке — 2 291 закупка за период с 01.09.2025 по 26.03.2026. Пиковая нагрузка и допустимое время обработки тендера в предоставленных материалах не указаны.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C24">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C24">
-            <span>Что уже известно</span>
-            <textarea id="answer-C24" name="answer-C24" required aria-required="true" placeholder="Укажите обычный объём тендеров, пик и допустимое время обработки.">В предоставленной выгрузке — 2 291 закупка за период с 01.09.2025 по 26.03.2026. Пиковая нагрузка и допустимое время обработки тендера пока не указаны.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C24" name="answer-C24" required aria-required="true" placeholder="Укажите обычный объём тендеров, пик и допустимое время обработки."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C24">
-          <input id="confirm-C24" name="confirm-C24" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C24" name="confirm-C24" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1590,14 +1622,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Где можно разместить тендерную систему и можно ли использовать внешние сервисы?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C25">Показать что известно</button>
+          <div class="question__known" id="known-C25" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В проектной концепции рассматриваются размещение системы на сервере БЕРВЕЛ и выбор внешних или локальных моделей. Допустимые сервисы и данные, которые нельзя передавать наружу, в предоставленных материалах не указаны.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C25">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C25">
-            <span>Что уже известно</span>
-            <textarea id="answer-C25" name="answer-C25" required aria-required="true" placeholder="Укажите место размещения и данные, которые нельзя передавать за пределы завода.">Проектная гипотеза — разместить систему на сервере БЕРВЕЛ и отдельно выбрать внешние или локальные модели. Нужно подтвердить место размещения, допустимые сервисы и данные, которые нельзя передавать наружу.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C25" name="answer-C25" required aria-required="true" placeholder="Укажите место размещения и данные, которые нельзя передавать за пределы завода."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C25">
-          <input id="confirm-C25" name="confirm-C25" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C25" name="confirm-C25" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1668,7 +1703,7 @@
   <div class="wrap">
     <div class="next__eyebrow">После заполнения</div>
     <h2 class="next__heading">Отправить ответы</h2>
-    <p class="next__lead">Заполните каждый ответ и подтвердите предзаполненные варианты. Когда опросник будет готов на 100%, кнопка станет активной.</p>
+    <p class="next__lead">Заполните каждый ответ. Если по вопросу уже есть сведения, их можно посмотреть и использовать как ответ. Когда опросник будет готов на 100%, кнопка станет активной.</p>
     <button class="next__cta" id="submit-answers" type="button" disabled>Отправить ответы →</button>
     <p class="next__status" id="submit-status" role="status" aria-live="polite">Заполнено 0 из 23 обязательных вопросов.</p>
   </div>
