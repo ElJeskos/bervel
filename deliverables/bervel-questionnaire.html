@@ -1138,7 +1138,7 @@
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
       <div class="hero__meta-item"><dt>Вопросов</dt><dd>23</dd></div>
       <div class="hero__meta-item"><dt>Есть сведения</dt><dd>17</dd></div>
-      <div class="hero__meta-item"><dt>Версия</dt><dd>2.9 · 02.09.2026</dd></div>
+      <div class="hero__meta-item"><dt>Версия</dt><dd>3.0 · 02.09.2026</dd></div>
     </dl>
   </div>
 </section>
@@ -1182,16 +1182,16 @@
           <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
         <div class="question__body">
-          <div class="question__prompt"><span>Вопрос</span><p>Кто будет пользоваться тендерной системой?</p></div>
+          <div class="question__prompt"><span>Вопрос</span><p>Кто будет пользоваться тендерной системой и сколько менеджеров, администраторов и руководителей должны работать в ней одновременно?</p></div>
           <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C02">Показать что известно</button>
           <div class="question__known" id="known-C02" hidden>
             <span>Что нам уже известно</span>
-            <p class="question__known-text">По материалам проекта система готовит рекомендацию по тендеру, а окончательное решение об участии или отказе принимает сотрудник БЕРВЕЛ.</p>
+            <p class="question__known-text">По материалам проекта система готовит рекомендацию по тендеру, а окончательное решение об участии или отказе принимает сотрудник БЕРВЕЛ. Другие роли и количество одновременно работающих пользователей в материалах не указаны.</p>
             <button class="question__known-use" type="button" data-answer-target="answer-C02">Использовать как ответ</button>
           </div>
           <label class="question__answer" for="answer-C02">
             <span>Ответ</span>
-            <textarea id="answer-C02" name="answer-C02" required aria-required="true" placeholder="Укажите роли и главную задачу каждой роли. Например: тендерный специалист — проверяет результат."></textarea>
+            <textarea id="answer-C02" name="answer-C02" required aria-required="true" placeholder="Укажите роль, главную задачу и максимальное количество одновременно работающих пользователей. Например: менеджер — проверяет результат — 5 человек."></textarea>
           </label>
           <input id="confirm-C02" name="confirm-C02" type="checkbox" checked hidden>
         </div>
@@ -2284,7 +2284,7 @@ void main(){
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             schemaVersion: 'bervel-questionnaire/v1',
-            questionnaireVersion: '2.9',
+            questionnaireVersion: '3.0',
             submissionId: submissionId,
             website: '',
             answers: collectAnswers()
