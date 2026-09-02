@@ -1031,6 +1031,43 @@
   .question__answer textarea::placeholder { color: var(--text-faint); }
   .question__answer textarea:focus { border-color: var(--accent-line); box-shadow: 0 0 0 3px var(--accent-mute); }
   .question__answer textarea:user-invalid { border-color: rgba(245, 201, 122, .6); }
+  .question__known-toggle,
+  .question__known-use {
+    width: max-content; border: 0; border-radius: 999px; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .03em;
+    transition: color .15s ease, background .15s ease;
+  }
+  .question__known-toggle {
+    margin: 0 0 18px 108px; padding: 9px 14px; background: var(--surface-2); color: var(--accent);
+  }
+  .question__known-toggle:hover { background: var(--accent-mute); }
+  .question__known-toggle:focus-visible,
+  .question__known-use:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+  .question__known {
+    margin: 0 0 22px 108px; padding: 18px; border-radius: 10px; background: var(--surface);
+  }
+  .question__known[hidden] { display: none; }
+  .question__known > span {
+    display: block; margin-bottom: 10px; color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .question__known p { color: var(--text-mid); font-size: 15px; line-height: 1.65; white-space: pre-line; }
+  .question__known-use { margin-top: 14px; padding: 9px 14px; background: var(--accent-mute); color: var(--accent); }
+  .question__known-use:hover { background: var(--accent); color: var(--bg); }
+  .question__choices { display: flex; flex-wrap: wrap; gap: 10px; }
+  .question__choice { position: relative; cursor: pointer; }
+  .question__choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .question__choice span {
+    display: inline-flex; align-items: center; min-width: 150px; padding: 13px 16px;
+    border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface);
+    color: var(--text-mid); font-size: 15px; transition: color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .question__choice span::before {
+    content: ''; width: 8px; height: 8px; margin-right: 10px; border-radius: 50%; background: var(--text-faint);
+  }
+  .question__choice input:focus-visible + span { outline: 1px solid var(--accent); outline-offset: 2px; }
+  .question__choice input:checked + span { border-color: var(--accent-line); background: var(--accent-mute); color: var(--accent); }
+  .question__choice input:checked + span::before { background: var(--accent); }
   .question__confirm { display: inline-flex; width: max-content; margin-top: 14px; cursor: pointer; }
   .question__confirm input { position: absolute; opacity: 0; pointer-events: none; }
   .question__confirm span {
@@ -1062,6 +1099,8 @@
     .question__title { font-size: 15px; }
     .question__body { padding: 0 0 26px; }
     .question__prompt { grid-template-columns: 1fr; gap: 8px; }
+    .question__known-toggle,
+    .question__known { margin-left: 0; }
     .question__answer textarea { min-height: 160px; }
   }
 
@@ -1134,14 +1173,17 @@
         </summary>
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Какие основные задачи должна решать тендерная система?</p></div>
+          <button class="question__known-toggle" type="button" aria-expanded="false" aria-controls="known-C01">Показать что известно</button>
+          <div class="question__known" id="known-C01" hidden>
+            <span>Что нам уже известно</span>
+            <p class="question__known-text">В проектной концепции предусмотрено, что тендерная система получает закупки и документы, извлекает требования, сопоставляет их с возможностями БЕРВЕЛ и готовит обоснованную рекомендацию об участии или отказе.</p>
+            <button class="question__known-use" type="button" data-answer-target="answer-C01">Использовать как ответ</button>
+          </div>
           <label class="question__answer" for="answer-C01">
-            <span>Что уже известно</span>
-            <textarea id="answer-C01" name="answer-C01" required aria-required="true" placeholder="Коротко перечислите задачи первой версии.">Для тендерного контура первая версия должна получать закупки и документы, извлекать требования, сопоставлять их с возможностями БЕРВЕЛ и готовить обоснованную рекомендацию об участии или отказе. Подтвердите или скорректируйте состав задач.</textarea>
+            <span>Ответ</span>
+            <textarea id="answer-C01" name="answer-C01" required aria-required="true" placeholder="Коротко перечислите задачи первой версии."></textarea>
           </label>
-        <label class="question__confirm" for="confirm-C01">
-          <input id="confirm-C01" name="confirm-C01" type="checkbox" required aria-required="true">
-          <span>Подтверждаю</span>
-        </label>
+          <input id="confirm-C01" name="confirm-C01" type="checkbox" checked hidden>
         </div>
       </details>
 
@@ -1585,10 +1627,19 @@
         <div class="question__body">
           <div class="question__prompt"><span>Вопрос</span><p>Какой вариант доступа к нейросети больше подходит БЕРВЕЛ: подписка или API?</p></div>
           <div class="question__prompt"><span>Пояснение</span><p>Подписка в разы дешевле API-ключа и позволяет выполнять весь необходимый функционал тендерной системы. Преимущество API-ключа — более простое масштабирование: можно централизованно управлять доступом, точно учитывать расходы, обрабатывать больше запросов одновременно и увеличивать лимиты без покупки дополнительных аккаунтов.</p></div>
-          <label class="question__answer" for="answer-C27">
+          <div class="question__answer">
             <span>Ответ</span>
-            <textarea id="answer-C27" name="answer-C27" required aria-required="true" placeholder="Выберите основной вариант: подписка, API или локальная нейросеть."></textarea>
-          </label>
+            <div class="question__choices" role="radiogroup" aria-label="Вариант доступа к нейросети">
+              <label class="question__choice">
+                <input type="radio" name="answer-C27" value="Подписка" required aria-required="true">
+                <span>Подписка</span>
+              </label>
+              <label class="question__choice">
+                <input type="radio" name="answer-C27" value="API-ключ" required aria-required="true">
+                <span>API-ключ</span>
+              </label>
+            </div>
+          </div>
         </div>
       </details>
 
@@ -2071,10 +2122,17 @@ void main(){
     var submitting = false;
     var submitted = false;
 
+    function getAnswerValue(question) {
+      var id = question.getAttribute('data-id');
+      var textarea = question.querySelector('textarea[name="answer-' + id + '"]');
+      if (textarea) return textarea.value.trim();
+      var selected = question.querySelector('input[name="answer-' + id + '"]:checked');
+      return selected ? selected.value.trim() : '';
+    }
+
     function isComplete(question) {
       var id = question.getAttribute('data-id');
-      var answer = question.querySelector('textarea[name="answer-' + id + '"]');
-      if (!answer || !answer.value.trim()) return false;
+      if (!getAnswerValue(question)) return false;
       if (question.getAttribute('data-prefilled') === 'true') {
         return Boolean(question.querySelector('input[name="confirm-' + id + '"]:checked'));
       }
@@ -2111,10 +2169,37 @@ void main(){
 
     questions.forEach(function (question) {
       question.open = true;
-      var answer = question.querySelector('textarea');
+      var textarea = question.querySelector('textarea');
+      var choices = question.querySelectorAll('input[name^="answer-"]');
       var confirm = question.querySelector('input[name^="confirm-"]');
-      if (answer) answer.addEventListener('input', updateProgress);
+      if (textarea) textarea.addEventListener('input', updateProgress);
+      Array.prototype.forEach.call(choices, function (choice) {
+        choice.addEventListener('change', updateProgress);
+      });
       if (confirm) confirm.addEventListener('change', updateProgress);
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.question__known-toggle'), function (button) {
+      button.addEventListener('click', function () {
+        var panel = document.getElementById(button.getAttribute('aria-controls'));
+        if (!panel) return;
+        var willOpen = panel.hidden;
+        panel.hidden = !willOpen;
+        button.setAttribute('aria-expanded', String(willOpen));
+        button.textContent = willOpen ? 'Скрыть что известно' : 'Показать что известно';
+      });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.question__known-use'), function (button) {
+      button.addEventListener('click', function () {
+        var panel = button.closest('.question__known');
+        var answer = document.getElementById(button.getAttribute('data-answer-target'));
+        var knownText = panel && panel.querySelector('.question__known-text');
+        if (!answer || !knownText) return;
+        answer.value = knownText.textContent.trim();
+        answer.dispatchEvent(new Event('input', { bubbles: true }));
+        answer.focus();
+      });
     });
 
     function scrollToQuestions() {
@@ -2138,13 +2223,12 @@ void main(){
     function collectAnswers() {
       return questions.map(function (question) {
         var id = question.getAttribute('data-id');
-        var answer = question.querySelector('textarea[name="answer-' + id + '"]');
         var confirm = question.querySelector('input[name="confirm-' + id + '"]');
         var title = question.querySelector('.question__title');
         return {
           id: id,
           question: title ? title.textContent.trim() : id,
-          answer: answer.value.trim(),
+          answer: getAnswerValue(question),
           confirmed: Boolean(confirm && confirm.checked)
         };
       });
