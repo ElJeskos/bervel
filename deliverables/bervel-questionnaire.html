@@ -572,6 +572,14 @@
     text-decoration: none; letter-spacing: 0.04em; transition: background 0.15s ease, color 0.15s ease;
   }
   .next__cta:hover { background: var(--accent); color: var(--bg); }
+  .next__cta:disabled {
+    cursor: not-allowed; opacity: .42; background: var(--surface-2); color: var(--text-mute);
+  }
+  .next__cta:disabled:hover { background: var(--surface-2); color: var(--text-mute); }
+  .next__cta[data-state="success"] { opacity: 1; background: var(--accent); color: var(--bg); }
+  .next__status { min-height: 22px; margin-top: 16px; color: var(--text-mute); font-size: 14px; }
+  .next__status--error { color: var(--high); }
+  .next__status--success { color: var(--accent); }
 
   /* ==================== FOOTER ==================== */
   footer { padding: 40px 0 56px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-faint); line-height: 1.6; }
@@ -1022,6 +1030,7 @@
   }
   .question__answer textarea::placeholder { color: var(--text-faint); }
   .question__answer textarea:focus { border-color: var(--accent-line); box-shadow: 0 0 0 3px var(--accent-mute); }
+  .question__answer textarea:user-invalid { border-color: rgba(245, 201, 122, .6); }
   .question__confirm { display: inline-flex; width: max-content; margin-top: 14px; cursor: pointer; }
   .question__confirm input { position: absolute; opacity: 0; pointer-events: none; }
   .question__confirm span {
@@ -1083,7 +1092,7 @@
       <svg class="brand__logo-mark" viewBox="397 0 224 224" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M621.073 111.26C621.073 173.463 571.619 223.088 509.66 223.088C447.7 223.088 397.677 173.463 397.677 111.26C397.677 49.0578 447.14 0 509.66 0C572.179 0 621.073 49.049 621.073 111.26ZM422.706 111.26C422.706 160.292 462.488 199.77 509.668 199.77C556.849 199.77 596.062 160.283 596.062 111.26C596.062 62.2381 556.849 23.4158 509.668 23.4158C462.488 23.4158 422.706 62.2114 422.706 111.26Z" fill="#8ADDD4"/></svg>
     </a>
     <div class="brand__progress" aria-label="Заполненность документа">
-      <div class="brand__progress-head"><span class="brand__progress-label">Заполненность</span><span class="brand__progress-value"><strong id="progress-percent">0%</strong> · <span id="progress-count">0 из 21</span></span></div>
+      <div class="brand__progress-head"><span class="brand__progress-label">Заполненность</span><span class="brand__progress-value"><strong id="progress-percent">0%</strong> · <span id="progress-count">0 из 23</span></span></div>
       <div class="brand__progress-track"><div class="brand__progress-fill" id="progress-fill"></div></div>
     </div>
     <div class="brand__cluster">
@@ -1097,13 +1106,13 @@
   <div class="wrap">
     <div class="hero__eyebrow">Простой опросник к техническому заданию · БЕРВЕЛ</div>
     <h1 class="hero__title">Уточнить систему для <span class="accent">анализа тендеров</span></h1>
-    <p class="hero__lead">21 короткий вопрос про тендеры, данные завода, интерфейс и запуск. <strong>На каждый вопрос можно ответить коротко.</strong></p>
+    <p class="hero__lead">23 коротких вопроса про тендеры, данные завода, интерфейс и запуск. <strong>На каждый вопрос можно ответить коротко.</strong></p>
     <button class="hero__cta" id="start-btn" type="button">Перейти к вопросам ↓</button>
     <dl class="hero__meta">
       <div class="hero__meta-item"><dt>Клиент</dt><dd>БЕРВЕЛ</dd></div>
-      <div class="hero__meta-item"><dt>Вопросов</dt><dd>21</dd></div>
+      <div class="hero__meta-item"><dt>Вопросов</dt><dd>23</dd></div>
       <div class="hero__meta-item"><dt>Предзаполнено</dt><dd>17</dd></div>
-      <div class="hero__meta-item"><dt>Версия</dt><dd>2.8 · 01.09.2026</dd></div>
+      <div class="hero__meta-item"><dt>Версия</dt><dd>2.9 · 02.09.2026</dd></div>
     </dl>
   </div>
 </section>
@@ -1127,10 +1136,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какие основные задачи должна решать тендерная система?</p></div>
           <label class="question__answer" for="answer-C01">
             <span>Что уже известно</span>
-            <textarea id="answer-C01" name="answer-C01" placeholder="Коротко перечислите задачи первой версии.">Для тендерного контура первая версия должна получать закупки и документы, извлекать требования, сопоставлять их с возможностями БЕРВЕЛ и готовить обоснованную рекомендацию об участии или отказе. Подтвердите или скорректируйте состав задач.</textarea>
+            <textarea id="answer-C01" name="answer-C01" required aria-required="true" placeholder="Коротко перечислите задачи первой версии.">Для тендерного контура первая версия должна получать закупки и документы, извлекать требования, сопоставлять их с возможностями БЕРВЕЛ и готовить обоснованную рекомендацию об участии или отказе. Подтвердите или скорректируйте состав задач.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C01">
-          <input id="confirm-C01" name="confirm-C01" type="checkbox">
+          <input id="confirm-C01" name="confirm-C01" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1147,10 +1156,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Кто будет пользоваться тендерной системой?</p></div>
           <label class="question__answer" for="answer-C02">
             <span>Что уже известно</span>
-            <textarea id="answer-C02" name="answer-C02" placeholder="Укажите роли и главную задачу каждой роли. Например: тендерный специалист — проверяет результат.">По материалам проекта система готовит рекомендацию, а решение по тендеру принимает сотрудник БЕРВЕЛ. Требуется перечислить роли пользователей тендерного контура и задачи каждой роли.</textarea>
+            <textarea id="answer-C02" name="answer-C02" required aria-required="true" placeholder="Укажите роли и главную задачу каждой роли. Например: тендерный специалист — проверяет результат.">По материалам проекта система готовит рекомендацию, а решение по тендеру принимает сотрудник БЕРВЕЛ. Требуется перечислить роли пользователей тендерного контура и задачи каждой роли.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C02">
-          <input id="confirm-C02" name="confirm-C02" type="checkbox">
+          <input id="confirm-C02" name="confirm-C02" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1167,7 +1176,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>К какой дате нужны прототип, пилот и рабочая версия?</p></div>
           <label class="question__answer" for="answer-C03">
             <span>Ответ</span>
-            <textarea id="answer-C03" name="answer-C03" placeholder="Укажите желаемые даты или важные внешние сроки."></textarea>
+            <textarea id="answer-C03" name="answer-C03" required aria-required="true" placeholder="Укажите желаемые даты или важные внешние сроки."></textarea>
           </label>
         </div>
       </details>
@@ -1192,10 +1201,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Через какой основной источник нужно получать тендеры и документы?</p></div>
           <label class="question__answer" for="answer-C04">
             <span>Что уже известно</span>
-            <textarea id="answer-C04" name="answer-C04" placeholder="Выберите один основной источник и при необходимости запасной.">Сейчас используются выгрузки из Контур.Закупки или другого сервиса, а техническая документация скачивается вручную. ЕИС рассматривается как целевой источник, но это требует подтверждения и технической проверки.</textarea>
+            <textarea id="answer-C04" name="answer-C04" required aria-required="true" placeholder="Выберите один основной источник и при необходимости запасной.">Сейчас используются выгрузки из Контур.Закупки или другого сервиса, а техническая документация скачивается вручную. ЕИС рассматривается как целевой источник, но это требует подтверждения и технической проверки.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C04">
-          <input id="confirm-C04" name="confirm-C04" type="checkbox">
+          <input id="confirm-C04" name="confirm-C04" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1212,7 +1221,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Есть ли у БЕРВЕЛ рабочий доступ к выбранному источнику?</p></div>
           <label class="question__answer" for="answer-C05">
             <span>Ответ</span>
-            <textarea id="answer-C05" name="answer-C05" placeholder="Укажите «да» или «нет» и название источника. Для ЕИС уточните, зарегистрирован ли завод как получатель данных. Секреты и пароли не нужны."></textarea>
+            <textarea id="answer-C05" name="answer-C05" required aria-required="true" placeholder="Укажите «да» или «нет» и название источника. Для ЕИС уточните, зарегистрирован ли завод как получатель данных. Секреты и пароли не нужны."></textarea>
           </label>
         </div>
       </details>
@@ -1228,10 +1237,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>По каким признакам тендер подходит БЕРВЕЛ?</p></div>
           <label class="question__answer" for="answer-C06">
             <span>Что уже известно</span>
-            <textarea id="answer-C06" name="answer-C06" placeholder="Например: продукция, объём, регион, срок поставки, отрасль и условия участия.">Базовый признак — соответствие предмета закупки продукции и производственным возможностям БЕРВЕЛ. В проекте также предлагается учитывать объём, сроки, обеспечение и риски. Пороги, географию и отраслевые ограничения нужно подтвердить.</textarea>
+            <textarea id="answer-C06" name="answer-C06" required aria-required="true" placeholder="Например: продукция, объём, регион, срок поставки, отрасль и условия участия.">Базовый признак — соответствие предмета закупки продукции и производственным возможностям БЕРВЕЛ. В проекте также предлагается учитывать объём, сроки, обеспечение и риски. Пороги, географию и отраслевые ограничения нужно подтвердить.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C06">
-          <input id="confirm-C06" name="confirm-C06" type="checkbox">
+          <input id="confirm-C06" name="confirm-C06" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1248,10 +1257,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>В каких случаях тендер нужно сразу отклонить?</p></div>
           <label class="question__answer" for="answer-C07">
             <span>Что уже известно</span>
-            <textarea id="answer-C07" name="answer-C07" placeholder="Перечислите только однозначные причины отказа.">В примерах товарного подбора встречаются отсутствие позиции в номенклатуре, неподдерживаемые размеры или класс и необходимость уточнения характеристик. Нужно подтвердить, какие из этих причин означают безусловный отказ от тендера.</textarea>
+            <textarea id="answer-C07" name="answer-C07" required aria-required="true" placeholder="Перечислите только однозначные причины отказа.">В примерах товарного подбора встречаются отсутствие позиции в номенклатуре, неподдерживаемые размеры или класс и необходимость уточнения характеристик. Нужно подтвердить, какие из этих причин означают безусловный отказ от тендера.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C07">
-          <input id="confirm-C07" name="confirm-C07" type="checkbox">
+          <input id="confirm-C07" name="confirm-C07" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1268,7 +1277,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Что система должна сделать с подходящим тендером?</p></div>
           <label class="question__answer" for="answer-C08">
             <span>Что уже известно</span>
-            <textarea id="answer-C08" name="answer-C08" rows="13" placeholder="Перечислите действия системы по порядку.">Фрагменты из матрицы ТЗ заказчика:
+            <textarea id="answer-C08" name="answer-C08" rows="13" required aria-required="true" placeholder="Перечислите действия системы по порядку.">Фрагменты из матрицы ТЗ заказчика:
 • «Автоматическая загрузка и структурирование тендерной документации».
 • «Анализ чертежей и технических требований к продукции».
 • «Сопоставление требований тендера с текущими производственными возможностями».
@@ -1281,7 +1290,7 @@
 Источник: «ИИ-агент для БЕРВЕЛ — матрица ТЗ, 22.06.2026.xlsx», направление 1 «Тендеры».</textarea>
           </label>
         <label class="question__confirm" for="confirm-C08">
-          <input id="confirm-C08" name="confirm-C08" type="checkbox">
+          <input id="confirm-C08" name="confirm-C08" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1298,10 +1307,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>На каких этапах тендерной системы должен участвовать человек?</p></div>
           <label class="question__answer" for="answer-C09">
             <span>Что уже известно</span>
-            <textarea id="answer-C09" name="answer-C09" placeholder="Укажите решение, которое всегда остаётся за человеком.">Рабочая гипотеза: система готовит рекомендацию, а сотрудник БЕРВЕЛ принимает решение об участии или отказе. Требуется подтвердить это правило.</textarea>
+            <textarea id="answer-C09" name="answer-C09" required aria-required="true" placeholder="Укажите решение, которое всегда остаётся за человеком.">Рабочая гипотеза: система готовит рекомендацию, а сотрудник БЕРВЕЛ принимает решение об участии или отказе. Требуется подтвердить это правило.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C09">
-          <input id="confirm-C09" name="confirm-C09" type="checkbox">
+          <input id="confirm-C09" name="confirm-C09" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1327,10 +1336,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какая 1С используется и как из неё можно получать данные?</p></div>
           <label class="question__answer" for="answer-C14">
             <span>Что уже известно</span>
-            <textarea id="answer-C14" name="answer-C14" placeholder="Укажите конфигурацию, версию и удобный способ получения данных.">В проектной концепции 1С рассматривается как источник номенклатуры, техкарт, цен и производственных данных. Наличие нужных данных, конфигурацию, версию и способ доступа — прямое подключение или выгрузку — нужно подтвердить.</textarea>
+            <textarea id="answer-C14" name="answer-C14" required aria-required="true" placeholder="Укажите конфигурацию, версию и удобный способ получения данных.">В проектной концепции 1С рассматривается как источник номенклатуры, техкарт, цен и производственных данных. Наличие нужных данных, конфигурацию, версию и способ доступа — прямое подключение или выгрузку — нужно подтвердить.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C14">
-          <input id="confirm-C14" name="confirm-C14" type="checkbox">
+          <input id="confirm-C14" name="confirm-C14" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1347,10 +1356,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Нужно ли сохранять результаты тендерного анализа в CRM и какие данные передавать?</p></div>
           <label class="question__answer" for="answer-C15">
             <span>Что уже известно</span>
-            <textarea id="answer-C15" name="answer-C15" placeholder="Укажите название CRM, нужные поля и статусы тендера.">CRM и ERP рассматриваются как возможные места хранения результатов тендерного анализа. Нужно подтвердить название системы, её реальное использование, нужные поля и статусы тендера.</textarea>
+            <textarea id="answer-C15" name="answer-C15" required aria-required="true" placeholder="Укажите название CRM, нужные поля и статусы тендера.">CRM и ERP рассматриваются как возможные места хранения результатов тендерного анализа. Нужно подтвердить название системы, её реальное использование, нужные поля и статусы тендера.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C15">
-          <input id="confirm-C15" name="confirm-C15" type="checkbox">
+          <input id="confirm-C15" name="confirm-C15" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1367,10 +1376,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Как сейчас рассчитывают себестоимость и загрузку мощностей?</p></div>
           <label class="question__answer" for="answer-C17">
             <span>Что уже известно</span>
-            <textarea id="answer-C17" name="answer-C17" placeholder="Укажите источник данных, название методики или файла и способ проверки.">Матрица требует считать себестоимость, маржу, прибыльность, инвестиции и производственные риски. Публично заявлены проектные мощности: 30 000 т/год калиброванного проката и 27 000 т/год высокопрочного крепежа. Источники оперативных данных, внутренняя методика и текущая загрузка пока не подтверждены.</textarea>
+            <textarea id="answer-C17" name="answer-C17" required aria-required="true" placeholder="Укажите источник данных, название методики или файла и способ проверки.">Матрица требует считать себестоимость, маржу, прибыльность, инвестиции и производственные риски. Публично заявлены проектные мощности: 30 000 т/год калиброванного проката и 27 000 т/год высокопрочного крепежа. Источники оперативных данных, внутренняя методика и текущая загрузка пока не подтверждены.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C17">
-          <input id="confirm-C17" name="confirm-C17" type="checkbox">
+          <input id="confirm-C17" name="confirm-C17" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1387,10 +1396,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какие характеристики товара система должна сравнивать?</p></div>
           <label class="question__answer" for="answer-C18">
             <span>Что уже известно</span>
-            <textarea id="answer-C18" name="answer-C18" placeholder="Оставьте только обязательные характеристики и добавьте недостающие.">По матрице, примерам товарного подбора и каталогу базовый набор включает тип продукции, ГОСТ, диаметр, длину, класс прочности, материал, покрытие, количество, единицу измерения и вес. Нужно утвердить обязательные поля отдельно для каждой товарной группы.</textarea>
+            <textarea id="answer-C18" name="answer-C18" required aria-required="true" placeholder="Оставьте только обязательные характеристики и добавьте недостающие.">По матрице, примерам товарного подбора и каталогу базовый набор включает тип продукции, ГОСТ, диаметр, длину, класс прочности, материал, покрытие, количество, единицу измерения и вес. Нужно утвердить обязательные поля отдельно для каждой товарной группы.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C18">
-          <input id="confirm-C18" name="confirm-C18" type="checkbox">
+          <input id="confirm-C18" name="confirm-C18" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1416,10 +1425,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>В каком виде пользователю нужен итоговый результат по тендеру?</p></div>
           <label class="question__answer" for="answer-C19">
             <span>Что уже известно</span>
-            <textarea id="answer-C19" name="answer-C19" placeholder="Выберите подходящие варианты: таблица, экран, PDF, письмо, Excel, запись в 1С или CRM.">Матрица подтверждает итоговое заключение по тендеру. Таблица, карточка, дашборд, PDF и запись в 1С или CRM пока являются вариантами концепции. Нужно выбрать обязательный формат и место сохранения.</textarea>
+            <textarea id="answer-C19" name="answer-C19" required aria-required="true" placeholder="Выберите подходящие варианты: таблица, экран, PDF, письмо, Excel, запись в 1С или CRM.">Матрица подтверждает итоговое заключение по тендеру. Таблица, карточка, дашборд, PDF и запись в 1С или CRM пока являются вариантами концепции. Нужно выбрать обязательный формат и место сохранения.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C19">
-          <input id="confirm-C19" name="confirm-C19" type="checkbox">
+          <input id="confirm-C19" name="confirm-C19" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1436,10 +1445,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Есть ли готовые бланки или брендбук для итогового документа по тендеру?</p></div>
           <label class="question__answer" for="answer-C20">
             <span>Что уже известно</span>
-            <textarea id="answer-C20" name="answer-C20" placeholder="Приложите пример бланка или брендбук либо укажите, что оформление можно разработать с нуля.">Есть четыре примера оформленных результатов и публичные каталоги БЕРВЕЛ в фирменном стиле. Официальный бланк и брендбук пока не указаны.</textarea>
+            <textarea id="answer-C20" name="answer-C20" required aria-required="true" placeholder="Приложите пример бланка или брендбук либо укажите, что оформление можно разработать с нуля.">Есть четыре примера оформленных результатов и публичные каталоги БЕРВЕЛ в фирменном стиле. Официальный бланк и брендбук пока не указаны.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C20">
-          <input id="confirm-C20" name="confirm-C20" type="checkbox">
+          <input id="confirm-C20" name="confirm-C20" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1456,10 +1465,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Где пользователю удобнее работать с тендерной системой?</p></div>
           <label class="question__answer" for="answer-C21">
             <span>Что уже известно</span>
-            <textarea id="answer-C21" name="answer-C21" placeholder="Выберите основной вариант: отдельный веб-интерфейс, 1С, CRM или другое рабочее место.">В проектной концепции предложены отдельный личный кабинет, уведомления в Telegram и связи с 1С или CRM. БЕРВЕЛ ещё нужно выбрать основное рабочее место пользователя.</textarea>
+            <textarea id="answer-C21" name="answer-C21" required aria-required="true" placeholder="Выберите основной вариант: отдельный веб-интерфейс, 1С, CRM или другое рабочее место.">В проектной концепции предложены отдельный личный кабинет, уведомления в Telegram и связи с 1С или CRM. БЕРВЕЛ ещё нужно выбрать основное рабочее место пользователя.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C21">
-          <input id="confirm-C21" name="confirm-C21" type="checkbox">
+          <input id="confirm-C21" name="confirm-C21" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1476,10 +1485,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какие 3–5 экранов нужны для ежедневной работы?</p></div>
           <label class="question__answer" for="answer-C22">
             <span>Что уже известно</span>
-            <textarea id="answer-C22" name="answer-C22" placeholder="Например: список тендеров, карточка тендера, проверка требований, итог и история решений.">Проектная концепция предлагает ранжированный список тендеров, карточку результата, дашборд и историю решений. Этот состав экранов нужно подтвердить для тендерного контура.</textarea>
+            <textarea id="answer-C22" name="answer-C22" required aria-required="true" placeholder="Например: список тендеров, карточка тендера, проверка требований, итог и история решений.">Проектная концепция предлагает ранжированный список тендеров, карточку результата, дашборд и историю решений. Этот состав экранов нужно подтвердить для тендерного контура.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C22">
-          <input id="confirm-C22" name="confirm-C22" type="checkbox">
+          <input id="confirm-C22" name="confirm-C22" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1496,7 +1505,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>Как администратор должен менять правила отбора тендеров, справочники, роли и уведомления?</p></div>
           <label class="question__answer" for="answer-C23">
             <span>Ответ</span>
-            <textarea id="answer-C23" name="answer-C23" placeholder="Например: через раздел настроек, загрузку Excel или данные из 1С."></textarea>
+            <textarea id="answer-C23" name="answer-C23" required aria-required="true" placeholder="Например: через раздел настроек, загрузку Excel или данные из 1С."></textarea>
           </label>
         </div>
       </details>
@@ -1521,10 +1530,10 @@
           <div class="question__prompt"><span>Вопрос</span><p>Какой объём тендеров должна обрабатывать система и за какое время?</p></div>
           <label class="question__answer" for="answer-C24">
             <span>Что уже известно</span>
-            <textarea id="answer-C24" name="answer-C24" placeholder="Укажите обычный объём тендеров, пик и допустимое время обработки.">В предоставленной выгрузке — 2 291 закупка за период с 01.09.2025 по 26.03.2026. Пиковая нагрузка и допустимое время обработки тендера пока не указаны.</textarea>
+            <textarea id="answer-C24" name="answer-C24" required aria-required="true" placeholder="Укажите обычный объём тендеров, пик и допустимое время обработки.">В предоставленной выгрузке — 2 291 закупка за период с 01.09.2025 по 26.03.2026. Пиковая нагрузка и допустимое время обработки тендера пока не указаны.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C24">
-          <input id="confirm-C24" name="confirm-C24" type="checkbox">
+          <input id="confirm-C24" name="confirm-C24" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
         </div>
@@ -1541,12 +1550,45 @@
           <div class="question__prompt"><span>Вопрос</span><p>Где можно разместить тендерную систему и можно ли использовать внешние сервисы?</p></div>
           <label class="question__answer" for="answer-C25">
             <span>Что уже известно</span>
-            <textarea id="answer-C25" name="answer-C25" placeholder="Укажите место размещения и данные, которые нельзя передавать за пределы завода.">Проектная гипотеза — разместить систему на сервере БЕРВЕЛ и отдельно выбрать внешние или локальные модели. Нужно подтвердить место размещения, допустимые сервисы и данные, которые нельзя передавать наружу.</textarea>
+            <textarea id="answer-C25" name="answer-C25" required aria-required="true" placeholder="Укажите место размещения и данные, которые нельзя передавать за пределы завода.">Проектная гипотеза — разместить систему на сервере БЕРВЕЛ и отдельно выбрать внешние или локальные модели. Нужно подтвердить место размещения, допустимые сервисы и данные, которые нельзя передавать наружу.</textarea>
           </label>
         <label class="question__confirm" for="confirm-C25">
-          <input id="confirm-C25" name="confirm-C25" type="checkbox">
+          <input id="confirm-C25" name="confirm-C25" type="checkbox" required aria-required="true">
           <span>Подтверждаю</span>
         </label>
+        </div>
+      </details>
+
+      <details class="question" id="q-C26" data-id="C26" data-prefilled="false">
+        <summary class="question__summary">
+          <span class="question__id">C26</span>
+          <span class="question__title">Выбор нейросети</span>
+          <span class="question__due question__due--critical">Критично для старта</span>
+          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="question__body">
+          <div class="question__prompt"><span>Вопрос</span><p>Какие нейросети можно использовать: российские, американские, китайские или только установленные на сервере БЕРВЕЛ?</p></div>
+          <label class="question__answer" for="answer-C26">
+            <span>Ответ</span>
+            <textarea id="answer-C26" name="answer-C26" required aria-required="true" placeholder="Укажите, модели каких стран разрешены и можно ли передавать тендерные документы во внешние сервисы."></textarea>
+          </label>
+        </div>
+      </details>
+
+      <details class="question" id="q-C27" data-id="C27" data-prefilled="false">
+        <summary class="question__summary">
+          <span class="question__id">C27</span>
+          <span class="question__title">Подключение нейросети</span>
+          <span class="question__due question__due--critical">Критично для старта</span>
+          <svg class="question__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="question__body">
+          <div class="question__prompt"><span>Вопрос</span><p>Какой вариант доступа к нейросети больше подходит БЕРВЕЛ: подписка или API?</p></div>
+          <div class="question__prompt"><span>Пояснение</span><p>Подписка даёт доступ к сервису за фиксированную плату и в пределах лимитов тарифа. API позволяет подключить нейросеть к системе напрямую; стоимость обычно зависит от объёма запросов. Условия зависят от поставщика: API может оплачиваться отдельно или входить в тариф.</p></div>
+          <label class="question__answer" for="answer-C27">
+            <span>Ответ</span>
+            <textarea id="answer-C27" name="answer-C27" required aria-required="true" placeholder="Выберите основной вариант: подписка, API или локальная нейросеть."></textarea>
+          </label>
         </div>
       </details>
 
@@ -1561,7 +1603,7 @@
           <div class="question__prompt"><span>Вопрос</span><p>На каких тендерах и по каким показателям БЕРВЕЛ примет пилот?</p></div>
           <label class="question__answer" for="answer-C29">
             <span>Ответ</span>
-            <textarea id="answer-C29" name="answer-C29" placeholder="Укажите набор реальных тендеров и 3–5 простых показателей: точность, полнота, время или удобство."></textarea>
+            <textarea id="answer-C29" name="answer-C29" required aria-required="true" placeholder="Укажите набор реальных тендеров и 3–5 простых показателей: точность, полнота, время или удобство."></textarea>
           </label>
         </div>
       </details>
@@ -1574,9 +1616,10 @@
   <div class="next__bg" id="next-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="next__eyebrow">После заполнения</div>
-    <h2 class="next__heading">Сохранить согласованный документ</h2>
-    <p class="next__lead">Сначала ответьте на вопросы с жёлтой меткой. Остальные можно уточнить на техническом брифе. Затем сохраните страницу в PDF и передайте координатору проекта.</p>
-    <button class="next__cta" id="next-print" type="button">Печать / PDF →</button>
+    <h2 class="next__heading">Отправить ответы</h2>
+    <p class="next__lead">Заполните каждый ответ и подтвердите предзаполненные варианты. Когда опросник будет готов на 100%, кнопка станет активной.</p>
+    <button class="next__cta" id="submit-answers" type="button" disabled>Отправить ответы →</button>
+    <p class="next__status" id="submit-status" role="status" aria-live="polite">Заполнено 0 из 23 обязательных вопросов.</p>
   </div>
 </section>
 
@@ -2019,14 +2062,29 @@ void main(){
     var percent = document.getElementById('progress-percent');
     var count = document.getElementById('progress-count');
     var fill = document.getElementById('progress-fill');
+    var submitButton = document.getElementById('submit-answers');
+    var submitStatus = document.getElementById('submit-status');
+    var productionApiUrl = 'https://moxdev3.ru/ajax/bervel-questionnaire.php';
+    var isLocal = location.hostname === '127.0.0.1' || location.hostname === 'localhost';
+    var apiUrl = isLocal ? location.origin + '/server/bervel-questionnaire.php' : productionApiUrl;
+    var pendingIdKey = 'bervel-questionnaire-pending-submission-id';
+    var submitting = false;
+    var submitted = false;
 
     function isComplete(question) {
       var id = question.getAttribute('data-id');
+      var answer = question.querySelector('textarea[name="answer-' + id + '"]');
+      if (!answer || !answer.value.trim()) return false;
       if (question.getAttribute('data-prefilled') === 'true') {
         return Boolean(question.querySelector('input[name="confirm-' + id + '"]:checked'));
       }
-      var answer = question.querySelector('textarea[name="answer-' + id + '"]');
-      return Boolean(answer && answer.value.trim());
+      return true;
+    }
+
+    function setSubmitStatus(text, state) {
+      submitStatus.textContent = text;
+      submitStatus.classList.toggle('next__status--error', state === 'error');
+      submitStatus.classList.toggle('next__status--success', state === 'success');
     }
 
     function updateProgress() {
@@ -2036,6 +2094,19 @@ void main(){
       count.textContent = done + ' из ' + questions.length;
       fill.style.width = pct + '%';
       questions.forEach(function (question) { question.classList.toggle('question--complete', isComplete(question)); });
+      if (!submitted) {
+        submitButton.disabled = submitting || done !== questions.length;
+        submitButton.removeAttribute('data-state');
+        submitButton.textContent = submitting ? 'Отправляем…' : 'Отправить ответы →';
+        if (!submitting) {
+          setSubmitStatus(
+            done === questions.length
+              ? 'Все обязательные ответы заполнены. Можно отправлять.'
+              : 'Заполнено ' + done + ' из ' + questions.length + ' обязательных вопросов.',
+            ''
+          );
+        }
+      }
     }
 
     questions.forEach(function (question) {
@@ -2053,9 +2124,77 @@ void main(){
     var start = document.getElementById('start-btn');
     if (start) start.addEventListener('click', scrollToQuestions);
 
-    function printPage() { window.print(); }
-    var nextPrint = document.getElementById('next-print');
-    if (nextPrint) nextPrint.addEventListener('click', printPage);
+    function createSubmissionId() {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+      }
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (character) {
+        var random = Math.random() * 16 | 0;
+        var value = character === 'x' ? random : (random & 3 | 8);
+        return value.toString(16);
+      });
+    }
+
+    function collectAnswers() {
+      return questions.map(function (question) {
+        var id = question.getAttribute('data-id');
+        var answer = question.querySelector('textarea[name="answer-' + id + '"]');
+        var confirm = question.querySelector('input[name="confirm-' + id + '"]');
+        var title = question.querySelector('.question__title');
+        return {
+          id: id,
+          question: title ? title.textContent.trim() : id,
+          answer: answer.value.trim(),
+          confirmed: Boolean(confirm && confirm.checked)
+        };
+      });
+    }
+
+    async function submitAnswers() {
+      if (submitting || submitted || !questions.every(isComplete)) return;
+      submitting = true;
+      submitButton.setAttribute('aria-busy', 'true');
+      updateProgress();
+      setSubmitStatus('Сохраняем ответы в базе…', '');
+      var submissionId = sessionStorage.getItem(pendingIdKey) || createSubmissionId();
+      sessionStorage.setItem(pendingIdKey, submissionId);
+
+      try {
+        var response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            schemaVersion: 'bervel-questionnaire/v1',
+            questionnaireVersion: '2.9',
+            submissionId: submissionId,
+            website: '',
+            answers: collectAnswers()
+          })
+        });
+        var payload = await response.json().catch(function () { return null; });
+        if (!response.ok || !payload || !payload.ok) {
+          var message = payload && payload.error && payload.error.message
+            ? payload.error.message
+            : 'Не удалось отправить ответы. Попробуйте ещё раз.';
+          throw new Error(message);
+        }
+
+        submitted = true;
+        sessionStorage.removeItem(pendingIdKey);
+        submitButton.disabled = true;
+        submitButton.removeAttribute('aria-busy');
+        submitButton.setAttribute('data-state', 'success');
+        submitButton.textContent = 'Ответы отправлены ✓';
+        setSubmitStatus('Ответы сохранены. Идентификатор: ' + payload.data.id, 'success');
+      } catch (error) {
+        submitting = false;
+        submitButton.removeAttribute('aria-busy');
+        updateProgress();
+        setSubmitStatus(error.message || 'Сервис временно недоступен. Попробуйте ещё раз.', 'error');
+      }
+    }
+
+    if (submitButton) submitButton.addEventListener('click', submitAnswers);
 
     var printState = [];
     window.addEventListener('beforeprint', function () {
