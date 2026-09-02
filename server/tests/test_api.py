@@ -41,7 +41,7 @@ def free_port() -> int:
 def payload(submission_id: str | None = None) -> dict:
     return {
         "schemaVersion": "bervel-questionnaire/v1",
-        "questionnaireVersion": "4.2",
+        "questionnaireVersion": "4.4",
         "submissionId": submission_id or str(uuid.uuid4()),
         "website": "",
         "answers": [
